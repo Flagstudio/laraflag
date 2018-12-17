@@ -9,10 +9,16 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
-        "laravel/nova": "~1.0"
+        "laravel/nova": "~1.0",
+        "spatie/laravel-medialibrary": "^7.0.0",
+        "spatie/laravel-tail": "^3.2",
+        "ebess/advanced-nova-media-library": "^1.2"
 
     },
     "require-dev": {
+        "ajthinking/tinx": "^2.1",
+        "barryvdh/laravel-debugbar": "^3.2",
+        "barryvdh/laravel-ide-helper": "^2.5",
         "beyondcode/laravel-dump-server": "^1.0",
         "filp/whoops": "^2.0",
         "fzaninotto/faker": "^1.4",
