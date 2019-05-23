@@ -1,0 +1,15 @@
+# Docs: https://caddyserver.com/docs/caddyfile
+pullkins.ru {
+    root /var/www/public
+    fastcgi / php-fpm:9000 php {
+        index index.php
+    }
+
+    rewrite {
+        to {path} {path}/ /index.php?{query}
+    }
+    gzip
+    browse
+    log /var/log/caddy/access.log
+    errors /var/log/caddy/error.log
+}
