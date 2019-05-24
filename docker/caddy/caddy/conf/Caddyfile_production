@@ -1,5 +1,5 @@
 # Docs: https://caddyserver.com/docs/caddyfile
-pullkins.ru {
+domain.ru {
     root /var/www/public
     fastcgi / php-fpm:9000 php {
         index index.php
