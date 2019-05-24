@@ -53,7 +53,7 @@ return [
 
         'slack' => [
             'driver' => 'slack',
-            'url' => env('LOG_SLACK_WEBHOOK_URL', 'https://hooks.slack.com/services/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'),
+            'url' => env('LOG_SLACK_WEBHOOK_URL'),
             'username' => config('app.url') . ' ' . config('app.name') . ' ' . config('app.env') . ' ERROR',
             'emoji' => ':boom:',
             'level' => 'error',
