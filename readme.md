@@ -2,6 +2,17 @@
 
 Just a simple Laravel+Docker build that we use on our projects in FlagStudio.ru.
 
+## Installation
+
+1. Install Docker and Docker Compose. If you are using clean Ubuntu 16.04 like I do then you might find helpful this gist https://gist.github.com/michaelradionov/84879dc686e7f9e43bc38ecbbd879af4
+2. Git clone this repo anywhere you want on your server
+3. `cp .env.example .env`
+4. Fill `.env` file with your project's variables
+4. `docker-compose up -d caddy mysql`
+5. `docker-compose exec workspace make install` or with BDSM `dew make install`
+
+
+
 ## Important notes
 
 - Remove `"laravel/nova": "~1.0",` line from `composer.json` if you don't have Nova License.
