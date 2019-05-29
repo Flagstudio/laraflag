@@ -25,7 +25,7 @@ start: ## start new project
 	composer install
 	php artisan storage:link
 	cp .env.example .env
-	php artisan key:generate
+	php artisan key:generate	
 	echo "\033[1;31mNow you need to set your DB credentials!\033[0m"
 
 test: ## Run tests

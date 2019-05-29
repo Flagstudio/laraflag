@@ -8,6 +8,9 @@ Just a simple Laravel+Docker build that we use on our projects in FlagStudio.ru.
 2. Git clone this repo anywhere you want on your server
 3. `cp .env.example .env`
 4. Fill `.env` file with your project's variables
+  1. Set `DB_HOST` equal to `mysql` if you are using Docker. Set it to `localhost` if you are not.
+  2. Put strong password in `DB_PASSWORD` if you running youк app NOT in local environment
+  3. Set your project's title in `COMPOSE_PROJECT_NAME`, `APP_NAME` and your URL in `APP_URL`
 4. `docker-compose up -d caddy mysql`
 5. `docker-compose exec workspace make install` or with BDSM `dew make install`
 
