@@ -77,6 +77,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind('Laravel\Nova\Http\Controllers\ResourceUpdateController', 'App\Http\Controllers\Nova\ResourceUpdateController');
     }
 }
