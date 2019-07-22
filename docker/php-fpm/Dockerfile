@@ -39,6 +39,16 @@ RUN docker-php-ext-install opcache
 # Copy opcache configration
 COPY ./opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 
+###########################################################################
+# Mysqli Modifications:
+###########################################################################
+
+ARG INSTALL_MYSQLI=false
+
+RUN if [ ${INSTALL_MYSQLI} = true ]; then \
+    docker-php-ext-install mysqli \
+;fi
+
 
 ###########################################################################
 # Check PHP version:
