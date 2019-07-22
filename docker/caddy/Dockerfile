@@ -6,7 +6,7 @@ ARG plugins="cors"
 
 ## ARG plugins="cors cgi cloudflare azure linode"
 
-RUN caddyplug install ${plugins}
+#RUN caddyplug install ${plugins}
 
 RUN apk add --no-cache inotify-tools
 ADD caddy/start.sh /start.sh
