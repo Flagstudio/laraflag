@@ -11,3 +11,7 @@ domain.ru {
     gzip
     browse
 }
+
+www.domain.ru {
+    redir https://domain.ru{uri}
+}
