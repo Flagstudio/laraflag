@@ -91,7 +91,17 @@ USER laradock
 RUN echo "" >> ~/.bashrc && \
     echo 'export PATH="/var/www/vendor/bin:$PATH"' >> ~/.bashrc
 
+###########################################################################
+# ImageMagick:
+###########################################################################
 
+USER root
+
+ARG INSTALL_IMAGEMAGICK=false
+
+RUN if [ ${INSTALL_IMAGEMAGICK} = true ]; then \
+    apt-get install -y imagemagick php-imagick \
+;fi
 
 ###########################################################################
 # Node / NVM:

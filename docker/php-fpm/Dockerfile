@@ -49,6 +49,20 @@ RUN if [ ${INSTALL_MYSQLI} = true ]; then \
     docker-php-ext-install mysqli \
 ;fi
 
+###########################################################################
+# ImageMagick:
+###########################################################################
+
+USER root
+
+ARG INSTALL_IMAGEMAGICK=false
+
+RUN if [ ${INSTALL_IMAGEMAGICK} = true ]; then \
+    apt-get install -y libmagickwand-dev imagemagick && \
+    pecl install imagick && \
+    docker-php-ext-enable imagick \
+;fi
+
 
 ###########################################################################
 # Check PHP version:

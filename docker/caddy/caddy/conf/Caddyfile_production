@@ -10,6 +10,4 @@ domain.ru {
     }
     gzip
     browse
-    log /var/log/caddy/access.log
-    errors /var/log/caddy/error.log
 }
