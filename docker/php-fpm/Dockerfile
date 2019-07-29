@@ -50,6 +50,46 @@ RUN if [ ${INSTALL_MYSQLI} = true ]; then \
 ;fi
 
 ###########################################################################
+# ZipArchive:
+###########################################################################
+
+ARG INSTALL_ZIP_ARCHIVE=false
+
+RUN if [ ${INSTALL_ZIP_ARCHIVE} = true ]; then \
+    apt-get install libzip-dev -y && \
+    docker-php-ext-configure zip --with-libzip && \
+    # Install the zip extension
+    docker-php-ext-install zip \
+;fi
+
+
+###########################################################################
+# bcmath:
+###########################################################################
+
+ARG INSTALL_BCMATH=false
+
+RUN if [ ${INSTALL_BCMATH} = true ]; then \
+    # Install the bcmath extension
+    docker-php-ext-install bcmath \
+;fi
+
+
+###########################################################################
+# Human Language and Character Encoding Support:
+###########################################################################
+
+ARG INSTALL_INTL=false
+
+RUN if [ ${INSTALL_INTL} = true ]; then \
+    # Install intl and requirements
+    apt-get install -y zlib1g-dev libicu-dev g++ && \
+    docker-php-ext-configure intl && \
+    docker-php-ext-install intl \
+;fi
+
+
+###########################################################################
 # ImageMagick:
 ###########################################################################
 
@@ -61,6 +101,33 @@ RUN if [ ${INSTALL_IMAGEMAGICK} = true ]; then \
     apt-get install -y libmagickwand-dev imagemagick && \
     pecl install imagick && \
     docker-php-ext-enable imagick \
+;fi
+
+
+###########################################################################
+# Opcache:
+###########################################################################
+
+ARG INSTALL_OPCACHE=false
+
+RUN if [ ${INSTALL_OPCACHE} = true ]; then \
+    docker-php-ext-install opcache \
+;fi
+
+# Copy opcache configration
+COPY ./opcache.ini /usr/local/etc/php/conf.d/opcache.ini
+
+
+###########################################################################
+# Image optimizers:
+###########################################################################
+
+USER root
+
+ARG INSTALL_IMAGE_OPTIMIZERS=false
+
+RUN if [ ${INSTALL_IMAGE_OPTIMIZERS} = true ]; then \
+    apt-get install -y jpegoptim optipng pngquant gifsicle \
 ;fi
 
 
@@ -89,7 +156,6 @@ RUN apt-get clean && \
 RUN usermod -u 1000 www-data
 
 RUN apt-get update
-RUN apt-get install ffmpeg -y
 
 WORKDIR /var/www
 
