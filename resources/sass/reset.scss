@@ -1,0 +1,123 @@
+
+//
+// Reset
+// --------------------------------------------------
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+  // appearance: none; // отключено наследование стилей браузера, осторожней!
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  // -webkit-appearance: inherit; // отключено наследование стилей браузера, осторожней!
+  // -moz-appearance: inherit; // отключено наследование стилей браузера, осторожней!
+}
+
+body {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+}
+
+li {
+  display: block;
+}
+
+dl {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+dd {
+  margin-left: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: inherit;
+}
+
+blockquote {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+strong {
+  font-weight: bold;
+}
+
+figure {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+
+  &:focus {
+    outline-color: inherit;
+    outline-style: dotted;
+    outline-width: thin;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border: 0;
+  vertical-align: middle;
+}
+
+button {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  text-align: inherit;
+  text-transform: inherit;
+  font: inherit;
+  -webkit-font-smoothing: inherit;
+  letter-spacing: inherit;
+  background: none;
+  cursor: pointer;
+  overflow: visible;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+  appearance: none;
+}
+
+textarea {
+  overflow: auto;
+}

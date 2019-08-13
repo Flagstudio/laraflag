@@ -13,3 +13,9 @@ yarn-error.log
 .env
 .phpunit.result.cache
 _ide_helper.php
+packagehash.txt
+public/css/
+public/js/
+public/images/
+public/mix-manifest.json
+public/fonts

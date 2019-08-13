@@ -1,0 +1,63 @@
+//
+// Defaults
+// --------------------------------------------------
+
+::selection {
+  background: rgba($black, .7);
+  color: $white;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: $white;
+  font: {
+    family: $font-family-base;
+    size: $font-size-base;
+    weight: $regular;
+  }
+  line-height: $font-line-height-base;
+}
+
+.visually-hidden {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+}
+
+/*
+Для того, чтобы футер прижимался вниз и мог тянуться:
+1) Оборачиваем все в main-wrapper
+2) Оборачиваем все, кроме футера в layout
+*/
+
+.layout,
+.footer {
+  max-width: 100%;
+}
+
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.layout {
+  position: relative;
+  flex: 1 0 auto;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.footer {
+  flex: 0 0 auto;
+}
+
+[v-cloak] {
+  visibility: hidden;
+}

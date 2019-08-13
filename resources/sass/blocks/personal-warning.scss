@@ -1,0 +1,69 @@
+.personal-warning {
+  position: fixed;
+  left: 0;
+  right: 0;
+  padding: 15px 0;
+  bottom: 0;
+  z-index: 15000;
+  background: rgba(0, 0, 0, 0.8);
+  font-size: 14px;
+  opacity: 0;
+  visibility: hidden;
+
+  transition: all 0.3s;
+
+  &--show {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.personal-warning__inner {
+  @include inner();
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.personal-warning__text {
+  font: $regular 13px/1.3 $font-family-base;
+  color: $white;
+}
+
+.personal-warning__link {
+  border-bottom: 1px solid $white;
+  transition: all 0.2s;
+
+  &:hover,
+  &:focus {
+    border-color: transparent;
+    outline: none;
+  }
+}
+
+.personal-warning__btn {
+  display: block;
+  padding: 10px 55px;
+  margin-left: 30px;
+  background: transparent;
+  font: $regular 13px/1.4 $font-family-base;
+  color: $white;
+  border: 1px solid $white;
+  transition: all 0.3s;
+
+  &:hover,
+  &:focus {
+    background: rgba(#777, 0.75);
+    outline: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .personal-warning__inner {
+    flex-direction: column;
+  }
+
+  .personal-warning__btn {
+    margin-top: 20px;
+    margin-left: 0;
+  }
+}
