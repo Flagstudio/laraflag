@@ -63,7 +63,7 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
     protected function gate()
     {
         Gate::define('viewTelescope', function ($user) {
-            return true;
+            return true; # it's ok because we use telescope only in local environment
         });
     }
 }
