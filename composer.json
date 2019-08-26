@@ -72,7 +72,6 @@
             "@php artisan package:discover"
         ],
         "cghooks": "vendor/bin/cghooks",
-        "phpunit": "vendor/bin/phpunit",
         "post-install-cmd": "cghooks add --ignore-lock",
         "post-update-cmd": "cghooks update"
     },
