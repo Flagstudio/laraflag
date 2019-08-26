@@ -23,7 +23,9 @@
         "barryvdh/laravel-debugbar": "^3.2",
         "barryvdh/laravel-ide-helper": "^2.5",
         "beyondcode/laravel-dump-server": "^1.0",
+        "brainmaestro/composer-git-hooks": "^2.7",
         "filp/whoops": "^2.0",
+        "friendsofphp/php-cs-fixer": "^2.15",
         "fzaninotto/faker": "^1.4",
         "laravel/telescope": "^2.0",
         "mockery/mockery": "^1.0",
@@ -48,6 +50,11 @@
         ]
     },
     "extra": {
+        "hooks": {
+            "pre-commit": [
+                "php-cs-fixer fix . --path-mode=intersection --dry-run -v"
+            ]
+        },
         "laravel": {
             "dont-discover": [
             ]
@@ -63,7 +70,11 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
-        ]
+        ],
+        "cghooks": "vendor/bin/cghooks",
+        "phpunit": "vendor/bin/phpunit",
+        "post-install-cmd": "cghooks add --ignore-lock",
+        "post-update-cmd": "cghooks update"
     },
     "config": {
         "preferred-install": "dist",

@@ -19,3 +19,5 @@ public/js/
 public/images/
 public/mix-manifest.json
 public/fonts
+.php_cs.cache
+cghooks.lock
