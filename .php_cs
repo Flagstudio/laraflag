@@ -16,6 +16,7 @@ $rules = [
     'no_empty_comment' => true,
     'no_unused_imports' => true,
     'no_useless_else' => true,
+    'line_ending' => false,
 ];
 
 $excludes = [
