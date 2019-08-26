@@ -17,14 +17,18 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * Make ajax POST request
+     *
+     * @param mixed $uri
      */
     protected function ajaxPost($uri, array $data = [])
     {
-        return $this->post($uri, $data, array('HTTP_X-Requested-With' => 'XMLHttpRequest'));
+        return $this->post($uri, $data, ['HTTP_X-Requested-With' => 'XMLHttpRequest']);
     }
 
     /**
      * Make ajax GET request
+     *
+     * @param mixed $uri
      */
     protected function ajaxGet($uri, array $data = [])
     {

@@ -12,6 +12,7 @@ class ResourceUpdateController extends NovaResourceUpdateController
      *
      * @param  \Laravel\Nova\Http\Requests\UpdateResourceRequest $request
      * @param  \Illuminate\Database\Eloquent\Model               $model
+     *
      * @return bool
      */
     protected function modelHasBeenUpdatedSinceRetrieval(UpdateResourceRequest $request, $model)

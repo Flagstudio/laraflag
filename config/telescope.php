@@ -92,11 +92,11 @@ return [
     */
 
     'ignore_paths' => [
-        //
+        
     ],
 
     'ignore_commands' => [
-        //
+        
     ],
 
     /*

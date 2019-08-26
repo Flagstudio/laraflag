@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('123123'), // secret
              'email_verified_at' => now()
             // 'remember_token' => str_random(10),
-        ]);    }
+        ]);
+    }
 }
