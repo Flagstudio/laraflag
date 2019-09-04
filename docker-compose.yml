@@ -74,7 +74,7 @@ services:
           - PHP_VERSION=${PHP_VERSION}
       volumes:
         - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
-        - ./php-worker/supervisord.d:/etc/supervisord.d
+        - ./docker/php-worker/supervisord.d:/etc/supervisord.d
       depends_on:
         - workspace
       extra_hosts:
@@ -98,7 +98,7 @@ services:
         - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
         - TZ=${WORKSPACE_TIMEZONE}
       volumes:
-        - ${DATA_PATH_HOST}/mysql:/var/lib/mysql
+        - ${DATA_PATH_HOST}/docker/mysql:/var/lib/mysql
         - ${MYSQL_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
       ports:
         - "127.0.0.1:${MYSQL_PORT}:3306"
