@@ -117,6 +117,16 @@ RUN if [ ${INSTALL_OPCACHE} = true ]; then \
 # Copy opcache configration
 COPY ./opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 
+###########################################################################
+# Exif:
+###########################################################################
+
+ARG INSTALL_EXIF=false
+
+RUN if [ ${INSTALL_EXIF} = true ]; then \
+    # Enable Exif PHP extentions requirements
+    docker-php-ext-install exif \
+;fi
 
 ###########################################################################
 # Image optimizers:
