@@ -76,6 +76,7 @@ return [
         DispatchServingNovaEvent::class,
         BootTools::class,
         Authorize::class,
+        \App\Http\Middleware\RenameUploadedFiles::class,
     ],
 
 ];
