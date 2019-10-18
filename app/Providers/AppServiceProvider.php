@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if(app()->environment('production')){
+        if (app()->environment('production')) {
             error_reporting(E_ALL ^ E_NOTICE);
         }
         Schema::defaultStringLength(191);
