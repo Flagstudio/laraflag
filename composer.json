@@ -12,9 +12,12 @@
         "fideloper/proxy": "^4.0",
         "gregoriohc/laravel-nova-theme-responsive": "^0.6.2",
         "guzzlehttp/guzzle": "^6.3",
+        "jenssegers/date": "^3.5",
         "laravel/framework": "5.8.*",
         "laravel/nova": "2.*",
         "laravel/tinker": "^1.0",
+        "spatie/image-optimizer": "^1.2",
+        "spatie/laravel-image-optimizer": "^1.5",
         "spatie/laravel-medialibrary": "^7.0.0",
         "spatie/laravel-tail": "^3.2",
         "whitecube/nova-flexible-content": "^0.1.9"
@@ -53,7 +56,7 @@
     "extra": {
         "hooks": {
             "pre-commit": [
-                "php-cs-fixer fix . --path-mode=intersection --dry-run -v"
+                "vendor/bin/php-cs-fixer fix . --path-mode=intersection --dry-run -v"
             ]
         },
         "laravel": {

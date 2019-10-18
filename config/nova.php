@@ -77,6 +77,7 @@ return [
         BootTools::class,
         Authorize::class,
         \App\Http\Middleware\RenameUploadedFiles::class,
+        'optimizeImages' => \Spatie\LaravelImageOptimizer\Middlewares\OptimizeImages::class,
     ],
 
 ];
