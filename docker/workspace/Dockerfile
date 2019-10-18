@@ -214,7 +214,7 @@ RUN apt-get clean && \
     rm /var/log/lastlog /var/log/faillog
 
 
-RUN apt-get update
+#RUN apt-get update
 RUN apt-get install ffmpeg -y
 
 # Set default work directory

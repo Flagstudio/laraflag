@@ -189,7 +189,7 @@ RUN apt-get clean && \
 
 RUN usermod -u 1000 www-data
 
-RUN apt-get update
+#RUN apt-get update
 
 WORKDIR /var/www
 
