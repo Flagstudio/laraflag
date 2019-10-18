@@ -20,6 +20,7 @@
         "spatie/laravel-image-optimizer": "^1.5",
         "spatie/laravel-medialibrary": "^7.0.0",
         "spatie/laravel-tail": "^3.2",
+        "tanmuhittin/nova-left-resource-index-links": "^0.1.2",
         "whitecube/nova-flexible-content": "^0.1.9"
     },
     "require-dev": {

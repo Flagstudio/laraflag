@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "11b228f422ee71aa62ec70480694df65",
+    "content-hash": "0689a225bf11536e95f42121af8c8815",
     "packages": [
         {
             "name": "arsenaltech/nova-tab",
@@ -4100,6 +4100,46 @@
                 "dump"
             ],
             "time": "2019-06-05T02:08:12+00:00"
+        },
+        {
+            "name": "tanmuhittin/nova-left-resource-index-links",
+            "version": "0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tanmuhittin/nova-left-resource-index-links.git",
+                "reference": "83a2ab34b679b05377f50de36423a584023e0cbb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tanmuhittin/nova-left-resource-index-links/zipball/83a2ab34b679b05377f50de36423a584023e0cbb",
+                "reference": "83a2ab34b679b05377f50de36423a584023e0cbb",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "TanMuhittin\\LeftResourceIndexLinks\\LeftResourceIndexLinksServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TanMuhittin\\LeftResourceIndexLinks\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Muhittin Tan",
+                    "email": "tanmuhittin@gmail.com"
+                }
+            ],
+            "description": "Moves Laravel Nova Index Links to Left",
+            "time": "2019-07-23T10:54:57+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
