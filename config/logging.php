@@ -54,9 +54,10 @@ return [
         'slack' => [
             'driver' => 'slack',
             'url' => env('LOG_SLACK_WEBHOOK_URL'),
-            'username' => config('app.url') . ' ' . config('app.name') . ' ' . config('app.env') . ' ERROR',
+            'username' => config('app.url') . ' ' . config('app.env') . ' ' . config('app.name') . ' ERROR',
             'emoji' => ':boom:',
             'level' => 'error',
+            'channel' => '#logs'
         ],
 
         'stderr' => [
