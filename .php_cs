@@ -16,7 +16,7 @@ $rules = [
     'no_empty_comment' => true,
     'no_unused_imports' => true,
     'no_useless_else' => true,
-    'line_ending' => false,
+    'line_ending' => true,
 ];
 
 $excludes = [
@@ -27,6 +27,7 @@ $excludes = [
 ];
 
 return PhpCsFixer\Config::create()
+    ->setLineEnding(PHP_EOL)
     ->setRules($rules)
     ->setFinder(
         PhpCsFixer\Finder::create()
