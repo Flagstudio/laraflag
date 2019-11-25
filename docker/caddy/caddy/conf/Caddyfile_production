@@ -10,6 +10,12 @@ domain.ru {
     }
     gzip
     browse
+
+    log stdout
+    log /var/www/storage/logs/caddy_access.log
+
+    errors stderr
+    errors /var/www/storage/logs/caddy_error.log
 }
 
 www.domain.ru {
