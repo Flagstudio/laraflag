@@ -4,4 +4,6 @@
     &copy; {{ date('Y') }} Laravel LLC - By Taylor Otwell, David Hemphill, and Steve Schoger.
     <span class="px-1">&middot;</span>
     v{{ \Laravel\Nova\Nova::version() }}
+    <span class="px-1">&middot;</span>
+    Разработано в <a href="https://flagstudio.ru" class="text-primary dim no-underline">Студии Флаг</a>
 </p>
