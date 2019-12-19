@@ -208,8 +208,8 @@ RUN sed -i "s/xdebug.remote_autostart=0/xdebug.remote_autostart=1/" /etc/php/${L
 ARG INSTALL_FFMPEG=false
 
 RUN if [ ${INSTALL_FFMPEG} = true ]; then \
-  apt-get install ffmpeg -y
-;fi
+      apt-get install ffmpeg -y; \
+  fi
 
 ###########################################################################
 # Crontab
