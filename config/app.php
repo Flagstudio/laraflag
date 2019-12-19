@@ -2,6 +2,10 @@
 
 return [
 
+    //Default admin password
+    'admin_password' => env('ADMIN_PASSWORD'),
+
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
