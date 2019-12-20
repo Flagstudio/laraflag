@@ -1,5 +1,5 @@
 # Docs: https://caddyserver.com/docs/caddyfile
-domain.ru {
+{$APP_URL} {
     root /var/www/public
     fastcgi / php-fpm:9000 php {
         index index.php
@@ -18,6 +18,6 @@ domain.ru {
     errors /var/www/storage/logs/caddy_error.log
 }
 
-www.domain.ru {
-    redir https://domain.ru{uri}
+www.{$APP_URL} {
+    redir https://{$APP_URL}{uri}
 }
