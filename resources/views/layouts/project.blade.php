@@ -30,6 +30,11 @@
     </footer>
 </div>
 
+<div id="update-warning" class="update-warning" style="display: none">
+    <p>Вы пользуетесь устаревшей версией браузера. Данная версия браузера не поддерживает многие современные технологии, из-за чего страницы отображаются некорректно, а главное — на сайте могут работать не все функции.<br> Рекомендуем установить <a href="https://www.google.com/chrome/" target="_blank" rel="nofollow noopener">Google Chrome</a> — современный, быстрый и безопасный браузер.</p>
+    <button class="update-warning__close js--close-update-warning" type="button">Закрыть</button>
+</div>
+
 @include('sprite')
 
 <script src="{!! mix('/js/app.js') !!}"></script>

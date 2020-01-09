@@ -1,8 +1,13 @@
 <template>
-    <section class="personal-warning" :class="{'personal-warning--show' : !agree}">
+    <section :class="['personal-warning', {'personal-warning--show' : !agree}]">
         <div class="personal-warning__inner">
-            <div class="personal-warning__text"><slot></slot></div>
-            <button class="personal-warning__btn btn" @click="closeMessage()">Принять</button>
+            <div class="personal-warning__text">
+                <slot/>
+            </div>
+            <button
+                class="personal-warning__btn btn"
+                @click="closeMessage"
+            >Принять</button>
         </div>
     </section>
 </template>
@@ -12,7 +17,7 @@
         name: 'PersonalWarning',
         data() {
             return {
-                agree : false
+                agree: true
             }
         },
         methods: {
