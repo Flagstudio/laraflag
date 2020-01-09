@@ -2,6 +2,8 @@
 
 return [
 
+    'jira_collector_id' => env('JIRA_COLLECTOR_ID'),
+
     //Default admin password
     'admin_password' => env('ADMIN_PASSWORD'),
 
