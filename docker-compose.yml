@@ -142,6 +142,7 @@ services:
         - "${CADDY_HOST_HTTPS_PORT}:443"
       depends_on:
         - php-fpm
+        - php-worker
       networks:
         - frontend
         - backend

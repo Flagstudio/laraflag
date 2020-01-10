@@ -235,15 +235,6 @@ RUN apt-get clean && \
     rm /var/log/lastlog /var/log/faillog
 
 
-###########################################################################
-# BDSM, Micro and Aliases
-###########################################################################
-
-RUN eval "$(curl "https://raw.githubusercontent.com/michaelradionov/gg_installer/master/gg_installer.sh")" && gg_installer bdsm
-RUN eval "$(curl "https://raw.githubusercontent.com/michaelradionov/gg_installer/master/gg_installer.sh")" && gg_installer gg_aliases
-RUN eval "$(curl "https://raw.githubusercontent.com/michaelradionov/gg_installer/master/gg_installer.sh")" && gg_installer laravel_aliases
-RUN eval "$(curl "https://raw.githubusercontent.com/michaelradionov/gg_installer/master/gg_installer.sh")" && gg_installer random_aliases
-
 
 # Set default work directory
 WORKDIR /var/www
