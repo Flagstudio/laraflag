@@ -134,6 +134,7 @@ services:
       environment:
         - APP_URL=${APP_URL}
         - APP_URL_PROD=${APP_URL_PROD}
+        - APP_ENV=${APP_ENV}
       volumes:
         - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
         - ${CADDY_CONFIG_PATH}:/etc/caddy
