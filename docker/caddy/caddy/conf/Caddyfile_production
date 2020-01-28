@@ -9,7 +9,6 @@
         to {path} {path}/ /index.php?{query}
     }
     gzip
-    browse
 
     log stdout
     log /var/www/storage/logs/caddy_access.log
