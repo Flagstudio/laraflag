@@ -10,7 +10,6 @@
     }
     gzip
 
-    log stdout
     log /var/www/storage/logs/caddy_access.log
 
     errors stderr
