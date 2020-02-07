@@ -73,6 +73,9 @@ class Settings extends Resource
             case \App\Settings::METRICS_SLUG:
                 $fields = $this->metricsFields();
                 break;
+            case \App\Settings::ROBOTS_SLUG:
+                $fields = $this->robotsFields();
+                break;
             default:
                 $fields = [];
                 break;
@@ -140,6 +143,16 @@ class Settings extends Resource
                 Textarea::make('После открывающего тега body', 'scripts_begin'),
                 Textarea::make('Перед закрывающем тегом body', 'scripts_end'),
 
+            ])
+        ];
+    }
+
+    private function robotsFields()
+    {
+        return [
+            $this->json('fields', [
+                Textarea::make('Robots.txt', 'robots')
+                    ->rows(10),
             ])
         ];
     }

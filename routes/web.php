@@ -12,3 +12,5 @@
 */
 
 Route::view('/', 'main.index');
+
+Route::get('robots.txt', 'RobotsController@index')->name('robots.index');

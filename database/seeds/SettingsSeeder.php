@@ -20,5 +20,14 @@ class SettingsSeeder extends Seeder
                 'fields' => [],
             ]);
         }
+
+        $robotsSlug = Settings::ROBOTS_SLUG;
+        if (!Settings::whereSlug($robotsSlug)->exists()) {
+            factory('App\Settings')->create([
+                'title' => 'Robots.txt',
+                'slug' => $robotsSlug,
+                'fields' => [],
+            ]);
+        }
     }
 }
