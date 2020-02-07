@@ -10,8 +10,20 @@
     <title>Title</title>
 
     <link href="{!! mix('/css/app.css') !!}" rel="stylesheet" type="text/css">
+
+    @if ($headScripts)
+        {!! $headScripts !!}
+    @endif
 </head>
 <body>
+
+@if ($beginScripts)
+    {!! $beginScripts !!}
+@endif
+
+@if (auth()->check() && auth()->user()->isAdmin())
+    {!! AdminBar::generate() !!}
+@endif
 <div class="main-wrapper">
     <div class="layout">
         <header id="header" class="header">
@@ -42,5 +54,10 @@
 @if(! app()->environment('local') && config('app.jira_collector_id') && optional(auth()->user())->isAdmin())
     <script type="text/javascript" src="https://jira.flagstudio.ru/s/95ad89360eec1845f13b7a13ded5c0c4-T/-y6xh9q/73015/19eec8c46095745849ebdd927f182f88/2.0.23/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=ru-RU&collectorId={{ config('app.jira_collector_id') }}"></script>
 @endif
+
+@if ($endScripts)
+    {!! $endScripts !!}
+@endif
+
 </body>
 </html>

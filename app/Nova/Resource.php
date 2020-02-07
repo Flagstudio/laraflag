@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Laravel\Nova\Resource as NovaResource;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use R64\NovaFields\JSON;
 
 abstract class Resource extends NovaResource
 {
@@ -59,5 +60,19 @@ abstract class Resource extends NovaResource
     public static function relatableQuery(NovaRequest $request, $query)
     {
         return parent::relatableQuery($request, $query);
+    }
+
+    /**
+     * @param string $columnName
+     * @param $fields
+     *
+     * @return JSON
+     */
+    public function json($columnName, $fields)
+    {
+        return JSON::make($columnName, $fields)
+            ->hideLabelInDetail()
+            ->hideLabelInForms()
+            ->fieldClasses('w-full');
     }
 }

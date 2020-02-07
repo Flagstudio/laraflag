@@ -5,24 +5,23 @@ namespace App\Nova;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Gravatar;
-use Laravel\Nova\Fields\Password;
+use Laravel\Nova\Fields\Textarea;
 
-class User extends Resource
+class Settings extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = 'App\\User';
+    public static $model = 'App\Settings';
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'name';
+    public static $title = 'title';
 
     /**
      * The columns that should be searched.
@@ -30,17 +29,14 @@ class User extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name', 'email',
+        'id',
     ];
+
+    public static $group = 'Другое';
 
     public static function label()
     {
-        return 'Пользователи';
-    }
-
-    public static function singularLabel()
-    {
-        return 'Пользователь';
+        return 'Настройки';
     }
 
     /**
@@ -52,26 +48,37 @@ class User extends Resource
      */
     public function fields(Request $request)
     {
-        return [
+        $defaultFields = [
             ID::make()->sortable(),
 
-            Gravatar::make(),
-
-            Text::make('Name')
-                ->sortable()
-                ->rules('required', 'max:255'),
-
-            Text::make('Email')
-                ->sortable()
-                ->rules('required', 'email', 'max:254')
-                ->creationRules('unique:users,email')
-                ->updateRules('unique:users,email,{{resourceId}}'),
-
-            Password::make('Password')
-                ->onlyOnForms()
-                ->creationRules('required', 'string', 'min:6')
-                ->updateRules('nullable', 'string', 'min:6'),
+            Text::make('Название', 'title')->displayUsing(function ($title) {
+                return mb_convert_case($title, MB_CASE_TITLE, 'UTF-8');
+            })->onlyOnIndex(),
         ];
+
+        $slug = '';
+
+        if (!$this->id) {
+            $matches = [];
+            preg_match('/\d+/', $request->path(), $matches);
+            if ($matches) {
+                $slug = \App\Settings::find($matches[0])->slug;
+            }
+        } else {
+            $slug = $this->slug;
+        }
+
+        //Get fields depending on resource title
+        switch ($slug) {
+            case \App\Settings::METRICS_SLUG:
+                $fields = $this->metricsFields();
+                break;
+            default:
+                $fields = [];
+                break;
+        }
+
+        return array_merge($defaultFields, $fields);
     }
 
     /**
@@ -120,5 +127,20 @@ class User extends Resource
     public function actions(Request $request)
     {
         return [];
+    }
+
+    /**
+     * @return array
+     */
+    private function metricsFields()
+    {
+        return [
+            $this->json('fields', [
+                Textarea::make('Внутри тега head', 'scripts_head'),
+                Textarea::make('После открывающего тега body', 'scripts_begin'),
+                Textarea::make('Перед закрывающем тегом body', 'scripts_end'),
+
+            ])
+        ];
     }
 }

@@ -10,9 +10,19 @@
 }
 
 /* Index */
-.relative .overflow-hidden {
+.relative .overflow-hidden
+{
   overflow: hidden;
   overflow-x: auto;
+}
+
+.relative .overflow-y-auto
+{
+  overflow-y: auto;
+}
+
+.relationship-tabs-panel.overflow-hidden {
+  overflow: visible;
 }
 
 /* Forms fields */
@@ -34,4 +44,8 @@ form {
 
 .whitespace-no-wrap {
   white-space: normal;
+}
+
+.multiselect__content-wrapper {
+  height: 300px;
 }
