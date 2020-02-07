@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Settings;
-use Illuminate\Http\Request;
 
 class RobotsController extends Controller
 {

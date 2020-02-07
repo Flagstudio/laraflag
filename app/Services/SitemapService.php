@@ -41,7 +41,7 @@ class SitemapService
      */
     public function addModel(Collection $collection, callable $urlCallback)
     {
-        $modelsUrls = $collection->map(function ($model) use ($urlCallback){
+        $modelsUrls = $collection->map(function ($model) use ($urlCallback) {
             return [
                 'url' => $urlCallback($model),
                 'date' => $model->updated_at ?? Carbon::now()

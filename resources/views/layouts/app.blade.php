@@ -7,7 +7,15 @@
     <meta name="developer" content="flagstudio.ru">
     <meta name="cmsmagazine" content="3a145314dbb5ea88527bc9277a5f8274">
     <meta name="csrf-token" content="{!! csrf_token() !!}">
-    <title>Title</title>
+
+    @isset($meta)
+        <meta name="title" content="{{ $meta->title ?? '' }}">
+        <meta name="description" content="{{ $meta->description ?? '' }}">
+        <meta name="keywords" content="{{ $meta->keywords ?? '' }}">
+    @endif
+
+    <title>{{ isset($meta) ? $meta->tag_title : ''  }}</title>
+
 
     <link href="{!! mix('/css/app.css') !!}" rel="stylesheet" type="text/css">
 

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Services\SitemapService;
-use Illuminate\Http\Request;
 
 class SitemapController extends Controller
 {
@@ -14,6 +13,7 @@ class SitemapController extends Controller
 
     /**
      * SitemapController constructor.
+     *
      * @param SitemapService $sitemapService
      */
     public function __construct(SitemapService $sitemapService)
