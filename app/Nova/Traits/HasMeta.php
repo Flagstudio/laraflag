@@ -9,6 +9,7 @@ trait HasMeta
 {
     /**
      * @param string $jsonColumn
+     *
      * @return JSON
      */
     public static function metaTagsFields($jsonColumn = 'meta')

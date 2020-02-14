@@ -22,3 +22,4 @@ public/fonts
 .php_cs.cache
 cghooks.lock
 db_backups/
+storage/debugbar/

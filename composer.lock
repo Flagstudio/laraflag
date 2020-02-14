@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f314d57479771807e6909e69e83f6c1a",
+    "content-hash": "54114aac8ed93069c4f547babfc1ffba",
     "packages": [
         {
             "name": "64robots/nova-fields",
@@ -1213,6 +1213,72 @@
             ],
             "description": "Nova admin bar for laravel.",
             "time": "2019-11-11T08:39:50+00:00"
+        },
+        {
+            "name": "flagstudio/nova-contacts",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./nova-components/NovaContacts",
+                "reference": "a72de849e6e4c20ee3f536d4738dd35a6f23f3db"
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Flagstudio\\NovaContacts\\CardServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Flagstudio\\NovaContacts\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova card.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ]
+        },
+        {
+            "name": "flagstudio/nova-instructions",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./nova-components/NovaInstructions",
+                "reference": "7845591cbb5eb20f103a171532683e6ee7e734d6"
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Flagstudio\\NovaInstructions\\CardServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Flagstudio\\NovaInstructions\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova card.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ]
         },
         {
             "name": "gregoriohc/laravel-nova-theme-responsive",
