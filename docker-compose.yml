@@ -57,8 +57,6 @@ services:
           - INSTALL_IMAGE_OPTIMIZERS=${PHP_FPM_INSTALL_IMAGE_OPTIMIZERS}
           - INSTALL_EXIF=${PHP_FPM_INSTALL_EXIF}
           - INSTALL_XDEBUG=${PHP_FPM_INSTALL_XDEBUG}
-      volumes:
-        - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
       expose:
         - "9000"
       extra_hosts:
