@@ -47,8 +47,7 @@ services:
       build:
         context: ./docker/php-fpm
         args:
-          - LARADOCK_PHP_VERSION=${PHP_VERSION}
-          - INSTALL_MYSQLI=${PHP_FPM_INSTALL_MYSQLI}
+          - PHP_VERSION=${PHP_VERSION}
           - INSTALL_ZIP_ARCHIVE=${PHP_FPM_INSTALL_ZIP_ARCHIVE}
           - INSTALL_BCMATH=${PHP_FPM_INSTALL_BCMATH}
           - INSTALL_INTL=${PHP_FPM_INSTALL_INTL}
@@ -59,7 +58,8 @@ services:
           - INSTALL_XDEBUG=${PHP_FPM_INSTALL_XDEBUG}
       volumes:
         - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
-
+#      depends_on:
+#        - workspace
 ### PHP Worker ############################################
     php-worker:
       build:

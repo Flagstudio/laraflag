@@ -45,6 +45,7 @@ services:
 ### PHP-FPM ##############################################
     php-fpm:
       restart: always
+      image: flagmaker/laraflag_php-fpm:v3
 
 ### PHP Worker ############################################
     php-worker:

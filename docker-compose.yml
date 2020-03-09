@@ -44,15 +44,26 @@ services:
 
 ### PHP-FPM ##############################################
     php-fpm:
-      image: flagmaker/laraflag_php-fpm:v3
+      build:
+        context: ./docker/php-fpm
+        args:
+          - PHP_VERSION=${PHP_VERSION}
+          - INSTALL_ZIP_ARCHIVE=${PHP_FPM_INSTALL_ZIP_ARCHIVE}
+          - INSTALL_BCMATH=${PHP_FPM_INSTALL_BCMATH}
+          - INSTALL_INTL=${PHP_FPM_INSTALL_INTL}
+          - INSTALL_IMAGEMAGICK=${PHP_FPM_INSTALL_IMAGEMAGICK}
+          - INSTALL_OPCACHE=${PHP_FPM_INSTALL_OPCACHE}
+          - INSTALL_IMAGE_OPTIMIZERS=${PHP_FPM_INSTALL_IMAGE_OPTIMIZERS}
+          - INSTALL_EXIF=${PHP_FPM_INSTALL_EXIF}
+          - INSTALL_XDEBUG=${PHP_FPM_INSTALL_XDEBUG}
+      volumes:
+        - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
       expose:
         - "9000"
       extra_hosts:
         - "dockerhost:${DOCKER_HOST_IP}"
       environment:
         - PHP_IDE_CONFIG=${PHP_IDE_CONFIG}
-      depends_on:
-        - workspace
       networks:
         - backend
 
