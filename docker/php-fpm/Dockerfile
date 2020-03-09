@@ -36,8 +36,6 @@ RUN docker-php-ext-install tokenizer
 
 RUN docker-php-ext-install opcache
 
-# Copy opcache configration
-COPY ./opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 
 ###########################################################################
 # Mysqli Modifications:
@@ -196,4 +194,3 @@ WORKDIR /var/www
 CMD ["php-fpm"]
 
 EXPOSE 9000
-#EXPOSE 9003
