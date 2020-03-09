@@ -36,6 +36,7 @@ RUN docker-php-ext-install tokenizer
 
 RUN docker-php-ext-install opcache
 
+RUN apt-get update
 
 ###########################################################################
 # Mysqli Modifications:
@@ -177,6 +178,7 @@ RUN php -v | head -n 1 | grep -q "PHP ${LARADOCK_PHP_VERSION}."
 
 COPY ./laravel.ini /usr/local/etc/php/conf.d
 COPY ./xlaravel.pool.conf /usr/local/etc/php-fpm.d/
+COPY ./php${LARADOCK_PHP_VERSION}.ini /usr/local/etc/php/conf.d/php.ini
 
 USER root
 
