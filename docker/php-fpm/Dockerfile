@@ -47,6 +47,24 @@ RUN pecl channel-update pecl.php.net && pecl install memcached mcrypt-1.0.1 && d
 RUN rm /var/cache/apk/* \
     && mkdir -p /var/www
 
+#
+#--------------------------------------------------------------------------
+# Some govno for Caddy web server
+#--------------------------------------------------------------------------
+#
+ARG VERSION="0.10.11"
+
+RUN apk update && apk upgrade \
+  && apk add --no-cache openssh-client git \
+  && apk add --no-cache --virtual .build-dependencies tar curl
+
+RUN curl --silent --show-error --fail --location \
+      --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" -o - \
+      "https://github.com/mholt/caddy/releases/download/v${VERSION}/caddy_v${VERSION}_linux_amd64.tar.gz" \
+    | tar --no-same-owner -C /usr/bin -xz \
+ && chmod 0755 /usr/bin/caddy \
+ && /usr/bin/caddy -version \
+ && apk del .build-dependencies
 
 #
 #--------------------------------------------------------------------------
@@ -57,27 +75,10 @@ RUN rm /var/cache/apk/* \
 # Make sure you rebuild your container with every change.
 #
 
-#COPY supervisord.conf /etc/supervisord.conf
+COPY supervisord.conf /etc/supervisord.conf
 
-#ENTRYPOINT ["/usr/bin/supervisord", "-n", "-c",  "/etc/supervisord.conf"]
-
-
-#
-#--------------------------------------------------------------------------
-# Check PHP version
-#--------------------------------------------------------------------------
-#
-
-RUN php -v | head -n 1 | grep -q "PHP ${PHP_VERSION}."
-
-#
-#--------------------------------------------------------------------------
-# Final Touch
-#--------------------------------------------------------------------------
-#
+ENTRYPOINT ["/usr/bin/supervisord", "-n", "-c",  "/etc/supervisord.conf"]
 
 WORKDIR /var/www
 
-CMD ["php-fpm"]
-
-EXPOSE 9000
+EXPOSE 443 80 2015
