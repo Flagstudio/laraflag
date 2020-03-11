@@ -6,7 +6,7 @@ use App\Settings;
 
 class RobotsController extends Controller
 {
-    public function index()
+    public function __invoke()
     {
         $setting = Settings::whereSlug(Settings::ROBOTS_SLUG)->first();
 

@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         if (!config('app.admin_password')) {
-            throw new Exception('Environment variable ADMIN_PASSWORD required. You can set it in .env file');
+            throw new Exception('Environment variable ADMIN_PASSWORD is required. You can set it in .env file');
         }
 
         factory('App\User')->create([

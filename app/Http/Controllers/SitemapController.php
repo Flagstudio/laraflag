@@ -21,7 +21,7 @@ class SitemapController extends Controller
         $this->sitemapService = $sitemapService;
     }
 
-    public function index()
+    public function __invoke()
     {
         $urls = $this->sitemapService->getUrls();
 
