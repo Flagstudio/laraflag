@@ -5,6 +5,8 @@ namespace App\Nova;
 use Laravel\Nova\Resource as NovaResource;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use R64\NovaFields\JSON;
+use Emilianotisato\NovaTinyMCE\NovaTinyMCE;
+use Laravel\Nova\Fields\Text;
 
 abstract class Resource extends NovaResource
 {
@@ -63,16 +65,43 @@ abstract class Resource extends NovaResource
     }
 
     /**
-     * @param string $columnName
      * @param $fields
-     *
+     * @param string $columnName
      * @return JSON
      */
-    public function json($columnName, $fields)
+    public function json($fields, $columnName = 'Fields')
     {
         return JSON::make($columnName, $fields)
             ->hideLabelInDetail()
             ->hideLabelInForms()
-            ->fieldClasses('w-full');
+            ->flatten();
+    }
+
+    /**
+     * @param $displayingName
+     * @param null $columnName
+     * @return NovaTinyMCE
+     */
+    public function tiny($displayingName, $columnName = null)
+    {
+        $columnName = $columnName ?? $displayingName;
+
+        return NovaTinyMCE::make($displayingName, $columnName)
+            ->options(config('nova.tinymce_options'));
+    }
+
+
+    /**
+     * @param null|string $url
+     * @param string $title
+     * @return Text
+     */
+    public function link(?string $url, string $title = 'Url')
+    {
+        return Text::make($title, function () use ($url) {
+            return '<a href="' . $url . '" target="_blank">' . $url . ' </a>';
+        })
+            ->exceptOnForms()
+            ->asHtml();
     }
 }

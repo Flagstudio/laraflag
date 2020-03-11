@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "54114aac8ed93069c4f547babfc1ffba",
+    "content-hash": "1c4c433358ab2d4615ecd61310a95aeb",
     "packages": [
         {
             "name": "64robots/nova-fields",
@@ -761,16 +761,16 @@
         },
         {
             "name": "emilianotisato/nova-tinymce",
-            "version": "0.5.4",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/emilianotisato/nova-tinymce.git",
-                "reference": "97f5d1351ccb8f9df86796e37dd2380a04ffa26d"
+                "reference": "969754a5dfe91f483c1084065d5c45437844205b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/emilianotisato/nova-tinymce/zipball/97f5d1351ccb8f9df86796e37dd2380a04ffa26d",
-                "reference": "97f5d1351ccb8f9df86796e37dd2380a04ffa26d",
+                "url": "https://api.github.com/repos/emilianotisato/nova-tinymce/zipball/969754a5dfe91f483c1084065d5c45437844205b",
+                "reference": "969754a5dfe91f483c1084065d5c45437844205b",
                 "shasum": ""
             },
             "require": {
@@ -800,7 +800,7 @@
                 "nova",
                 "tiny"
             ],
-            "time": "2018-11-17T17:21:30+00:00"
+            "time": "2019-12-06T20:52:29+00:00"
         },
         {
             "name": "erusev/parsedown",
@@ -1220,7 +1220,8 @@
             "dist": {
                 "type": "path",
                 "url": "./nova-components/NovaContacts",
-                "reference": "a72de849e6e4c20ee3f536d4738dd35a6f23f3db"
+                "reference": "a72de849e6e4c20ee3f536d4738dd35a6f23f3db",
+                "shasum": null
             },
             "require": {
                 "php": ">=7.1.0"
@@ -1253,7 +1254,8 @@
             "dist": {
                 "type": "path",
                 "url": "./nova-components/NovaInstructions",
-                "reference": "7845591cbb5eb20f103a171532683e6ee7e734d6"
+                "reference": "7845591cbb5eb20f103a171532683e6ee7e734d6",
+                "shasum": null
             },
             "require": {
                 "php": ">=7.1.0"
@@ -3575,9 +3577,9 @@
             "authors": [
                 {
                     "name": "Freek Van der Herten",
-                    "role": "Developer",
                     "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be"
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
                 }
             ],
             "description": "A magic memoization function",
@@ -6653,18 +6655,18 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "role": "Developer",
-                    "email": "arne@blankerts.de"
+                    "email": "arne@blankerts.de",
+                    "role": "Developer"
                 },
                 {
                     "name": "Sebastian Heuer",
-                    "role": "Developer",
-                    "email": "sebastian@phpeople.de"
+                    "email": "sebastian@phpeople.de",
+                    "role": "Developer"
                 },
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "Developer",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "Developer"
                 }
             ],
             "description": "Component for reading phar.io manifest information from a PHP Archive (PHAR)",
@@ -6700,18 +6702,18 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "role": "Developer",
-                    "email": "arne@blankerts.de"
+                    "email": "arne@blankerts.de",
+                    "role": "Developer"
                 },
                 {
                     "name": "Sebastian Heuer",
-                    "role": "Developer",
-                    "email": "sebastian@phpeople.de"
+                    "email": "sebastian@phpeople.de",
+                    "role": "Developer"
                 },
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "Developer",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "Developer"
                 }
             ],
             "description": "Library for handling version information and constraints",
@@ -7031,8 +7033,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Library that provides collection, processing, and rendering functionality for PHP code coverage information.",
@@ -7082,8 +7084,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "FilterIterator implementation that filters files based on a list of suffixes.",
@@ -7124,8 +7126,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Simple template engine.",
@@ -7173,8 +7175,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Utility class for timing",
@@ -7875,8 +7877,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
