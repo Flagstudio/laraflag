@@ -36,6 +36,8 @@ ENV PUID ${PUID}
 ARG PGID=1000
 ENV PGID ${PGID}
 
+RUN add-apt-repository ppa:ondrej/php
+
 # always run apt update when start and after add new source list, then clean up at end.
 RUN apt-get update -yqq && \
     pecl channel-update pecl.php.net && \
