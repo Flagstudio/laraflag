@@ -132,22 +132,24 @@ class Settings extends Resource
     /**
      * @return array
      */
-    private function metricsFields()
+    private function metricsFields(): array
     {
         return [
-            $this->json('fields', [
+            $this->json([
                 Textarea::make('Внутри тега head', 'scripts_head'),
                 Textarea::make('После открывающего тега body', 'scripts_begin'),
                 Textarea::make('Перед закрывающем тегом body', 'scripts_end'),
-
             ])
         ];
     }
 
-    private function robotsFields()
+    /**
+     * @return array
+     */
+    private function robotsFields(): array
     {
         return [
-            $this->json('fields', [
+            $this->json([
                 Textarea::make('Robots.txt', 'robots')
                     ->rows(10),
             ])

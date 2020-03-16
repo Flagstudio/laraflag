@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Nova;
+namespace App\Nova\Traits;
 
 use Laravel\Nova\Fields\Text;
 use R64\NovaFields\JSON;
