@@ -1,6 +1,4 @@
-
-ARG PHP_VERSION=${PHP_VERSION}
-FROM php:${PHP_VERSION}-fpm-alpine
+FROM php:7.2-fpm-alpine
 
 #
 #--------------------------------------------------------------------------
@@ -75,7 +73,7 @@ RUN curl --silent --show-error --fail --location \
 # Make sure you rebuild your container with every change.
 #
 
-COPY supervisord.conf /etc/supervisord.conf
+COPY ./docker/php-fpm/supervisord.conf /etc/supervisord.conf
 
 
 #
@@ -85,12 +83,12 @@ COPY supervisord.conf /etc/supervisord.conf
 #
 
 
-COPY ./laraflag.ini /usr/local/etc/php/conf.d
-COPY ./xlaravel.pool.conf /usr/local/etc/php-fpm.d/
+COPY ./docker/php-fpm/laraflag.ini /usr/local/etc/php/conf.d
+COPY ./docker/php-fpm/xlaravel.pool.conf /usr/local/etc/php-fpm.d/
 #COPY ./php${LARADOCK_PHP_VERSION}.ini /usr/local/etc/php/conf.d/php.ini
-COPY Caddyfile /etc/Caddyfile
+COPY ./docker/php-fpm/Caddyfile /etc/Caddyfile
 
-
+COPY . /var/www/
 
 
 ENTRYPOINT ["/usr/bin/supervisord", "-n", "-c",  "/etc/supervisord.conf"]

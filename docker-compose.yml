@@ -4,11 +4,11 @@ services:
 
 ### PHP-FPM ##############################################
     php-fpm:
-      restart: always
-      image: flagmaker/laraflag_php-fpm:v5
+      image: flagmaker/laraflag_php-fpm:latest
       ports:
         - "80:80"
         - "443:443"
+      restart: always
 
 
 ### MySQL ################################################

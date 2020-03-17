@@ -4,12 +4,14 @@ services:
 
 ### PHP-FPM ##############################################
     php-fpm:
+      container_name: php_caddy_app
       build:
-        context: ./docker/php-fpm
-        args:
-          - PHP_VERSION=${PHP_VERSION}
+        context: .
+        dockerfile: docker/php-fpm/Dockerfile
       volumes:
-        - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
+        - ${APP_CODE_PATH_HOST}/.env:${APP_CODE_PATH_CONTAINER}/.env
+        - ${APP_CODE_PATH_HOST}/storage:${APP_CODE_PATH_CONTAINER}/storage
+#        - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER} # for dev
       ports:
         - "80:80"
 
