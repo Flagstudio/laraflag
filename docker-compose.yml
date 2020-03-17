@@ -4,7 +4,7 @@ services:
 
 ### PHP-FPM ##############################################
     php-fpm:
-      image: flagmaker/laraflag_php-fpm:latest
+      image: registry.gitlab.com/flagmaker/laraflag:latest
       ports:
         - "80:80"
         - "443:443"

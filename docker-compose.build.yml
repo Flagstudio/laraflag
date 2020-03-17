@@ -8,6 +8,7 @@ services:
       build:
         context: .
         dockerfile: docker/php-fpm/Dockerfile
+      image: registry.gitlab.com/flagmaker/laraflag:latest # образ, который строим. НЕ ТОТ из которого строимся
       volumes:
         - ${APP_CODE_PATH_HOST}/.env:${APP_CODE_PATH_CONTAINER}/.env
         - ${APP_CODE_PATH_HOST}/storage:${APP_CODE_PATH_CONTAINER}/storage
