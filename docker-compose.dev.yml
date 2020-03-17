@@ -4,11 +4,14 @@ services:
 
 ### PHP-FPM ##############################################
     php-fpm:
-      restart: always
-      image: flagmaker/laraflag_php-fpm:v5
+      build:
+        context: ./docker/php-fpm
+        args:
+          - PHP_VERSION=${PHP_VERSION}
+      volumes:
+        - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
       ports:
         - "80:80"
-        - "443:443"
 
 
 ### MySQL ################################################

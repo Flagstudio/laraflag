@@ -77,6 +77,22 @@ RUN curl --silent --show-error --fail --location \
 
 COPY supervisord.conf /etc/supervisord.conf
 
+
+#
+#--------------------------------------------------------------------------
+# Final huita
+#--------------------------------------------------------------------------
+#
+
+
+COPY ./laraflag.ini /usr/local/etc/php/conf.d
+COPY ./xlaravel.pool.conf /usr/local/etc/php-fpm.d/
+#COPY ./php${LARADOCK_PHP_VERSION}.ini /usr/local/etc/php/conf.d/php.ini
+COPY Caddyfile /etc/Caddyfile
+
+
+
+
 ENTRYPOINT ["/usr/bin/supervisord", "-n", "-c",  "/etc/supervisord.conf"]
 
 WORKDIR /var/www
