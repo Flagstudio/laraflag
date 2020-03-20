@@ -62,7 +62,7 @@ return [
     |
     */
 
-    'enabled' => env('TELESCOPE_ENABLED', true),
+    'enabled' => env('TELESCOPE_ENABLED', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -92,11 +92,11 @@ return [
     */
 
     'ignore_paths' => [
-        
+
     ],
 
     'ignore_commands' => [
-        
+
     ],
 
     /*
