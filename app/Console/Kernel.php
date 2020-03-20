@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        
+
     ];
 
     /**
@@ -25,7 +25,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('telescope:prune --hours=72')->daily();
+        if ($this->app->isLocal() || mb_strtolower(app()->environment()) === 'dev') {
+            $schedule->command('telescope:prune')->cron('0 23 */2 * *');
+        }
     }
 
     /**
