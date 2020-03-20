@@ -16,7 +16,7 @@
 
     <title>{{ isset($meta) ? $meta->tag_title : ''  }}</title>
 
-
+    <link href="{!! mix('/css/components.css') !!}" rel="stylesheet" type="text/css">
     <link href="{!! mix('/css/app.css') !!}" rel="stylesheet" type="text/css">
 
     {!! $headScripts ?? '' !!}
@@ -54,6 +54,8 @@
 
 @include('sprite')
 
+<script src="{!! mix('/js/manifest.js') !!}"></script>
+<script src="{!! mix('/js/vendor.js') !!}"></script>
 <script src="{!! mix('/js/app.js') !!}"></script>
 
 @if(! app()->environment('local') && config('app.jira_collector_id') && optional(auth()->user())->isAdmin())

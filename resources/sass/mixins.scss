@@ -1,77 +1,84 @@
 @mixin inner {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    width: auto;
-    max-width: $site-width;
-    height: inherit;
-    margin: 0 auto;
-    padding: 0 $site-gutter;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  width: $site-width;
+  height: inherit;
+  margin: 0 auto;
+  padding: 0 $site-gutter;
 }
 
 @mixin placeholder {
-    &::-webkit-input-placeholder { @content; }
-    &:-moz-placeholder           { @content; }
-    &::-moz-placeholder          { @content; }
-    &:-ms-input-placeholder      { @content; }
+  &::-webkit-input-placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
 }
 
 @mixin word-break {
-    hyphens: auto;
-    overflow-wrap: break-word;
-    -ms-word-wrap: break-word;
+  hyphens: auto;
+  overflow-wrap: break-word;
+  -ms-word-wrap: break-word;
 
-    @supports not (overflow-wrap: break-word) {
-        word-wrap: break-word;
-    }
+  @supports not (overflow-wrap: break-word) {
+    word-wrap: break-word;
+  }
 }
 
 @mixin screen-lg() {
-    @media screen and (max-width: 1920px) {
-        @content;
-    }
+  @media screen and (max-width: 1920px) {
+    @content;
+  }
 }
 
 @mixin screen-md() {
-    @media screen and (max-width: 1400px) {
-        @content;
-    }
+  @media screen and (max-width: 1400px) {
+    @content;
+  }
 }
 
 @mixin screen-sm() {
-    @media screen and (max-width: 1240px) {
-        @content;
-    }
+  @media screen and (max-width: 1240px) {
+    @content;
+  }
 }
 
 @mixin tablet-lg() {
-    @media screen and (max-width: 991px) {
-        @content;
-    }
+  @media screen and (max-width: 991px) {
+    @content;
+  }
 }
 
 @mixin tablet-md() {
-    @media screen and (max-width: 768px) {
-        @content;
-    }
+  @media screen and (max-width: 768px) {
+    @content;
+  }
 }
 
 @mixin tablet-sm() {
-    @media screen and (max-width: 601px) {
-        @content;
-    }
+  @media screen and (max-width: 601px) {
+    @content;
+  }
 }
 
 @mixin phone-lg() {
-    @media screen and (max-width: 480px) {
-        @content;
-    }
+  @media screen and (max-width: 480px) {
+    @content;
+  }
 }
 
 @mixin phone-sm() {
-    @media screen and (max-width: 400px) {
-        @content;
-    }
+  @media screen and (max-width: 400px) {
+    @content;
+  }
 }

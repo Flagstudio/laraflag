@@ -9,7 +9,7 @@ function checkSupport() {
     } else {
         warning.style.display = 'block';
 
-        if(closeBtn) {
+        if (closeBtn) {
             closeBtn.addEventListener('click', function () {
                 warning.style.display = 'none';
             })
