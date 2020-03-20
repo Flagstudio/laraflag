@@ -1,7 +1,7 @@
 #!/usr/bin/make
 
 SHELL = /bin/sh
-
+APP_CONTAINER=docker-compose exec app
 
 #
 
@@ -12,21 +12,43 @@ help: ## Show this help
 
 # --- [ Application ] -------------------------------------------------------------------------------------------------
 
-install: ## Update project
-	composer install
-	php artisan migrate:fresh --seed
-	php artisan view:clear
-	php artisan ide-helper:generate
+update-dev: ## Update project
+	$(APP_CONTAINER) composer install
+	$(APP_CONTAINER) php artisan migrate:fresh --seed
+	$(APP_CONTAINER) php artisan view:clear
+	$(APP_CONTAINER) php artisan ide-helper:generate
 	chmod -R 777 bootstrap/ storage/
-	npm i
-	npm run dev
 
-start: ## start new project
-	composer install
-	php artisan storage:link
+update-prod: ## Update project
+	$(APP_CONTAINER) composer install --no-dev
+	$(APP_CONTAINER) php artisan migrate --force
+	$(APP_CONTAINER) php artisan view:clear
+	$(APP_CONTAINER) chmod -R 777 bootstrap/ storage/
+	$(APP_CONTAINER) php artisan config:cache
+	$(APP_CONTAINER) php artisan route:cache
+
+start-prod: ## start new project
 	cp .env.example .env
-	php artisan key:generate	
-	echo "\033[1;31mNow you need to set your DB credentials!\033[0m"
+	make update-prod
+	$(APP_CONTAINER) php artisan key:generate
+	$(APP_CONTAINER) php artisan storage:link
 
-test: ## Run tests
-	./vendor/bin/phpunit --testdox
+build: ## Build PHP image
+	docker build -t registry.gitlab.com/flagmaker/laraflag:latest -f docker/php-fpm/Dockerfile .
+
+build-up: ## Build and start PHP image
+	docker-compose -f docker-compose.build.yml up --build -d app
+
+buildbase: ## Build and start PHP image
+	docker build -t registry.gitlab.com/flagmaker/laraflag:base -f docker/php-fpm/Dockerfile_base_image .
+	docker push registry.gitlab.com/flagmaker/laraflag:base
+
+push: ## Build PHP image
+	docker push registry.gitlab.com/flagmaker/laraflag:latest
+
+pull: ## Pull and start PHP image
+	docker-compose pull app
+	docker-compose up --remove-orphans -d app
+
+tail: ## Tail laravel.log
+	$(APP_CONTAINER) tail -f storage/logs/laravel.log

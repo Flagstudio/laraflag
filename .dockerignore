@@ -7,15 +7,15 @@ node_modules
 .php_cs
 .php_cs.cache
 cghooks.lock
-composer.json
-composer.lock
 docker-compose.*
 package-lock.json
 package.json
 phpunit.xml
 readme.md
 webpack.mix.js
-# vendor
 storage/framework/cache/**
 storage/framework/sessions/**
 storage/framework/views/**
+#composer.json
+#composer.lock
+# vendor
