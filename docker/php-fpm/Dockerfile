@@ -23,11 +23,11 @@ COPY . /var/www/
 # Composer packages
 ###########################################################################
 
+ARG NOVA_USERNAME
+ARG NOVA_PASSWORD
+
 WORKDIR /var/www
 USER root
-
-ARG NOVA_USERNAME=boss@flagstudio.ru
-ARG NOVA_PASSWORD=252525
 
 COPY composer.json /var/www/composer.json
 COPY composer.lock /var/www/composer.lock
@@ -50,7 +50,6 @@ RUN php artisan route:cache
 # Not sure about this
 
 #RUN php artisan config:cache # after deploy
-RUN php artisan route:cache
 
 
 ###########################################################################

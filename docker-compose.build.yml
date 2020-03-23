@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+
+### PHP-FPM + Caddy ##############################################
+    app:
+      build:
+        args:
+          - NOVA_USERNAME=${NOVA_USERNAME}
+          - NOVA_PASSWORD=${NOVA_PASSWORD}
+        context: .
+        dockerfile: docker/php-fpm/Dockerfile
+      image: registry.gitlab.com/flagmaker/${COMPOSE_PROJECT_NAME}:latest # образ, который строим. НЕ ТОТ из которого строимся
+      ports:
+        - "80:80"

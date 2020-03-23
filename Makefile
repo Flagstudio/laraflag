@@ -3,7 +3,7 @@
 SHELL = /bin/sh
 APP_CONTAINER=docker-compose exec app
 
-#
+
 
 # This will output the help for each task. thanks to https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
 help: ## Show this help
@@ -33,20 +33,20 @@ start-prod: ## start new project
 	$(APP_CONTAINER) php artisan key:generate
 	$(APP_CONTAINER) php artisan storage:link
 
-build: ## Build PHP image
-	docker build -t registry.gitlab.com/flagmaker/laraflag:latest -f docker/php-fpm/Dockerfile .
-
-build-up: ## Build and start PHP image
-	docker-compose -f docker-compose.build.yml up --build -d app
-
-buildbase: ## Build and start PHP image
+build-base: ## Build and push BASIC app image
 	docker build -t registry.gitlab.com/flagmaker/laraflag:base -f docker/php-fpm/Dockerfile_base_image .
 	docker push registry.gitlab.com/flagmaker/laraflag:base
 
-push: ## Build PHP image
-	docker push registry.gitlab.com/flagmaker/laraflag:latest
+build: ## Build app image
+	docker-compose -f docker-compose.build.yml build app
 
-pull: ## Pull and start PHP image
+build-up: ## Build and start app image
+	docker-compose -f docker-compose.build.yml up --build -d app
+
+push: ## Push app image
+	docker-compose push app
+
+pull: ## Pull and start app image
 	docker-compose pull app
 	docker-compose up --remove-orphans -d app
 
