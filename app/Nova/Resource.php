@@ -67,6 +67,7 @@ abstract class Resource extends NovaResource
     /**
      * @param $fields
      * @param string $columnName
+     *
      * @return JSON
      */
     public function json($fields, $columnName = 'Fields')
@@ -80,6 +81,7 @@ abstract class Resource extends NovaResource
     /**
      * @param $displayingName
      * @param null $columnName
+     *
      * @return NovaTinyMCE
      */
     public function tiny($displayingName, $columnName = null)
@@ -94,6 +96,7 @@ abstract class Resource extends NovaResource
     /**
      * @param null|string $url
      * @param string $title
+     *
      * @return Text
      */
     public function link(?string $url, string $title = 'Url')

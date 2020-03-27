@@ -1,25 +1,195 @@
-# LaraFlag
+# Документация к сайту
 
-Just a simple Laravel+Docker build that we use on our projects in FlagStudio.ru.
+Разработчик: [Студия Флаг](https://flagstudio.ru)
 
-## Installation
+Дата публикации сайта: март 2020
 
-1. Install Docker and Docker Compose. If you are using clean Ubuntu 16.04 like I do then you might find helpful this gist https://gist.github.com/michaelradionov/84879dc686e7f9e43bc38ecbbd879af4
-2. Git clone this repo anywhere you want on your server
-3. `cp .env.example .env`
-4. Fill `.env` file with your project's variables
-  1. Set `DB_HOST` equal to `mysql` if you are using Docker. Set it to `localhost` if you are not.
-  2. Put strong password in `DB_PASSWORD` if you running youк app NOT in local environment
-  3. Set your project's title in `COMPOSE_PROJECT_NAME`, `APP_NAME` and your URL in `APP_URL`
-4. `docker-compose up -d caddy mysql`
-5. `docker-compose exec workspace make install` or with BDSM `dew make install`
+Адрес сайта (прод): <URL сайта>
+
+Данная инструкция покрывает ТОЛЬКО запуск сайта в docker-compose (требования к серверу в конце). Подразумевается, что на сервере установлен `make` и в корне сайта есть Makefile.
+
+## Настройка PROD-сервера (запуск на проде)
+
+1. Закажите VPS с Ubuntu 16.04+ (можно 18.04)
+2. Устновите скрипт BDSM и установите рекомендуемое ПО
+
+```bash
+eval "$(curl "https://raw.githubusercontent.com/michaelradionov/gg_installer/master/gg_installer.sh")" && gg_installer bdsm
+bdsm --install-all
+```
+
+2. Установите Docker и Docker Compose с помощью `bdsm`, затем `9`, затем `8`.
+
+3. В домашней директории создайте директорию с именем (доменом) сайта
+
+```bash
+mkdir <site.ru>
+```
+
+4. Перейдите в эту директорию и склонируйте в нее код сайта из Git репозитория (спросите адрес репозитория у вашего менеджера. контакты менеджера обычно указаны на главной странице в админке сайта)
+
+```bash
+cd <site.ru>
+git clone <git_repo_url> .
+```
+
+5. Создайте файл `.env` и измените в нем значения на нужные. Например, `COMPOSE_PROJECT_NAME`, `APP_URL` и реквизиты подключения к бд. Обязательно измените параметр `DB_PASSWORD` на сложный рандомный набор символов. Также, возможно, вам потребуется настроить другие параметры, такие как токены для подключения к внешним сервисам. Набор параметров разнится между проектами.
+
+```bash
+cp .env.example .env
+nano .env
+```
+
+- `COMPOSE_PROJECT_NAME` - название проекта латинскими буквами (системное имя для Docker)
+- `APP_NAME` - Название проекта для людей. Можно по-русски. Используется как <title/> по умолчанию и еще в паре мест для админа.
+- `APP_URL` - домен сайта с https://
+- `APP_URL_PROD` - домен сайта без https://
+- `DB_CONNECTION` - `pgsql` или `mysql`
+- `DB_HOST` - `mysql` или `postgres`. Если запускаете без докера, то `localhost`
+- `DB_DATABASE` - название проекта латинскими буквами
+- `DB_USERNAME` - название проекта латинскими буквами
+- `DB_PASSWORD` — сложный набор случайных символов. если вы установили BDSM, то выполните `genpass`
+
+6. Выполните `make start-prod` и ждите. В какой-то момент установщик попросит доступы к Nova. Запросите их у вашего менеджера или удалите строку `"laravel/nova": "~1.0",` из `composer.json`
+
+```bash
+make start-prod
+```
+
+7. На этом шаге сайт уже должен кое-как запуститься
+8. Залейте бэкап БД. BDSM поможет вам с импортом/экспортом БД, поиском с заменой домена и тд.
+9. Залейте содержимое загруженные медиаматериалы с помощью scp. Например, из корневой директории сайта на локале или тестовой площадке.
+10. Отредактируйте `.env` еще раз
+- `APP_ENV=production`
+- `APP_DEBUG=false`
+12. Настройте DNS. Обычно для нормальной работы сайта нужна запись типа A с именем "@" (и заодно вторая с именем "www") и значением равным IP вашего VPS-сервера.
+11. Перезапустите Caddy, чтобы заработал https. Все должно заработать автоматически, если сервис Let's encrypt сможет получить доступ к  вашему сайту. То есть DNS уже должны быть настроены. Имейте ввиду, количество попыток получения сертификата ограничено.
+
+```bash
+dc caddy restart
+```
+
+```bash
+scp -r storage root@<server_ip>:<site_dir>/
+```
+
+## Обновление прода (подтянуть изменения)
+
+Для этого действия у вас должен быть подключен  и доступен внешний git репозиторий с именем origin
+
+```bash
+make update-prod
+```
+
+## Работа с Docker
+
+Эта дока не то чтобы сделает из вас Docker-гуру, но вы сможете что то поправить на проде без Миши. Большая часть ваших действий - это либо изменить конфиг, закоммитить и что то ребутнуть на проде, либо поменять настройки в `.env` и тоже как то ребутнуть что нибудь.
+
+Мы используем Docker Compose. Это означает, что в файле `docker-compose.yml` определяются службы приложения. Службами являются:
+- **caddy** - веб сервер (вместо nginx)
+- **php-fpm** - пыха
+- **workspace** — здесь у нас composer, node, cron
+- **php-worker** - воркер, необходимый для работы очередей
+- **mysql** - угадайте
+- **postgress** - угадайте
+
+Каждая службы может иметь один или несколько контенеров, связанных через переменные окружения, порты и вольюмы. При использовании Docker Compose (DC) вы можете оперировать как службами, так и контейнерами. Службами удобнее.
+
+Сокращенные команды для Docker (устанавливаются с помощью [BDSM](https://github.com/michaelradionov/bdsm))
+
+- `dc` = `docker-compose`
+- `dew` = `docker-compose exec workspace`
+- `dewpa` = `docker-compose exec workspace php artisan`
+- `dewmfs` = `docker-compose exec workspace php artisan migrate:fresh --seed`
+
+### Просмотр
+
+```bash
+dc ps # выводит список контейнеров для данного проекта (надо выполнять в директории проекта, где docker-compose.yml)
+dps # выводит список всех запущенных в системе контейнеров (полезно, чтобы узнать, какой проект запущен на сервере или чекнуть контейнеры, не переходя в директорию проекта)
+dc logs -f --tail=1000 # выводит логи всех служб
+dc logs -f --tail=1000 php-fpm # выводит логи службы php-fpm
+```
+
+### Выполнение команд в контейнерах
+
+```bash
+dc exec php-fpm bash # войти в контенер службы php-fpm
+dc exec mysql mysql -u<user> -p<password> # войти в контенер mysql и сразу войти в консоль mysql, например, на локале: dc exec mysql mysql -uroot -psecret
+dew npm i # выполнение npm i в контейнере workspace
+dew bash # войти в контенер в интерактивном режиме (Bash)
+```
+
+### Запуск проекта
+
+При запуске проекта можно не указывать все необходимые службы, так как они опираются друг на друга. Службы **workspace** и **php-fpm** поднимутся автоматически при выполнении команды
+
+```bash
+dc up -d caddy mysql
+```
+
+Службу php-worker на момент написания доки надо указывать отдельно.
+
+### Перезапуск контейнеров (для применения изменений в конфигах)
+
+Тут все довольно интересно. Некоторые конфиги прокинуты в контейнеры через вольюмы, некоторые прокидываются при билде контейнера. Поэтому иногда изменения в конфигах применяются после перезапуска контейнера, иногда после пересборки, а ногда после обоих действий. Пока давайте будем рассматривать общий случай с пересборкой и рестартом.
+
+```bash
+dc up --build --no-deps --force-recreate -d caddy # билдит и поднимает контейнер службы caddy, но не рестартит его. и не трогает зависимые контейнеры
+dc restart caddy # рестартит php-fpm
+```
+
+В общем случае этих двух команд должно хватить для применения конфигов.
+
+### Конфиги
+
+```bash
+.env # единственный конфиг не под Git'ом, поэтому м нем хранятся все настройки сайта и докера
+docker/php-fpm/xlaravel.pool.conf # php-fpm
+docker/php-fpm/php7.2.ini # php
+docker/caddy/caddy/conf/Caddyfile_production # Caddy продакшен
+docker/mysql/my.cnf # mysql
+docker/php-worker/supervisord.d/pullkins.conf # supervisor (хз почему называется pullkins в старых проектах, в сборке исправил на laraflag)
+docker/workspace/crontab/laradock # cron (тоже в сборке уже laraflag)
+```
+
+
+### Чистка
+
+Очень много места могут занимать неиспользуемые образы. Немного места могу занимать убитые контейнеры. Давайте удалим их все.
+
+```bash
+docker image prune
+docker container prune
+```
 
 
 
-## Important notes
+## Требования к серверу
 
-- Remove `"laravel/nova": "~1.0",` line from `composer.json` if you don't have Nova License.
-- If you want to track errors from production server then add `LOG_SLACK_WEBHOOK_URL` in your `.env` with you Slack webhook URL as a value.
-- Before using production environment make sure that you put your domain name in `docker/caddy/caddy/conf/Caddyfile_production` file
-- We assume that when you are using production environment your domain is accessible from web. So that Caddy can get and install Let's Encrypt certificate for you. Otherwise you should put you domain in Caddyfile with http:// scheme like `http://yourdomain.com`.
-- Don't forget to edit `COMPOSE_PROJECT_NAME` in your `.env` to see something nice in your terminal when running `docker-compose ps` for example.
+### Программное обеспечение
+
+- Ubuntu 16.04+
+- Доступ по SSH с правами root
+
+### Ресурсы
+
+- RAM 2+ Гб
+- CPU 1+ core 2+ Ггц
+- Дисковое пространство 20+ Гб
+
+### Сторонние сервисы
+
+- Сервис отправки почты: Mailgun, SMTP или другие
+
+## Требования к клиенту (средствам просмотра)
+
+Сайт должен корректно отображаться в браузерах
+- Google Chrome 69+
+- Mozilla Firefox 62+
+- Microsoft Edge 41+
+- Opera 60.0+
+- Яндекс.Браузер 18+
+Сайт должен корректно работать как на устройствах с широкоэкранным монитором, так и на мобильных устройствах и планшетах с разрешением не ниже 1136 x 640 пикселей.
+Сайт должен корректно отображаться при просмотре в масштабе 100%, другие масштабы на усмотрение Исполнителя.
+Исполнитель не гарантирует валидность HTML и CSS.

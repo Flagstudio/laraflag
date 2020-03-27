@@ -1,9 +1,5 @@
 #!/usr/bin/make
 
-SHELL = /bin/sh
-
-
-#
 
 # This will output the help for each task. thanks to https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
 help: ## Show this help
@@ -12,21 +8,45 @@ help: ## Show this help
 
 # --- [ Application ] -------------------------------------------------------------------------------------------------
 
-install: ## Update project
-	composer install
-	php artisan migrate:fresh --seed
-	php artisan view:clear
-	php artisan ide-helper:generate
+start-prod: ## Start Prod
+	docker-compose up -d caddy mysql php-worker
+	docker-compose exec workspace composer install --no-dev -q
+	docker-compose exec workspace php artisan key:generate
+	docker-compose exec workspace php artisan storage:link
+	docker-compose exec workspace php artisan config:cache
+	docker-compose exec workspace php artisan route:cache
+	docker-compose exec workspace npm i
+	docker-compose exec workspace npm run prod
 	chmod -R 777 bootstrap/ storage/
-	npm i
-	npm run dev
 
-start: ## start new project
-	composer install
-	php artisan storage:link
-	cp .env.example .env
-	php artisan key:generate	
-	echo "\033[1;31mNow you need to set your DB credentials!\033[0m"
+update-prod: ## Update prod
+	git stash
+	git fetch origin master
+	git checkout master
+	git reset --hard origin/master
+	docker-compose exec workspace composer install --no-dev -q
+	docker-compose exec workspace php artisan migrate --force --quiet
+	docker-compose exec workspace php artisan view:clear
+	docker-compose exec workspace php artisan config:cache
+	docker-compose exec workspace php artisan route:cache
+	docker-compose exec workspace npm run prod
+	chmod -R 777 bootstrap/ storage/
+
+start-local: ## Start Local
+	docker-compose up -d caddy mysql php-worker
+	docker-compose exec workspace composer install
+	docker-compose exec workspace php artisan migrate --seed
+	docker-compose exec workspace php artisan key:generate
+	docker-compose exec workspace php artisan storage:link
+	docker-compose exec workspace php artisan ide-helper:generate
+	docker-compose exec workspace npm i
+	docker-compose exec workspace npm run dev
+
+update-local: ## Update Local
+	docker-compose exec workspace composer install
+	docker-compose exec workspace php artisan migrate --seed
+	docker-compose exec workspace php artisan ide-helper:generate
+	docker-compose exec workspace npm run dev
 
 test: ## Run tests
-	./vendor/bin/phpunit --testdox
+	docker-compose exec workspace ./vendor/bin/phpunit --testdox
