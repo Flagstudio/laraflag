@@ -9,7 +9,7 @@ help: ## Show this help
 # --- [ Application ] -------------------------------------------------------------------------------------------------
 
 start-prod: ## Start Prod
-	docker-compose up -d caddy mysql php-worker
+	docker-compose up -d caddy postgres php-worker
 	docker-compose exec workspace composer install --no-dev -q
 	docker-compose exec workspace php artisan key:generate
 	docker-compose exec workspace php artisan storage:link
@@ -33,7 +33,7 @@ update-prod: ## Update prod
 	chmod -R 777 bootstrap/ storage/
 
 start-local: ## Start Local
-	docker-compose up -d caddy mysql php-worker
+	docker-compose up -d caddy postgres php-worker
 	docker-compose exec workspace composer install
 	docker-compose exec workspace php artisan migrate --seed
 	docker-compose exec workspace php artisan key:generate
@@ -44,9 +44,12 @@ start-local: ## Start Local
 
 update-local: ## Update Local
 	docker-compose exec workspace composer install
-	docker-compose exec workspace php artisan migrate --seed
 	docker-compose exec workspace php artisan ide-helper:generate
+	docker-compose exec workspace php artisan ide-helper:models -N
 	docker-compose exec workspace npm run dev
+
+mfs: ## Refresh and seed database
+	docker-compose exec workspace php artisan migrate --seed
 
 test: ## Run tests
 	docker-compose exec workspace ./vendor/bin/phpunit --testdox
