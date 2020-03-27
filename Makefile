@@ -9,7 +9,6 @@ help: ## Show this help
 # --- [ Application ] -------------------------------------------------------------------------------------------------
 
 start-prod: ## Start Prod
-	docker-compose up -d caddy postgres php-worker
 	docker-compose exec workspace composer install --no-dev -q
 	docker-compose exec workspace php artisan key:generate
 	docker-compose exec workspace php artisan storage:link
@@ -33,7 +32,6 @@ update-prod: ## Update prod
 	chmod -R 777 bootstrap/ storage/
 
 start-local: ## Start Local
-	docker-compose up -d caddy postgres php-worker
 	docker-compose exec workspace composer install
 	docker-compose exec workspace php artisan migrate --seed
 	docker-compose exec workspace php artisan key:generate
