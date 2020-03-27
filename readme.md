@@ -55,10 +55,26 @@ nano .env
 ```bash
 make start-prod
 ```
+или, если у вас устаревший Makefile или не установлен make
+```bash
+docker-compose up -d caddy postgres php-worker
+docker-compose exec workspace composer install --no-dev -q
+docker-compose exec workspace php artisan key:generate
+docker-compose exec workspace php artisan storage:link
+docker-compose exec workspace php artisan config:cache
+docker-compose exec workspace php artisan route:cache
+docker-compose exec workspace npm i
+docker-compose exec workspace npm run prod
+chmod -R 777 bootstrap/ storage/
+```
 
 7. На этом шаге сайт уже должен кое-как запуститься
 8. Залейте бэкап БД. BDSM поможет вам с импортом/экспортом БД, поиском с заменой домена и тд.
 9. Залейте содержимое загруженные медиаматериалы с помощью scp. Например, из корневой директории сайта на локале или тестовой площадке.
+
+```bash
+scp -r storage root@<server_ip>:<site_dir>/
+```
 10. Отредактируйте `.env` еще раз
 - `APP_ENV=production`
 - `APP_DEBUG=false`
@@ -68,9 +84,19 @@ make start-prod
 ```bash
 dc caddy restart
 ```
-
+или, если у вас устаревший Makefile или не установлен make
 ```bash
-scp -r storage root@<server_ip>:<site_dir>/
+	git stash
+	git fetch origin master
+	git checkout master
+	git reset --hard origin/master
+	docker-compose exec workspace composer install --no-dev -q
+	docker-compose exec workspace php artisan migrate --force --quiet
+	docker-compose exec workspace php artisan view:clear
+	docker-compose exec workspace php artisan config:cache
+	docker-compose exec workspace php artisan route:cache
+	docker-compose exec workspace npm run prod
+	chmod -R 777 bootstrap/ storage/
 ```
 
 ## Обновление прода (подтянуть изменения)
