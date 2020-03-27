@@ -47,22 +47,7 @@ RUN php artisan route:cache
 
 
 
-# Not sure about this
-
-#RUN php artisan config:cache # after deploy
-
-
-###########################################################################
-# Tooling
-###########################################################################
-
-#RUN curl https://getmic.ro | bash; echo 'alias m="~/micro"' >> /root/.bashrc;
-
-# Not sure about this
-
-#RUN chown -R www-data:www-data /var/www
-#RUN chmod -R 777 /var/www/storage/ /var/www/bootstrap/
 
 ENTRYPOINT ["/usr/bin/supervisord", "-n", "-c",  "/etc/supervisord.conf"]
 
-EXPOSE 443 80 2015 9000
+EXPOSE 443 80 2015
