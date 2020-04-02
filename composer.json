@@ -7,11 +7,11 @@
     "require": {
         "php": "^7.2",
         "64robots/nova-fields": "^0.15.0",
-        "arsenaltech/nova-tab": "^0.2.0",
         "coderello/laravel-nova-lang": "^1.3",
         "ebess/advanced-nova-media-library": "^2.0",
         "emilianotisato/nova-tinymce": "^1.1",
         "facade/ignition": "^1.11",
+        "eminiarts/nova-tabs": "^1.2",
         "fideloper/proxy": "^4.0",
         "flagstudio/nova-actions-left": "^0.1.1",
         "flagstudio/nova-admin-bar": "^0.1.6",
