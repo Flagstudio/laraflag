@@ -2,13 +2,16 @@ version: '3'
 
 services:
 
-### PHP-FPM + Caddy ##############################################
-    app:
-      image: registry.gitlab.com/flagmaker/laraflag:latest
-      ports:
-        - "80:80"
-        - "443:443"
-      restart: always
+  ### PHP-FPM + Caddy ##############################################
+  app:
+    image: registry.gitlab.com/flagmaker/${COMPOSE_PROJECT_NAME}:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./.env:/var/www/.env
+      - ./storage:/var/www/storage
+    restart: always
 
 
 ### MySQL ################################################
