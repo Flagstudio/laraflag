@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1c4c433358ab2d4615ecd61310a95aeb",
+    "content-hash": "ccfc396339a0bae5b150fdab4b279ade",
     "packages": [
         {
             "name": "64robots/nova-fields",
@@ -1220,8 +1220,7 @@
             "dist": {
                 "type": "path",
                 "url": "./nova-components/NovaContacts",
-                "reference": "a72de849e6e4c20ee3f536d4738dd35a6f23f3db",
-                "shasum": null
+                "reference": "a72de849e6e4c20ee3f536d4738dd35a6f23f3db"
             },
             "require": {
                 "php": ">=7.1.0"
@@ -1254,8 +1253,7 @@
             "dist": {
                 "type": "path",
                 "url": "./nova-components/NovaInstructions",
-                "reference": "7845591cbb5eb20f103a171532683e6ee7e734d6",
-                "shasum": null
+                "reference": "7845591cbb5eb20f103a171532683e6ee7e734d6"
             },
             "require": {
                 "php": ">=7.1.0"
@@ -1519,6 +1517,57 @@
                 "url"
             ],
             "time": "2019-07-01T23:21:34+00:00"
+        },
+        {
+            "name": "hirak/prestissimo",
+            "version": "0.3.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hirak/prestissimo.git",
+                "reference": "fb6724d5ee81c96bebd2255175d8c364ac9301e3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hirak/prestissimo/zipball/fb6724d5ee81c96bebd2255175d8c364ac9301e3",
+                "reference": "fb6724d5ee81c96bebd2255175d8c364ac9301e3",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0.0",
+                "ext-curl": "*",
+                "php": "^5.3.2 || ^7.0"
+            },
+            "require-dev": {
+                "composer/composer": "1.0.0",
+                "phpunit/phpunit": "4.8.* || 5.7.* || ^6.3",
+                "squizlabs/php_codesniffer": "^2.5"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Hirak\\Prestissimo\\Plugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hirak\\Prestissimo\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hiraku NAKANO",
+                    "email": "hiraku@tojiru.net"
+                }
+            ],
+            "description": "composer parallel install plugin",
+            "keywords": [
+                "install",
+                "parallel",
+                "speedup"
+            ],
+            "time": "2020-02-16T12:49:55+00:00"
         },
         {
             "name": "intervention/image",
@@ -3047,17 +3096,17 @@
             ],
             "authors": [
                 {
+                    "name": "Ben Ramsey",
+                    "email": "ben@benramsey.com",
+                    "homepage": "https://benramsey.com"
+                },
+                {
                     "name": "Marijn Huizendveld",
                     "email": "marijn.huizendveld@gmail.com"
                 },
                 {
                     "name": "Thibaud Fabre",
                     "email": "thibaud@aztech.io"
-                },
-                {
-                    "name": "Ben Ramsey",
-                    "email": "ben@benramsey.com",
-                    "homepage": "https://benramsey.com"
                 }
             ],
             "description": "Formerly rhumsaa/uuid. A PHP 5.4+ library for generating RFC 4122 version 1, 3, 4, and 5 universally unique identifiers (UUID).",

@@ -19,6 +19,7 @@
         "flagstudio/nova-instructions": "*",
         "gregoriohc/laravel-nova-theme-responsive": "^0.6.2",
         "guzzlehttp/guzzle": "^6.3",
+        "hirak/prestissimo": "^0.3.10",
         "jenssegers/date": "^3.5",
         "laravel/framework": "^6.0",
         "laravel/nova": "~2.0",
