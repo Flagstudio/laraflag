@@ -1,0 +1,45 @@
+
+stages:
+  - build
+  - deploy
+
+before_script:
+  - eval $(ssh-agent -s)
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  - ssh-keyscan $HOSTNAME_PROD >> ~/.ssh/known_hosts
+  - chmod 644 ~/.ssh/known_hosts
+
+docker-build-master:
+  # Official docker image.
+  image: docker:latest
+  stage: build
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - docker build --pull -f docker/php-fpm/Dockerfile -t "$CI_REGISTRY_IMAGE" .
+    - docker push "$CI_REGISTRY_IMAGE"
+  only:
+    - master
+
+docker-build-develop:
+  # Official docker image.
+  image: docker:latest
+  stage: build
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - docker build --pull -f docker/php-fpm/Dockerfile -t "$CI_REGISTRY_IMAGE:develop" .
+    - docker push "$CI_REGISTRY_IMAGE:develop"
+  only:
+    - develop
+
+deploy:
+  stage: deploy
+  script:
+    - ssh -T root@$HOSTNAME_PROD "cd $PATH_PROD &&  make pull"
