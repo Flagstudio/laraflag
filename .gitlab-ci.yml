@@ -43,3 +43,5 @@ deploy:
   stage: deploy
   script:
     - ssh -T root@$HOSTNAME_PROD "cd $PATH_PROD &&  make pull"
+  only:
+    - master
