@@ -1,4 +1,4 @@
-FROM registry.gitlab.com/flagmaker/laraflag:base
+FROM registry.gitlab.com/flagstudio/laraflag:base
 
 
 ###########################################################################

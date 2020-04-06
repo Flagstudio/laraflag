@@ -10,6 +10,6 @@ services:
           - NOVA_PASSWORD=${NOVA_PASSWORD}
         context: .
         dockerfile: docker/php-fpm/Dockerfile
-      image: registry.gitlab.com/flagmaker/${COMPOSE_PROJECT_NAME}:latest # образ, который строим. НЕ ТОТ из которого строимся
+      image: registry.gitlab.com/flagstudio/${COMPOSE_PROJECT_NAME}:latest # образ, который строим. НЕ ТОТ из которого строимся
       ports:
         - "80:80"

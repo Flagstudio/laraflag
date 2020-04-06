@@ -145,4 +145,4 @@ RUN echo "" >> ~/.bashrc && \
 # cache routes, configs, create storage link
 # run endpoint
 # expose ports
-# So, you need flagmaker/laraflag:latest on gitlab resitry. Ask Misha for more info.
+# So, you need flagstudio/laraflag:latest on gitlab resitry. Ask Misha for more info.
