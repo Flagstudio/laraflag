@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+
+    ### PHP-FPM + Caddy ##############################################
+    app:
+      image: registry.gitlab.com/flagstudio/${COMPOSE_PROJECT_NAME}:latest
+      ports:
+        - "8080:8080"
+        - "2015:2015"
+      volumes:
+        - ./.env:/var/www/.env
+        - ./storage:/var/www/storage
+        - ${DATA_PATH_HOST}/.well-known:/var/www/public/.well-known
+        - ./docker2020/app/www.conf:/usr/local/etc/php-fpm.d/www.conf
+
+### MySQL ################################################
+    mysql:
+      build:
+        context: ./docker2020/mysql
+        args:
+          - MYSQL_VERSION=${MYSQL_VERSION}
+      environment:
+        - MYSQL_DATABASE=${DB_DATABASE}
+        - MYSQL_USER=${DB_USERNAME}
+        - MYSQL_PASSWORD=${DB_PASSWORD}
+        - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+        - TZ=${WORKSPACE_TIMEZONE}
+      volumes:
+        - ${DATA_PATH_HOST}/mysql:/var/lib/mysql
+        - ${MYSQL_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
+      ports:
+        - "127.0.0.1:${MYSQL_PORT}:3306"
+      restart: always
+
+  ### SSL proxy (Caddy Server) #########################################
+    ssl:
+      image: registry.gitlab.com/flagstudio/laraflag:ssl-base
+      ports:
+        - "443:443"
+        - "80:80"
+      volumes:
+        - ./Caddyfile_SSL:/etc/Caddyfile
+        - ${DATA_PATH_HOST}/.well-known:/var/www/public/.well-known

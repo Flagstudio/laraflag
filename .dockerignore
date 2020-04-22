@@ -8,11 +8,8 @@ node_modules
 .php_cs.cache
 cghooks.lock
 docker-compose.*
-package-lock.json
-package.json
 phpunit.xml
 readme.md
-webpack.mix.js
 storage/framework/cache/**
 storage/framework/sessions/**
 storage/framework/views/**

@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+
+  ### PHP-FPM + Caddy ##############################################
+  app:
+    build:
+      args:
+        - NOVA_USERNAME=${NOVA_USERNAME}
+        - NOVA_PASSWORD=${NOVA_PASSWORD}
+      context: .
+      dockerfile: docker2020/app/Dockerfile_local
+    image: registry.gitlab.com/flagstudio/${COMPOSE_PROJECT_NAME}:latest # образ, который строим. НЕ ТОТ из которого строимся
+    volumes:
+      - ./:/var/www
+      - ./docker2020/app/www.conf:/usr/local/etc/php-fpm.d/www.conf
+    ports:
+      - "8080:8080"
+      - "2015:2015"
+
+  ### MySQL ################################################
+  mysql:
+    build:
+      context: ./docker2020/mysql
+      args:
+        - MYSQL_VERSION=${MYSQL_VERSION}
+    environment:
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - TZ=${WORKSPACE_TIMEZONE}
+    volumes:
+      - ${DATA_PATH_HOST}/mysql:/var/lib/mysql
+      - ${MYSQL_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
+    ports:
+      - "127.0.0.1:${MYSQL_PORT}:3306"
+    restart: always
+
+  ### SSL proxy (Caddy Server) #########################################
+  ssl:
+    build:
+      context: .
+      dockerfile: docker2020/ssl/Dockerfile
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - ./docker2020/ssl/Caddyfile_http:/etc/Caddyfile

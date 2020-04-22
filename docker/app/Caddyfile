@@ -1,5 +1,10 @@
 # Docs: https://caddyserver.com/docs/caddyfile
-0.0.0.0:80 {
+0.0.0.0:2015 {
+    fastcgi /status :9000 {
+        env SCRIPT_NAME /status
+    }
+}
+0.0.0.0:8080 {
     root /var/www/public
     fastcgi / 127.0.0.1:9000 php {
         index index.php

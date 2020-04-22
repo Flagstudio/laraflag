@@ -6,11 +6,11 @@ FROM registry.gitlab.com/flagstudio/laraflag:base
 ###########################################################################
 
 
-COPY ./docker/php-fpm/laraflag.ini /usr/local/etc/php/conf.d
-COPY ./docker/php-fpm/xlaravel.pool.conf /usr/local/etc/php-fpm.d/
+COPY ./docker2020/app/laraflag.ini /usr/local/etc/php/conf.d
+COPY ./docker2020/app/www.conf /usr/local/etc/php-fpm.d/www.conf
 #COPY ./php${LARADOCK_PHP_VERSION}.ini /usr/local/etc/php/conf.d/php.ini
-COPY ./docker/php-fpm/supervisord.conf /etc/supervisord.conf
-COPY ./docker/php-fpm/Caddyfile /etc/Caddyfile
+COPY ./docker2020/app/supervisord.conf /etc/supervisord.conf
+COPY ./docker2020/app/Caddyfile /etc/Caddyfile
 
 ###########################################################################
 # Copy code
@@ -38,6 +38,15 @@ RUN composer install --optimize-autoloader --no-dev --no-scripts
 RUN composer dumpautoload
 
 ###########################################################################
+# NPM
+###########################################################################
+
+RUN apk add  --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/v3.7/main/ nodejs=8.9.3-r1
+RUN npm i
+RUN npm run prod
+RUN rm -rf node_modules
+
+###########################################################################
 # Prepare Laravel for Prod
 ###########################################################################
 
@@ -50,4 +59,4 @@ RUN php artisan route:cache
 
 ENTRYPOINT ["/usr/bin/supervisord", "-n", "-c",  "/etc/supervisord.conf"]
 
-EXPOSE 443 80 2015
+EXPOSE 8080 2015

@@ -1,0 +1,9 @@
+# Docs: https://caddyserver.com/docs/caddyfile
+0.0.0.0:80 {
+    root /var/www/public
+    proxy / app:8080 {
+        transparent
+    }
+    errors stderr
+}
+# @TODO www

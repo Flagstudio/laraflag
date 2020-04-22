@@ -1,0 +1,13 @@
+# Docs: https://caddyserver.com/docs/caddyfile
+its.academy {
+    root /var/www/public
+    proxy / app:8080 {
+        except .well-known
+        transparent
+    }
+    errors stderr
+}
+
+www.its.academy {
+    redir https://its.academy{uri}
+}
