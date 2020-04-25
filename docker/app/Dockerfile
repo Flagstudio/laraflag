@@ -33,7 +33,6 @@ COPY composer.json /var/www/composer.json
 COPY composer.lock /var/www/composer.lock
 
 RUN composer config http-basic.nova.laravel.com ${NOVA_USERNAME} ${NOVA_PASSWORD}
-RUN composer global require hirak/prestissimo
 RUN composer install --optimize-autoloader --no-dev --no-scripts
 RUN composer dumpautoload
 
@@ -41,7 +40,6 @@ RUN composer dumpautoload
 # NPM
 ###########################################################################
 
-RUN apk add  --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/v3.7/main/ nodejs=8.9.3-r1
 RUN npm i
 RUN npm run prod
 RUN rm -rf node_modules

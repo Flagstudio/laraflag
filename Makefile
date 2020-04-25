@@ -34,7 +34,7 @@ start-prod: ## start new project
 	$(APP_CONTAINER) php artisan storage:link
 
 build-base: ## Build and push BASIC app image
-	docker build -t registry.gitlab.com/flagstudio/laraflag:base -f docker/php-fpm/Dockerfile_base_image .
+	docker build -t registry.gitlab.com/flagstudio/laraflag:base -f docker/app/Dockerfile_base_image . && \
 	docker push registry.gitlab.com/flagstudio/laraflag:base
 
 build: ## Build app image
