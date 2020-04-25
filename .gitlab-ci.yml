@@ -1,3 +1,4 @@
+image: docker:latest
 
 stages:
   - build
@@ -5,43 +6,58 @@ stages:
 
 before_script:
   - eval $(ssh-agent -s)
-  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
   - mkdir -p ~/.ssh
   - chmod 700 ~/.ssh
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
   - ssh-keyscan $HOSTNAME_PROD >> ~/.ssh/known_hosts
+  - ssh-keyscan $HOSTNAME_STAGING_35 >> ~/.ssh/known_hosts
   - chmod 644 ~/.ssh/known_hosts
 
 docker-build-master:
-  # Official docker image.
-  image: docker:latest
   stage: build
   services:
     - docker:dind
   before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" registry.gitlab.com
   script:
-    - docker build --pull -f docker/php-fpm/Dockerfile -t "$CI_REGISTRY_IMAGE" .
-    - docker push "$CI_REGISTRY_IMAGE"
+    - docker build  --pull -f docker/app/Dockerfile -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA -t $CI_REGISTRY_IMAGE:latest --build-arg NOVA_USERNAME=$NOVA_USERNAME --build-arg NOVA_PASSWORD=$NOVA_PASSWORD .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker push "$CI_REGISTRY_IMAGE:latest"
   only:
     - master
 
-docker-build-develop:
-  # Official docker image.
-  image: docker:latest
-  stage: build
-  services:
-    - docker:dind
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+deploy-prod:
+  stage: deploy
+  only:
+    - master
   script:
-    - docker build --pull -f docker/php-fpm/Dockerfile -t "$CI_REGISTRY_IMAGE:develop" .
-    - docker push "$CI_REGISTRY_IMAGE:develop"
+    - scp docker/ssl/Caddyfile_SSL root@$HOSTNAME_PROD:its.academy/
+    - scp docker-compose.prod.yml root@$HOSTNAME_PROD:its.academy/docker-compose.yml
+    - scp docker/app/www.conf root@$HOSTNAME_PROD:its.academy/docker2020/app/www.conf
+    - ssh -T root@$HOSTNAME_PROD "cd $PATH_PROD &&
+      docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" registry.gitlab.com &&
+      docker pull $CI_REGISTRY_IMAGE:latest &&
+      docker-compose stop ssl app &&
+      docker-compose up --remove-orphans -d app ssl &&
+      docker-compose exec -T app php artisan migrate --force &&
+      docker  image prune --force"
+
+
+deploy-staging:
+  stage: deploy
   only:
     - develop
-
-deploy:
-  stage: deploy
   script:
-    - ssh -T root@$HOSTNAME_PROD "cd $PATH_PROD &&  make pull"
-  only:
-    - master
+    - ssh -T root@$HOSTNAME_STAGING_35 "cd $PATH_STAGING_35 &&
+      php artisan down --message=\"We are in deploying process. Please wait for a minute...\" &&
+      git stash &&
+      git checkout develop &&
+      git fetch origin develop &&
+      git reset --hard origin/develop &&
+      npm run prod &&
+      composer install -q &&
+      php artisan view:clear &&
+      chmod -R 777 storage/ bootstrap/ &&
+      chown -R dev:dev . &&
+      php artisan up"
+
