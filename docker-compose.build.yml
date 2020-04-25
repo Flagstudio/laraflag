@@ -9,7 +9,7 @@ services:
           - NOVA_USERNAME=${NOVA_USERNAME}
           - NOVA_PASSWORD=${NOVA_PASSWORD}
         context: .
-        dockerfile: docker2020/app/Dockerfile
+        dockerfile: docker/app/Dockerfile
       image: registry.gitlab.com/flagstudio/${COMPOSE_PROJECT_NAME}:latest # образ, который строим. НЕ ТОТ из которого строимся
       ports:
         - "8080:8080"

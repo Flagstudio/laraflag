@@ -15,4 +15,4 @@ storage/framework/sessions/**
 storage/framework/views/**
 #composer.json
 #composer.lock
-# vendor
+vendor

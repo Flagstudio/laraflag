@@ -6,11 +6,11 @@ FROM registry.gitlab.com/flagstudio/laraflag:base
 ###########################################################################
 
 
-COPY ./docker2020/app/laraflag.ini /usr/local/etc/php/conf.d
-COPY ./docker2020/app/www.conf /usr/local/etc/php-fpm.d/www.conf
+COPY ./docker/app/laraflag.ini /usr/local/etc/php/conf.d
+COPY ./docker/app/www.conf /usr/local/etc/php-fpm.d/www.conf
 #COPY ./php${LARADOCK_PHP_VERSION}.ini /usr/local/etc/php/conf.d/php.ini
-COPY ./docker2020/app/supervisord.conf /etc/supervisord.conf
-COPY ./docker2020/app/Caddyfile /etc/Caddyfile
+COPY ./docker/app/supervisord.conf /etc/supervisord.conf
+COPY ./docker/app/Caddyfile /etc/Caddyfile
 
 ###########################################################################
 # Copy code
