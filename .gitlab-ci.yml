@@ -13,7 +13,7 @@ before_script:
   - ssh-keyscan $HOSTNAME_STAGING_35 >> ~/.ssh/known_hosts
   - chmod 644 ~/.ssh/known_hosts
 
-docker-build-master:
+build-master:
   stage: build
   services:
     - docker:dind
@@ -26,7 +26,7 @@ docker-build-master:
   only:
     - master
 
-deploy-prod:
+deploy-master:
   stage: deploy
   only:
     - master
@@ -43,7 +43,7 @@ deploy-prod:
       docker  image prune --force"
 
 
-deploy-staging:
+deploy-develop:
   stage: deploy
   only:
     - develop
