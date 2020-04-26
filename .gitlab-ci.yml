@@ -31,21 +31,21 @@ build-master:
   only:
     - master
 
-deploy-master:
-  stage: deploy
-  only:
-    - master
-  script:
-    - scp docker/ssl/Caddyfile_SSL root@$HOSTNAME_PROD:its.academy/
-    - scp docker-compose.prod.yml root@$HOSTNAME_PROD:its.academy/docker-compose.yml
-    - scp docker/app/www.conf root@$HOSTNAME_PROD:its.academy/docker2020/app/www.conf
-    - ssh -T root@$HOSTNAME_PROD "cd $PATH_PROD &&
-      docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" registry.gitlab.com &&
-      docker pull $CI_REGISTRY_IMAGE:latest &&
-      docker-compose stop ssl app &&
-      docker-compose up --remove-orphans -d app ssl &&
-      docker-compose exec -T app php artisan migrate --force &&
-      docker  image prune --force"
+#deploy-master:
+#  stage: deploy
+#  only:
+#    - master
+#  script:
+#    - scp docker/ssl/Caddyfile_SSL root@$HOSTNAME_PROD:its.academy/
+#    - scp docker-compose.prod.yml root@$HOSTNAME_PROD:its.academy/docker-compose.yml
+#    - scp docker/app/www.conf root@$HOSTNAME_PROD:its.academy/docker2020/app/www.conf
+#    - ssh -T root@$HOSTNAME_PROD "cd $PATH_PROD &&
+#      docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" registry.gitlab.com &&
+#      docker pull $CI_REGISTRY_IMAGE:latest &&
+#      docker-compose stop ssl app &&
+#      docker-compose up --remove-orphans -d app ssl &&
+#      docker-compose exec -T app php artisan migrate --force &&
+#      docker  image prune --force"
 
 
 deploy-develop:
