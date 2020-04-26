@@ -40,7 +40,6 @@ RUN composer dumpautoload
 
 RUN npm i
 RUN npm run prod
-RUN rm -rf node_modules
 
 ###########################################################################
 # Prepare Laravel for Prod
