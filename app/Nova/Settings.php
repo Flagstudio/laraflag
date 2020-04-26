@@ -2,8 +2,8 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 
@@ -42,7 +42,7 @@ class Settings extends Resource
     /**
      * Get the fields displayed by the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      *
      * @return array
      */
@@ -56,16 +56,13 @@ class Settings extends Resource
             })->onlyOnIndex(),
         ];
 
-        $slug = '';
+        $slug = $this->slug;
 
-        if (!$this->id) {
-            $matches = [];
-            preg_match('/\d+/', $request->path(), $matches);
-            if ($matches) {
-                $slug = \App\Settings::find($matches[0])->slug;
+        if ($this->slug === null) {
+            $resourceId = $request->route('resourceId');
+            if ($resourceId === null) {
+                $slug = \App\Settings::find($resourceId)->slug;
             }
-        } else {
-            $slug = $this->slug;
         }
 
         //Get fields depending on resource title
@@ -87,7 +84,7 @@ class Settings extends Resource
     /**
      * Get the cards available for the request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      *
      * @return array
      */
@@ -99,7 +96,7 @@ class Settings extends Resource
     /**
      * Get the filters available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      *
      * @return array
      */
@@ -111,7 +108,7 @@ class Settings extends Resource
     /**
      * Get the lenses available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      *
      * @return array
      */
@@ -123,7 +120,7 @@ class Settings extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      *
      * @return array
      */
@@ -135,22 +132,24 @@ class Settings extends Resource
     /**
      * @return array
      */
-    private function metricsFields()
+    private function metricsFields(): array
     {
         return [
-            $this->json('fields', [
+            $this->json([
                 Textarea::make('Внутри тега head', 'scripts_head'),
                 Textarea::make('После открывающего тега body', 'scripts_begin'),
                 Textarea::make('Перед закрывающем тегом body', 'scripts_end'),
-
             ])
         ];
     }
 
-    private function robotsFields()
+    /**
+     * @return array
+     */
+    private function robotsFields(): array
     {
         return [
-            $this->json('fields', [
+            $this->json([
                 Textarea::make('Robots.txt', 'robots')
                     ->rows(10),
             ])

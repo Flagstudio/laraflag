@@ -104,4 +104,13 @@ return [
     */
 
     'pagination' => 'simple',
+
+    'tinymce_api_key' => env('TINYMCE_API_KEY'),
+
+    'tinymce_options' => [
+        'plugins' => [
+            'lists preview hr anchor pagebreak image wordcount fullscreen directionality paste textpattern'
+        ],
+        'toolbar' => 'undo redo | styleselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | image | bullist numlist outdent indent | link',
+    ],
 ];

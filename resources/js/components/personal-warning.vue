@@ -5,9 +5,10 @@
                 <slot/>
             </div>
             <button
-                class="personal-warning__btn btn"
-                @click="closeMessage"
-            >Принять</button>
+                    class="personal-warning__btn btn"
+                    @click="closeMessage"
+            >Принять
+            </button>
         </div>
     </section>
 </template>

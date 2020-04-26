@@ -1,4 +1,5 @@
 import checkSupport from './modules/support-check';
+
 checkSupport();
 
 window.Vue = require('vue');
