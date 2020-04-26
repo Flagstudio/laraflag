@@ -26,9 +26,8 @@ build-master:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" registry.gitlab.com
   script:
     - docker build  --pull -f docker/app/Dockerfile -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA -t $CI_REGISTRY_IMAGE:latest --build-arg NOVA_USERNAME=$NOVA_USERNAME --build-arg NOVA_PASSWORD=$NOVA_PASSWORD .
-    - ls -al
-#    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
-#    - docker push "$CI_REGISTRY_IMAGE:latest"
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker push "$CI_REGISTRY_IMAGE:latest"
   only:
     - master
 
