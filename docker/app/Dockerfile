@@ -29,8 +29,6 @@ ARG NOVA_PASSWORD
 WORKDIR /var/www
 USER root
 
-COPY composer.json /var/www/composer.json
-COPY composer.lock /var/www/composer.lock
 
 RUN composer config http-basic.nova.laravel.com ${NOVA_USERNAME} ${NOVA_PASSWORD}
 RUN composer install --optimize-autoloader --no-dev --no-scripts
