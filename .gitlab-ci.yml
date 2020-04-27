@@ -1,9 +1,12 @@
 image: docker:latest
 
-cache:
-  paths:
-    - vendor/
-    - node_modules/
+variables:
+  DOCKER_DRIVER: overlay2
+
+#cache:
+#  paths:
+#    - vendor/
+#    - node_modules/
 
 stages:
   - build
