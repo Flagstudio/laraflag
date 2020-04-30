@@ -7,12 +7,9 @@ services:
       image: registry.gitlab.com/flagstudio/${COMPOSE_PROJECT_NAME}:latest
       ports:
         - "8080:8080"
-        - "2015:2015"
       volumes:
         - ./.env:/var/www/.env
         - ./storage:/var/www/storage
-        - ${DATA_PATH_HOST}/.well-known:/var/www/public/.well-known
-        - ./docker2020/app/www.conf:/usr/local/etc/php-fpm.d/www.conf
 
 ### MySQL ################################################
     mysql:
@@ -41,4 +38,3 @@ services:
         - "80:80"
       volumes:
         - ./Caddyfile_SSL:/etc/Caddyfile
-        - ${DATA_PATH_HOST}/.well-known:/var/www/public/.well-known

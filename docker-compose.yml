@@ -13,10 +13,8 @@ services:
     image: registry.gitlab.com/flagstudio/${COMPOSE_PROJECT_NAME}:latest # образ, который строим. НЕ ТОТ из которого строимся
     volumes:
       - ./:/var/www
-      - ./docker/app/www.conf:/usr/local/etc/php-fpm.d/www.conf
     ports:
       - "8080:8080"
-      - "2015:2015"
 
   ### MySQL ################################################
   mysql:
