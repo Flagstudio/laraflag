@@ -17,7 +17,7 @@ services:
 ### MySQL ################################################
     mysql:
       build:
-        context: ./docker2020/mysql
+        context: ./docker/mysql
         args:
           - MYSQL_VERSION=${MYSQL_VERSION}
       environment:
