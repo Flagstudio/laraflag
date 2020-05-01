@@ -1,5 +1,5 @@
 # Docs: https://caddyserver.com/docs/caddyfile
-its.academy {
+domain.ru {
     root /var/www/public
     proxy / app:8080 {
         except .well-known
@@ -8,6 +8,6 @@ its.academy {
     errors stderr
 }
 
-www.its.academy {
-    redir https://its.academy{uri}
+www.domain.ru {
+    redir https://domain.ru{uri}
 }
