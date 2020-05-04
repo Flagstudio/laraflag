@@ -1,5 +1,5 @@
 ARG PHP_VERSION
-FROM registry.gitlab.com/flagstudio/laraflag:${PHP_VERSION}-base
+FROM registry.gitlab.com/flagstudio/laraflag:php-${PHP_VERSION}-base
 
 
 ###########################################################################
