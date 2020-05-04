@@ -22,14 +22,9 @@ COPY . /var/www/
 # Composer packages
 ###########################################################################
 
-ARG NOVA_USERNAME
-ARG NOVA_PASSWORD
-
 WORKDIR /var/www
 USER root
 
-
-RUN composer config http-basic.nova.laravel.com ${NOVA_USERNAME} ${NOVA_PASSWORD}
 RUN composer install --optimize-autoloader --no-dev --no-scripts
 RUN composer dumpautoload
 

@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+
+### PHP-FPM + Caddy ##############################################
+    app:
+      build:
+        args:
+          - NOVA_USERNAME=${NOVA_USERNAME}
+          - NOVA_PASSWORD=${NOVA_PASSWORD}
+          - PHP_VERSION=${PHP_VERSION}
+        context: .
+        dockerfile: docker/app/Dockerfile_base_image${PHP_VERSION}
+      image: registry.gitlab.com/flagstudio/laraflag:${PHP_VERSION}-base # образ, который строим. НЕ ТОТ из которого строимся
+      ports:
+        - "8080:8080"

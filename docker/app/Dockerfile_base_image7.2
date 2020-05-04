@@ -1,4 +1,5 @@
-FROM php:7.2-fpm-alpine
+ARG PHP_VERSION
+FROM php:${PHP_VERSION}-fpm-alpine
 
 #
 #--------------------------------------------------------------------------
@@ -138,6 +139,11 @@ ENV COMPOSER_REPO_PACKAGIST ${COMPOSER_REPO_PACKAGIST}
 RUN echo "" >> ~/.bashrc && \
     echo 'export PATH="~/.composer/vendor/bin:$PATH"' >> ~/.bashrc
 RUN composer global require hirak/prestissimo
+# Nova CMS credentials
+ARG NOVA_USERNAME
+ARG NOVA_PASSWORD
+RUN composer global config http-basic.nova.laravel.com ${NOVA_USERNAME} ${NOVA_PASSWORD}
+
 
 ###########################################################################
 # NPM
