@@ -27,7 +27,8 @@ build-master:
   services:
     - docker:dind
   before_script:
-    - apk add --update py-pip && pip install docker-compose
+    - apk add  --no-cache py-pip python-dev
+    - pip install docker-compose
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" registry.gitlab.com
   script:
     - docker-compose -f docker-compose.build.yml build --pull app
