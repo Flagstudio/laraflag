@@ -8,6 +8,7 @@ services:
         args:
           - NOVA_USERNAME=${NOVA_USERNAME}
           - NOVA_PASSWORD=${NOVA_PASSWORD}
+          - PHP_VERSION=${PHP_VERSION}
         context: .
         dockerfile: docker/app/Dockerfile
       image: registry.gitlab.com/flagstudio/${COMPOSE_PROJECT_NAME}:latest # образ, который строим. НЕ ТОТ из которого строимся

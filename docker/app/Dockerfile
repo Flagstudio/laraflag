@@ -1,4 +1,5 @@
-FROM registry.gitlab.com/flagstudio/laraflag:base
+ARG PHP_VERSION
+FROM registry.gitlab.com/flagstudio/laraflag:${PHP_VERSION}-base
 
 
 ###########################################################################
