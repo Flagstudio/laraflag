@@ -13,4 +13,3 @@ services:
       image: registry.gitlab.com/flagstudio/${COMPOSE_PROJECT_NAME}:latest # образ, который строим. НЕ ТОТ из которого строимся
       ports:
         - "8080:8080"
-        - "2015:2015"

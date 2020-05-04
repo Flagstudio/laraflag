@@ -53,4 +53,4 @@ RUN php artisan route:cache
 
 ENTRYPOINT ["/usr/bin/supervisord", "-n", "-c",  "/etc/supervisord.conf"]
 
-EXPOSE 8080 2015
+EXPOSE 8080
