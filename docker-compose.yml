@@ -19,30 +19,18 @@ services:
 
   ### MySQL ################################################
   mysql:
-    build:
-      context: ./docker/mysql
-      args:
-        - MYSQL_VERSION=${MYSQL_VERSION}
-    environment:
-      - MYSQL_DATABASE=${DB_DATABASE}
-      - MYSQL_USER=${DB_USERNAME}
-      - MYSQL_PASSWORD=${DB_PASSWORD}
-      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
-      - TZ=${WORKSPACE_TIMEZONE}
+    image: registry.gitlab.com/flagstudio/laraflag:mysql-5.7-base
     volumes:
       - ${DATA_PATH_HOST}/mysql:/var/lib/mysql
-      - ./docker/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     ports:
-      - "127.0.0.1:${MYSQL_PORT}:3306"
+      - "127.0.0.1:3306:3306"
     restart: always
 
   ### SSL proxy (Caddy Server) #########################################
   ssl:
-    build:
-      context: .
-      dockerfile: docker/ssl/Dockerfile
+    image: registry.gitlab.com/flagstudio/laraflag:ssl-base
     ports:
       - "443:443"
       - "80:80"
     volumes:
-      - ./docker/ssl/Caddyfile_http:/etc/Caddyfile
+      - ./Caddyfile_SSL:/etc/Caddyfile
