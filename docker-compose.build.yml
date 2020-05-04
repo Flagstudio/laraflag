@@ -9,8 +9,6 @@ services:
           - PHP_VERSION=7.4
         context: .
         dockerfile: docker/app/Dockerfile
-      env_file:
-        - .env.example
       image: registry.gitlab.com/flagstudio/${COMPOSE_PROJECT_NAME}:latest # образ, который строим. НЕ ТОТ из которого строимся
       ports:
         - "8080:8080"
