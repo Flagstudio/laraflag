@@ -12,6 +12,39 @@ COPY ./docker/app/www.conf /usr/local/etc/php-fpm.d/www.conf
 COPY ./docker/app/supervisord.conf /etc/supervisord.conf
 COPY ./docker/app/Caddyfile /etc/Caddyfile
 
+
+###########################################################################
+# Opcache:
+###########################################################################
+
+ARG PHP_FPM_INSTALL_OPCACHE=true
+
+RUN if [ ${PHP_FPM_INSTALL_OPCACHE} = true ]; then \
+    docker-php-ext-install opcache \
+;fi
+
+# Copy opcache configration
+COPY ./docker/app/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
+
+###########################################################################
+# xDebug:
+###########################################################################
+
+ARG PHP_FPM_INSTALL_XDEBUG=false
+
+RUN if [ ${PHP_FPM_INSTALL_XDEBUG} = true ]; then \
+#    apk add --no-cache $PHPIZE_DEPS \
+      pecl install xdebug \
+      && docker-php-ext-enable xdebug \
+    ;fi
+
+# Copy xdebug configuration for remote debugging
+COPY ./docker/app/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+
+RUN sed -i "s/xdebug.remote_autostart=0/xdebug.remote_autostart=1/" /usr/local/etc/php/conf.d/xdebug.ini && \
+    sed -i "s/xdebug.remote_enable=0/xdebug.remote_enable=1/" /usr/local/etc/php/conf.d/xdebug.ini && \
+    sed -i "s/xdebug.cli_color=0/xdebug.cli_color=1/" /usr/local/etc/php/conf.d/xdebug.ini
+
 ###########################################################################
 # Copy code
 ###########################################################################

@@ -72,7 +72,7 @@ RUN set -ex \
     && apk add --no-cache --virtual .imagick-runtime-deps imagemagick \
     && apk del .phpize-deps
 
-RUN docker-php-ext-install mysqli mbstring pdo pdo_mysql tokenizer xml pcntl bcmath opcache intl zip exif gd && \
+RUN docker-php-ext-install mysqli mbstring pdo pdo_mysql tokenizer xml pcntl bcmath intl zip exif gd && \
     docker-php-ext-configure zip --with-libzip
 
 # GD library
