@@ -11,6 +11,7 @@ variables:
 stages:
   - build
   - deploy
+  - test
 
 before_script:
   - eval $(ssh-agent -s)
@@ -33,6 +34,14 @@ build-master:
   script:
     - docker build  --pull -f docker/app/Dockerfile -t $CI_REGISTRY_IMAGE:latest --build-arg PHP_VERSION=7.4 .
     - docker push "$CI_REGISTRY_IMAGE:latest"
+  only:
+    - master
+
+test:
+  image: "$CI_REGISTRY_IMAGE:latest"
+  stage: test
+  script:
+    - ./vendor/bin/phpunit --testdox
   only:
     - master
 
