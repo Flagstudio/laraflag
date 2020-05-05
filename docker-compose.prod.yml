@@ -4,6 +4,7 @@ services:
 
     ### PHP-FPM + Caddy ##############################################
     app:
+      container_name: ${COMPOSE_PROJECT_NAME}_app_prod
       image: registry.gitlab.com/flagstudio/${COMPOSE_PROJECT_NAME}:latest
       ports:
         - "8080:8080"

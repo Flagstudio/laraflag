@@ -4,6 +4,7 @@ services:
 
 ### PHP-FPM + Caddy ##############################################
     app:
+      container_name: ${COMPOSE_PROJECT_NAME}_app_build
       build:
         args:
           - PHP_VERSION=7.4

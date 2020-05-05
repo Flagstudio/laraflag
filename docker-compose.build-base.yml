@@ -4,6 +4,7 @@ services:
 
 ### PHP-FPM + Caddy ##############################################
     app:
+      container_name: ${COMPOSE_PROJECT_NAME}_app_base
       build:
         args:
           - NOVA_USERNAME=${NOVA_USERNAME}
