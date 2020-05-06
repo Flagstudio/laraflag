@@ -18,14 +18,6 @@ services:
     ports:
       - "8080:8080"
 
-  ### MySQL ################################################
-  mysql:
-    image: registry.gitlab.com/flagstudio/laraflag:mysql-5.7-base
-    volumes:
-      - ${DATA_PATH_HOST}/mysql:/var/lib/mysql
-    ports:
-      - "127.0.0.1:3306:3306"
-    restart: always
 
   ### SSL proxy (Caddy Server) #########################################
   ssl:
@@ -35,3 +27,23 @@ services:
       - "80:80"
     volumes:
       - ./Caddyfile_SSL:/etc/Caddyfile
+
+
+  ### MySQL ################################################
+  mysql:
+    image: registry.gitlab.com/flagstudio/laraflag:mysql-5.7-base
+    volumes:
+      - ${DATA_PATH_HOST}/mysql:/var/lib/mysql
+    ports:
+      - "127.0.0.1:3306:3306"
+    restart: always
+
+
+  ### PostgreSQL ###########################################
+  postgres:
+    image: postgres:alpine
+    command: postgres
+    volumes:
+      - ${DATA_PATH_HOST}/postgres:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:5432:5432"
