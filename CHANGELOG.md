@@ -8,3 +8,4 @@
 2. Opcache and Xdebug (in docker-compose.yml)
 3. Mysql and ssl as an images. No need to build it anywhere
 4. Moved Nova credentials to the App base image
+5. Postgres added
