@@ -72,4 +72,10 @@ deploy-settings: ## Deploy settings to prod
 	scp docker/ssl/Caddyfile_SSL $(HOSTNAME):its.academy/
 	scp docker-compose.prod.yml $(HOSTNAME):its.academy/docker-compose.yml
 
-
+laraflag-settings: ## Copy settings from Laraflag
+	cp -r ../laraflag/Makefile .
+	cp -r ../laraflag/docker* .
+	cp -r ../laraflag/docker .
+	cp -r ../laraflag/.gitlab-ci.yml .
+	cp -r ../laraflag/.env.example .
+	cp -r ../laraflag/.dockerignore .
