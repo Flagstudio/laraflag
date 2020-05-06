@@ -50,9 +50,9 @@ build-master:
 #  only:
 #    - master
 #  script:
-#    - scp docker/ssl/Caddyfile_SSL root@$HOSTNAME_PROD:its.academy/
-#    - scp docker-compose.prod.yml root@$HOSTNAME_PROD:its.academy/docker-compose.yml
-#    - scp docker/app/www.conf root@$HOSTNAME_PROD:its.academy/docker/app/www.conf
+#    - scp docker/ssl/Caddyfile_SSL root@$HOSTNAME_PROD:$PATH_PROD/
+#    - scp docker-compose.prod.yml root@$HOSTNAME_PROD:$PATH_PROD/docker-compose.yml
+#    - scp docker/app/www.conf root@$HOSTNAME_PROD:$PATH_PROD/docker/app/www.conf
 #    - ssh -T root@$HOSTNAME_PROD "cd $PATH_PROD &&
 #      docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" registry.gitlab.com &&
 #      docker pull $CI_REGISTRY_IMAGE:latest &&
