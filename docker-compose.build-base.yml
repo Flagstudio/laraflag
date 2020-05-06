@@ -15,3 +15,17 @@ services:
       image: registry.gitlab.com/flagstudio/laraflag:php-${PHP_VERSION}-base # образ, который строим. НЕ ТОТ из которого строимся
       ports:
         - "8080:8080"
+
+
+  ### MySQL ################################################
+    mysql:
+      build:
+        args:
+          - MYSQL_VERSION=${MYSQL_VERSION}
+        context: ./docker/mysql
+      environment:
+        - TZ=Europe/Moscow
+      image: registry.gitlab.com/flagstudio/laraflag:mysql-${MYSQL_VERSION}-base # образ, который строим. НЕ ТОТ из которого строимся
+      ports:
+        - "127.0.0.1:3306:3306"
+

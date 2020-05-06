@@ -37,13 +37,13 @@ build-master:
   only:
     - master
 
-test:
-  image: "$CI_REGISTRY_IMAGE:latest"
-  stage: test
-  script:
-    - ./vendor/bin/phpunit --testdox
-  only:
-    - master
+#test:
+#  image: "$CI_REGISTRY_IMAGE:latest"
+#  stage: test
+#  script:
+#    - ./vendor/bin/phpunit --testdox
+#  only:
+#    - master
 
 #deploy-master:
 #  stage: deploy
