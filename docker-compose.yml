@@ -8,8 +8,8 @@ services:
     build:
       args:
         - PHP_VERSION=7.4
-        - PHP_FPM_INSTALL_XDEBUG=true
-        - PHP_FPM_INSTALL_OPCACHE=false
+        - PHP_FPM_INSTALL_XDEBUG=${PHP_FPM_INSTALL_XDEBUG}
+        - PHP_FPM_INSTALL_OPCACHE=${PHP_FPM_INSTALL_OPCACHE}
       context: .
       dockerfile: docker/app/Dockerfile
     image: registry.gitlab.com/flagstudio/${COMPOSE_PROJECT_NAME}:latest # образ, который строим. НЕ ТОТ из которого строимся
