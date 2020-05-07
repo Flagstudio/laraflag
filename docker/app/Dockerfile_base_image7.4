@@ -23,6 +23,7 @@ RUN apk --update --no-cache add wget \
   supervisor \
   libzip-dev \
   icu-dev \
+  postgresql-dev \
 #  zlib1g-dev \
 #  libicu-dev \
   g++ \
@@ -72,7 +73,7 @@ RUN set -ex \
     && apk add --no-cache --virtual .imagick-runtime-deps imagemagick \
     && apk del .phpize-deps
 
-RUN docker-php-ext-install mysqli pdo pdo_mysql tokenizer xml pcntl bcmath intl zip exif gd
+RUN docker-php-ext-install mysqli pdo pdo_mysql pdo_pgsql tokenizer xml pcntl bcmath intl zip exif gd
 
 # GD library
 
