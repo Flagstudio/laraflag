@@ -40,9 +40,9 @@ start-local: ## start project on local
 	docker-compose -f docker-compose.local.yml exec app npm i
 	docker-compose -f docker-compose.local.yml exec app npm run dev
 
-build-base: ## Build and push BASIC app image
-	docker build -t registry.gitlab.com/flagstudio/laraflag:base -f docker/app/Dockerfile_base_image .
-	docker push registry.gitlab.com/flagstudio/laraflag:base
+# build-base: ## Build and push BASIC app image
+# 	docker build -t registry.gitlab.com/flagstudio/laraflag:base -f docker/app/Dockerfile_base_image .
+# 	docker push registry.gitlab.com/flagstudio/laraflag:base
 
 build: ## Build app image
 	docker-compose -f docker-compose.build.yml build app
