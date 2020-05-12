@@ -2,7 +2,7 @@ version: '3'
 
 services:
 
-    ### PHP-FPM + Caddy ##############################################
+### PHP-FPM + Caddy ##############################################
     app:
       container_name: ${COMPOSE_PROJECT_NAME}_app_prod
       image: registry.gitlab.com/flagstudio/${COMPOSE_PROJECT_NAME}:latest
@@ -11,6 +11,7 @@ services:
       volumes:
         - ./.env:/var/www/.env
         - ./storage:/var/www/storage
+      restart: unless-stopped
 
 ### MySQL ################################################
     mysql:
@@ -19,9 +20,9 @@ services:
         - ${DATA_PATH_HOST}/mysql:/var/lib/mysql
       ports:
         - "127.0.0.1:3306:3306"
-      restart: always
+      restart: unless-stopped
 
-  ### SSL proxy (Caddy Server) #########################################
+### SSL proxy (Caddy Server) #########################################
     ssl:
       image: registry.gitlab.com/flagstudio/laraflag:ssl-base
       ports:
@@ -30,11 +31,16 @@ services:
       volumes:
         - ./Caddyfile_SSL:/etc/Caddyfile
 
-  ### PostgreSQL ###########################################
+### PostgreSQL ###########################################
     postgres:
       image: postgres:alpine
       command: postgres
+      environment:
+        - POSTGRES_DB=${DB_DATABASE}
+        - POSTGRES_USER=${DB_USERNAME}
+        - POSTGRES_PASSWORD=${DB_PASSWORD}
       volumes:
         - ${DATA_PATH_HOST}/postgres:/var/lib/postgresql/data
       ports:
         - "127.0.0.1:5432:5432"
+      restart: unless-stopped
