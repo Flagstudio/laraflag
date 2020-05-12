@@ -49,8 +49,7 @@ build-master:
 #    - ssh -T $USER_PROD@$HOSTNAME_PROD "cd $PATH_PROD &&
 #      sudo docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" registry.gitlab.com &&
 #      sudo docker pull $CI_REGISTRY_IMAGE:latest &&
-#      sudo docker-compose stop ssl app &&
-#      sudo docker-compose up --remove-orphans -d app ssl &&
+#      sudo docker-compose up --remove-orphans -d app &&
 #      sudo docker-compose exec -T app php artisan migrate --force &&
 #      sudo docker  image prune --force"
 #
