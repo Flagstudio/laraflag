@@ -47,3 +47,29 @@ services:
       - ${DATA_PATH_HOST}/postgres:/var/lib/postgresql/data
     ports:
       - "127.0.0.1:5432:5432"
+
+  ### ElasticSearch ########################################
+  elasticsearch:
+    image: registry.gitlab.com/flagstudio/laraflag:elasticsearch-7.6.2
+    volumes:
+      - ${ELASTICSEARCH_CONFIG_PATH}:/usr/share/elasticsearch/data
+    environment:
+      - cluster.name=laradock-cluster
+      - node.name=laradock-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - cluster.initial_master_nodes=laradock-node
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - "127.0.0.1:${ELASTICSEARCH_HOST_HTTP_PORT}:9200"
+      - "127.0.0.1:${ELASTICSEARCH_HOST_TRANSPORT_PORT}:9300"
+
+  elastichq:
+    image: elastichq/elasticsearch-hq
+    ports:
+      - ${ELASTICHQ_PORT}:5000
+    depends_on:
+      - elasticsearch
