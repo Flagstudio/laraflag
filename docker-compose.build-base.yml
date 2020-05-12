@@ -29,3 +29,15 @@ services:
       ports:
         - "127.0.0.1:3306:3306"
 
+  ### ElasticSearch ########################################
+    elasticsearch:
+      build:
+        context: ./docker/elasticsearch
+      image: registry.gitlab.com/flagstudio/laraflag:elasticsearch-7.6.2
+      environment:
+        - cluster.name=laradock-cluster
+        - node.name=laradock-node
+        - bootstrap.memory_lock=true
+        - "ES_JAVA_OPTS=-Xms1024m -Xmx1024m"
+        - cluster.initial_master_nodes=laradock-node
+
