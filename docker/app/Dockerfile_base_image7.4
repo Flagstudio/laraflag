@@ -147,7 +147,7 @@ RUN composer global config http-basic.nova.laravel.com ${NOVA_USERNAME} ${NOVA_P
 # NPM
 ###########################################################################
 
-RUN apk add python make
+RUN apk add python make automake autoconf
 RUN apk add  --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/v3.7/main/ nodejs=8.9.3-r1
 
 
