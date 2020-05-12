@@ -77,8 +77,11 @@ RUN php artisan package:discover
 RUN php artisan storage:link
 RUN php artisan route:cache
 
+###########################################################################
+# Cron
+###########################################################################
 
-
+RUN crontab /var/www/docker/app/crontab
 
 CMD ["/usr/bin/supervisord", "-n", "-c",  "/etc/supervisord.conf"]
 
