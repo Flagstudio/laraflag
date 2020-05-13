@@ -64,8 +64,8 @@ deploy-develop:
       php artisan down --message=\"We are in deploying process. Please wait for a minute...\" &&
       git stash &&
       git checkout develop &&
-      git fetch origin develop &&
-      git reset --hard origin/develop &&
+      git fetch gitlab develop &&
+      git reset --hard gitlab/develop &&
       npm run prod &&
       composer install -q &&
       php artisan view:clear &&
