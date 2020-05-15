@@ -14,10 +14,10 @@ stages:
   - test
 
 before_script:
-  - eval $(ssh-agent -s)
   - mkdir -p ~/.ssh
   - chmod 700 ~/.ssh
-  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+  - echo "$SSH_PRIVATE_KEY" >> ~/.ssh/id_rsa
+  - chmod 400 ~/.ssh/id_rsa
   - ssh-keyscan $HOSTNAME_PROD >> ~/.ssh/known_hosts
   - ssh-keyscan $HOSTNAME_STAGING_35 >> ~/.ssh/known_hosts
   - chmod 644 ~/.ssh/known_hosts
