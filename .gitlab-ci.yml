@@ -61,7 +61,7 @@ deploy-develop:
       git checkout develop &&
       git fetch gitlab develop &&
       git reset --hard gitlab/develop &&
-      npm run prod &&
+      npm run dev &&
       composer install -q &&
       php artisan view:clear &&
       chmod -R 777 storage/ bootstrap/ &&
