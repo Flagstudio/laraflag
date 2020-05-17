@@ -19,6 +19,7 @@ before_script:
 
 
 build-master:
+  image: docker:git
   stage: build
   services:
     - docker:dind
