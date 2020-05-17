@@ -3,11 +3,6 @@ image: docker:latest
 variables:
   DOCKER_DRIVER: overlay2
 
-#cache:
-#  paths:
-#    - vendor/
-#    - node_modules/
-
 stages:
   - build
   - deploy
@@ -26,7 +21,7 @@ before_script:
 build-master:
   stage: build
   services:
-    - docker:dind
+    - docker:18.09.7-dind
   before_script:
 #    - apk add --no-cache py-pip python-dev libffi-dev openssl-dev gcc libc-dev make
 #    - pip install docker-compose
