@@ -13,6 +13,6 @@ readme.md
 storage/framework/cache/**
 storage/framework/sessions/**
 storage/framework/views/**
-#composer.json
-#composer.lock
-vendor
+# composer.json
+# composer.lock
+# vendor
