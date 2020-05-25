@@ -9,8 +9,9 @@ FROM registry.gitlab.com/flagstudio/laraflag:php-${PHP_VERSION}-base
 
 COPY ./docker/app/laraflag.ini /usr/local/etc/php/conf.d
 COPY ./docker/app/www.conf /usr/local/etc/php-fpm.d/www.conf
-COPY ./docker/app/supervisord.conf /etc/supervisord.conf
+COPY ./docker/app/supervisord_local.conf /etc/supervisord.conf
 COPY ./docker/app/Caddyfile /etc/Caddyfile
+COPY ./docker/app/crontab /etc/crontabs/root
 
 
 ###########################################################################
@@ -41,47 +42,38 @@ RUN if [ ${PHP_FPM_INSTALL_XDEBUG} = true ]; then \
 # Copy xdebug configuration for remote debugging
 COPY ./docker/app/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
-RUN sed -i "s/xdebug.remote_autostart=0/xdebug.remote_autostart=1/" /usr/local/etc/php/conf.d/xdebug.ini && \
-    sed -i "s/xdebug.remote_enable=0/xdebug.remote_enable=1/" /usr/local/etc/php/conf.d/xdebug.ini && \
-    sed -i "s/xdebug.cli_color=0/xdebug.cli_color=1/" /usr/local/etc/php/conf.d/xdebug.ini
-
 ###########################################################################
 # Copy code
 ###########################################################################
 
-USER www-data:www-data
-COPY . /var/www/
+#USER www-data:www-data
+#COPY . /var/www/
 
 ###########################################################################
 # Composer packages
 ###########################################################################
 
-WORKDIR /var/www
-USER root
-
-RUN composer install --optimize-autoloader --no-dev --no-scripts
-RUN composer dumpautoload
+#USER root
+#
+#RUN composer install --optimize-autoloader --no-dev --no-scripts
+#RUN composer dumpautoload
 
 ###########################################################################
 # NPM
 ###########################################################################
 
-RUN npm i
-RUN npm run prod
+#RUN npm i
+#RUN npm run prod
 
 ###########################################################################
 # Prepare Laravel for Prod
 ###########################################################################
 
-RUN php artisan package:discover
-RUN php artisan storage:link
-RUN php artisan route:cache
-
-###########################################################################
-# Cron
-###########################################################################
-
-RUN crontab /var/www/docker/app/crontab
+#RUN php artisan package:discover
+#RUN php artisan storage:link
+#RUN php artisan route:cache
+#
+WORKDIR /var/www
 
 CMD ["/usr/bin/supervisord", "-n", "-c",  "/etc/supervisord.conf"]
 
