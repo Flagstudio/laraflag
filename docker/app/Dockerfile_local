@@ -77,4 +77,4 @@ WORKDIR /var/www
 
 CMD ["/usr/bin/supervisord", "-n", "-c",  "/etc/supervisord.conf"]
 
-EXPOSE 8080
+EXPOSE 8080 9000

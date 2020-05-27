@@ -17,7 +17,8 @@ services:
       - ./:/var/www
     ports:
       - "8080:8080"
-
+    expose:
+      - "9000"
 
   ### SSL proxy (Caddy Server) #########################################
   ssl:
