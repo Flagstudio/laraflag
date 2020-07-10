@@ -16,18 +16,18 @@ services:
     volumes:
       - ./:/var/www
     ports:
-      - "8080:8080"
+      - "80:8080"
     expose:
       - "9000"
 
   ### SSL proxy (Caddy Server) #########################################
-  ssl:
-    image: registry.gitlab.com/flagstudio/laraflag:ssl-base
-    ports:
-      - "443:443"
-      - "80:80"
-    volumes:
-      - ./docker/ssl/Caddyfile_SSL:/etc/Caddyfile
+#  ssl:
+#    image: registry.gitlab.com/flagstudio/laraflag:ssl-base
+#    ports:
+#      - "443:443"
+#      - "80:80"
+#    volumes:
+#      - ./docker/ssl/Caddyfile_SSL:/etc/Caddyfile
 
 
   ### MySQL ################################################
