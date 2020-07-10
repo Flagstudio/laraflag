@@ -4,14 +4,14 @@
 
 ## Структура Docker Compose
 
-Конфиги Docker Compose:
+### Конфиги Docker Compose
 
 - **docker-compose.yml** — для локальной разработки
 - **docker-compose.build.yml** — для сборки продуктового образа app (в нормальном режиме используется только в CI)
 - **docker-compose.prod.yml** — конфиг для запуска на проде. Лежит на проде, переименованный в docker-compose.yml
 - **docker-compose.build-base.yml** — конфиг для сборки базовых образов. Не должен использоваться разработчиками, так как нужен для создания образов **общих для всех проектов веб-студии**
 
-Службы:
+### Службы
 
 - **ssl** - caddy веб сервер (вместо nginx)
 - **app** - php-fpm+caddy
@@ -20,7 +20,7 @@
 - **elasticsearch** — угадайте
 - **elastichq** — UI для эластика
 
-Конфиги:
+### Конфиги
 
 Общие
 
@@ -40,7 +40,7 @@ Prod
 - **docker/app/supervisord_build.conf** — supervisor
 - **docker/ssl/Caddyfile_SSL** — Caddy
 
-## Local
+## LOCAL
 
 Используйте docker-compose.yml, запускайте нужные службы, собирайте зависимости в `app`. Вот несоклько полезных команд для запуска на локале:
 
@@ -53,7 +53,7 @@ Prod
 Для использования xDebug, читайте [инструкцию](http://docs.flagstudio.ru/docs/1.0/xdebug_docker).
 
 
-## CI
+## CI/CD
 
 ### Доставка на тестовый
 
