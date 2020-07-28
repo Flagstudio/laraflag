@@ -1,48 +1,50 @@
 {
     "name": "laravel/laravel",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": "^7.2",
-        "64robots/nova-fields": "^0.15.0",
-        "coderello/laravel-nova-lang": "^1.3",
-        "ebess/advanced-nova-media-library": "^2.0",
-        "emilianotisato/nova-tinymce": "^1.1",
-        "facade/ignition": "^1.11",
+        "php": "^7.4",
+        "64robots/nova-fields": "^0.17.0",
+        "ampeco/nova-date-range-filter": "^0.1.1",
+        "babenkoivan/scout-elasticsearch-driver": "^4.2",
+        "doctrine/dbal": "^2.10.2",
+        "ebess/advanced-nova-media-library": "^3.2.0",
+        "emilianotisato/nova-tinymce": "v0.5.4",
         "eminiarts/nova-tabs": "^1.2",
-        "fideloper/proxy": "^4.0",
-        "flagstudio/nova-actions-left": "^0.1.1",
-        "flagstudio/nova-admin-bar": "^0.1.6",
-        "flagstudio/nova-contacts": "*",
-        "flagstudio/nova-instructions": "*",
-        "gregoriohc/laravel-nova-theme-responsive": "^0.6.2",
-        "guzzlehttp/guzzle": "^6.3",
-        "hirak/prestissimo": "^0.3.10",
-        "jenssegers/date": "^3.5",
-        "laravel/framework": "^6.0",
-        "laravel/nova": "~2.0",
-        "laravel/tinker": "^1.0",
+        "fideloper/proxy": "^4.4",
+        "flagstudio/nova-actions-left": "^0.2.0",
+        "flagstudio/nova-admin-bar": "^0.2.0",
+        "fourstacks/nova-repeatable-fields": "^1.3",
+        "hirak/prestissimo": "^0.3.8",
+        "jenssegers/date": "^4.0",
+        "laravel/framework": "^7.0",
+        "laravel/helpers": "^1.2",
+        "laravel/nova": "^3.0",
+        "laravel/telescope": "^3.5",
+        "laravel/tinker": "^2.0",
+        "spatie/eloquent-sortable": "^3.8",
         "spatie/image-optimizer": "^1.2",
-        "spatie/laravel-image-optimizer": "^1.5",
-        "spatie/laravel-medialibrary": "^7.0.0",
+        "spatie/laravel-image-optimizer": "^1.6",
+        "spatie/laravel-medialibrary": "^8.3",
         "spatie/laravel-missing-page-redirector": "^2.5",
-        "spatie/laravel-tail": "^3.2",
-        "whitecube/nova-flexible-content": "^0.1.9"
+        "spatie/laravel-tail": "^4.2",
+        "whitecube/nova-flexible-content": "^0.2.2"
     },
     "require-dev": {
-        "ajthinking/tinx": "^2.1",
         "barryvdh/laravel-debugbar": "^3.2",
         "barryvdh/laravel-ide-helper": "^2.5",
         "beyondcode/laravel-dump-server": "^1.0",
-        "brainmaestro/composer-git-hooks": "^2.7",
+        "brainmaestro/composer-git-hooks": "^2.8",
         "friendsofphp/php-cs-fixer": "^2.15",
-        "fzaninotto/faker": "^1.4",
-        "laravel/telescope": "^2.0",
+        "fzaninotto/faker": "^1.9",
         "mockery/mockery": "^1.0",
-        "nunomaduro/collision": "^2.0",
-        "phpunit/phpunit": "^7.0"
+        "nunomaduro/collision": "^4.1",
+        "phpunit/phpunit": "^8.5"
     },
     "autoload": {
         "classmap": [
@@ -71,8 +73,7 @@
             ]
         },
         "laravel": {
-            "dont-discover": [
-            ]
+            "dont-discover": []
         }
     },
     "scripts": {

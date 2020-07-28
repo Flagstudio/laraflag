@@ -107,4 +107,25 @@ abstract class Resource extends NovaResource
             ->exceptOnForms()
             ->asHtml();
     }
+
+    protected static string $identificator = 'id';
+    protected function identificator()
+    {
+        $identificatorName = static::$identificator;
+        $identificator = $this->$identificatorName;
+        if (!$identificator && $resourceId = request()->resourceId) {
+            $identificator = static::$model::find($resourceId)->$identificatorName;
+        }
+        return $identificator;
+    }
+
+    /**
+     * @return \Closure
+     */
+    public static function getHashMediaFunc()
+    {
+        return function ($originalFilename, $extension) {
+            return Str::slug(explode(".", $originalFilename)[0]) . '.' . $extension;
+        };
+    }
 }
