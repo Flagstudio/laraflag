@@ -41,8 +41,10 @@
 
     <footer id="footer" class="footer">
         <personal-warning>
-            Мы используем данные файлы cookie, данные об IP-адресе и местоположении, разработанные третьими лицами для анализа событий на нашем сайте. Продолжая просмотр страниц сайта, вы принимаете условия его использования. Более подробные сведения можно посмотреть в
-            <a class="personal-warning__link" href="#!" target="_blank" title="Политика конфиденциальности">Политике конфиденциальности</a>.
+            <template v-slot:default>
+                Мы используем данные файлы cookie, данные об IP-адресе и местоположении, разработанные третьими лицами для анализа событий на нашем сайте. Продолжая просмотр страниц сайта, вы принимаете условия его использования. Более подробные сведения можно посмотреть в
+                <a class="personal-warning__link" href="#!" target="_blank" title="Политика конфиденциальности">Политике конфиденциальности</a>.
+            </template>
         </personal-warning>
     </footer>
 </div>
@@ -54,6 +56,7 @@
 
 @include('sprite')
 
+<script src="{!! mix('/js/check-support.js') !!}"></script>
 <script src="{!! mix('/js/manifest.js') !!}"></script>
 <script src="{!! mix('/js/vendor.js') !!}"></script>
 <script src="{!! mix('/js/app.js') !!}"></script>

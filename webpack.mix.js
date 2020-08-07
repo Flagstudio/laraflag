@@ -5,6 +5,7 @@ require('laravel-mix-bundle-analyzer');
 
 mix
     .js('resources/js/app.js', 'public/js').extract()
+    .js('resources/js/check-support.js', 'public/js')
     .sass('resources/sass/nova.scss', 'public/css/nova.css')
     .sass('resources/sass/app.scss', 'public/css', {
         implementation: require('node-sass')
