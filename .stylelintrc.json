@@ -1,0 +1,14 @@
+{
+    "extends": [
+        "stylelint-config-sass-guidelines",
+        "stylelint-config-hudochenkov/order"
+    ],
+    "rules": {
+        "number-leading-zero": null,
+        "max-nesting-depth": 3,
+        "selector-class-pattern": null,
+        "order/properties-alphabetical-order": null,
+        "property-no-vendor-prefix": null,
+        "string-quotes": "double"
+    }
+}

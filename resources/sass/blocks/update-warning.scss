@@ -3,49 +3,49 @@
   top: 0;
   left: 0;
   z-index: 999999;
-
-  padding: 10px 20px;
+  display: block;
 
   width: 100%;
-  display: block;
+
+  padding: 10px 20px;
+  background: #e05252;
+  background-size: cover;
+
+  color: #fff;
 
   font-size: 14px;
   line-height: 1.4;
   text-align: center;
-
-  color: #fff;
-  background: #e05252;
-  background-size: cover;
 }
 
 .update-warning a {
-  border: none;
+  border: 0;
+  border-bottom: 1px solid #fff;
   color: #fff;
   text-decoration: none;
-  border-bottom: 1px solid #fff;
 
   transition: border-color 0.3s;
 
   &:hover,
   &:focus {
-    outline: none;
     border-bottom-color: transparent;
+    outline: none;
   }
 }
 
 .update-warning__close {
   margin-top: 10px;
+  border: 0;
 
   color: #fff;
   text-decoration: none;
   text-transform: uppercase;
-  border: none;
 
   transition: color 0.3s;
 
   &:hover,
   &:focus {
-    outline: none;
     color: rgba(255, 255, 255, 0.7);
+    outline: none;
   }
 }

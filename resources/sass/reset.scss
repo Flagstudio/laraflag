@@ -8,18 +8,18 @@ body {
 }
 
 html {
+  box-sizing: border-box;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
-  box-sizing: border-box;
   // appearance: none; // отключено наследование стилей браузера, осторожней!
 }
 
 *,
-*:before,
-*:after {
+*::before,
+*::after {
   box-sizing: border-box;
   // -webkit-appearance: inherit; // отключено наследование стилей браузера, осторожней!
   // -moz-appearance: inherit; // отключено наследование стилей браузера, осторожней!
@@ -79,40 +79,40 @@ figure {
 }
 
 a {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
 
   &:focus {
-    outline-color: inherit;
-    outline-style: dotted;
     outline-width: thin;
+    outline-style: dotted;
+    outline-color: inherit;
   }
 }
 
 img {
+  vertical-align: middle;
   max-width: 100%;
   height: auto;
   border: 0;
-  vertical-align: middle;
 }
 
 button {
-  border: 0;
+  overflow: visible;
   margin: 0;
   padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
   text-align: inherit;
   text-transform: inherit;
-  font: inherit;
-  -webkit-font-smoothing: inherit;
-  letter-spacing: inherit;
-  background: none;
   cursor: pointer;
-  overflow: visible;
+  -webkit-font-smoothing: inherit;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="tel"],
+[type="text"],
+[type="email"],
+[type="tel"],
 textarea {
   appearance: none;
 }

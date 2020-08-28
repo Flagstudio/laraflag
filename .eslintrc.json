@@ -1,0 +1,33 @@
+{
+    "env": {
+        "browser": true,
+        "es2020": true
+    },
+    "extends": [
+        "plugin:vue/recommended",
+        "airbnb-base"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 11,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "vue"
+    ],
+    "rules": {
+        "vue/require-default-prop": "off",
+        "no-new": "off",
+        "func-names": "off",
+        "no-alert": "off",
+        "default-case": "off",
+        "no-param-reassign": "off",
+        "linebreak-style": "off",
+        "no-plusplus": "off",
+        "vue/no-v-html": "off",
+        "vue/html-indent": ["error", 4],
+        "indent": ["error", 4],
+        "import/extensions": ["error", {
+            "js": "always"
+        }]
+    }
+}

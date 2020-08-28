@@ -1,25 +1,27 @@
-window.Vue = require('vue');
+import Vue from 'vue';
+import axios from 'axios';
+import PersonalWarning from './components/personal-warning.vue';
+
 window.csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+axios.defaults.headers.post['X-CSRF-Token'] = window.csrf;
 
-const componentsHeader = {};
+new Vue({
+    el: '#header',
+    components: {
 
-const componentsMain = {};
-
-const componentsFooter = {
-    'personal-warning': require('./components/personal-warning.vue').default,
-};
-
-const header = new Vue({
-    components: componentsHeader,
-    el: '#header'
+    },
 });
 
-const main = new Vue({
-    components: componentsMain,
-    el: '#main'
+new Vue({
+    el: '#main',
+    components: {
+
+    },
 });
 
-const footer = new Vue({
-    components: componentsFooter,
-    el: '#footer'
+new Vue({
+    el: '#footer',
+    components: {
+        PersonalWarning,
+    },
 });

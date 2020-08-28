@@ -1,10 +1,10 @@
 .personal-warning {
   position: fixed;
-  left: 0;
   right: 0;
-  padding: 15px 0;
   bottom: 0;
+  left: 0;
   z-index: 15000;
+  padding: 15px 0;
   background: rgba(0, 0, 0, 0.8);
   font-size: 14px;
   opacity: 0;
@@ -25,8 +25,8 @@
 }
 
 .personal-warning__text {
-  font: $regular 13px/1.3 $font-family-base;
   color: $white;
+  font: $regular 13px/1.3 $font-family-base;
 }
 
 .personal-warning__link {
@@ -42,12 +42,12 @@
 
 .personal-warning__btn {
   display: block;
-  padding: 10px 55px;
   margin-left: 30px;
-  background: transparent;
-  font: $regular 13px/1.4 $font-family-base;
-  color: $white;
+  padding: 10px 55px;
   border: 1px solid $white;
+  background: transparent;
+  color: $white;
+  font: $regular 13px/1.4 $font-family-base;
   transition: all 0.3s;
 
   &:hover,
