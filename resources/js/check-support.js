@@ -9,7 +9,7 @@ if (window.Modernizr.flexbox && window.Modernizr.flexwrap && window.Modernizr.cs
     warning.style.display = 'block';
 
     if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
+        closeBtn.addEventListener('click', function () {
             warning.style.display = 'none';
         });
     }
