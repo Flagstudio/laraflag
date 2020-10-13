@@ -9,6 +9,7 @@ if (window.Modernizr.flexbox && window.Modernizr.flexwrap && window.Modernizr.cs
     warning.style.display = 'block';
 
     if (closeBtn) {
+        // eslint-disable-next-line prefer-arrow-callback
         closeBtn.addEventListener('click', function () {
             warning.style.display = 'none';
         });
