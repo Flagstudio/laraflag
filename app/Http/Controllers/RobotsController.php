@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Settings;
+use App\Models\Settings;
 
 class RobotsController extends Controller
 {

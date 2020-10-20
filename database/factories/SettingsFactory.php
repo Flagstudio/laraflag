@@ -1,13 +1,30 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use Faker\Generator as Faker;
+use App\Models\Settings;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(\App\Settings::class, function (Faker $faker) {
-    return [
-        'title' => $faker->word,
-        'slug' => $faker->unique()->word,
-        'fields' => [],
-    ];
-});
+class SettingsFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Settings::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'title' => $this->faker->word,
+            'slug' => $this->faker->unique()->word,
+            'fields' => [],
+        ];
+    }
+}

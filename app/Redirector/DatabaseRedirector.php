@@ -2,7 +2,7 @@
 
 namespace App\Redirector;
 
-use App\Redirect;
+use App\Models\Redirect;
 use Spatie\MissingPageRedirector\Redirector\Redirector;
 use Symfony\Component\HttpFoundation\Request;
 

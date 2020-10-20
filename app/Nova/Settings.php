@@ -14,7 +14,7 @@ class Settings extends Resource
      *
      * @var string
      */
-    public static $model = 'App\Settings';
+    public static $model = 'App\Models\Settings';
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -61,16 +61,16 @@ class Settings extends Resource
         if ($this->slug === null) {
             $resourceId = $request->route('resourceId');
             if ($resourceId === null) {
-                $slug = \App\Settings::find($resourceId)->slug;
+                $slug = \App\Models\Settings::find($resourceId)->slug;
             }
         }
 
         //Get fields depending on resource title
         switch ($slug) {
-            case \App\Settings::METRICS_SLUG:
+            case \App\Models\Settings::METRICS_SLUG:
                 $fields = $this->metricsFields();
                 break;
-            case \App\Settings::ROBOTS_SLUG:
+            case \App\Models\Settings::ROBOTS_SLUG:
                 $fields = $this->robotsFields();
                 break;
             default:

@@ -1,6 +1,8 @@
 <?php
 
-use App\Settings;
+namespace Database\Seeders;
+
+use App\Models\Settings;
 use Illuminate\Database\Seeder;
 
 class SettingsSeeder extends Seeder
@@ -14,7 +16,7 @@ class SettingsSeeder extends Seeder
     {
         $metricsSlug = Settings::METRICS_SLUG;
         if (!Settings::whereSlug($metricsSlug)->exists()) {
-            factory('App\Settings')->create([
+            Settings::factory()->create([
                 'title' => 'Метрики',
                 'slug' => $metricsSlug,
                 'fields' => [],
@@ -23,7 +25,7 @@ class SettingsSeeder extends Seeder
 
         $robotsSlug = Settings::ROBOTS_SLUG;
         if (!Settings::whereSlug($robotsSlug)->exists()) {
-            factory('App\Settings')->create([
+            Settings::factory()->create([
                 'title' => 'Robots.txt',
                 'slug' => $robotsSlug,
                 'fields' => [],
