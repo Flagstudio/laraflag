@@ -9,7 +9,6 @@
         to {path} {path}/ /index.php?{query}
     }
     gzip
-    browse
 
     # php-fpm status page @TODO check
 #     fastcgi /status :9000 {
