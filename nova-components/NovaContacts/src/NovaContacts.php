@@ -12,12 +12,12 @@ class NovaContacts extends Card
 
         $this->withMeta([
             'flagstudioInfo' => [
-                'testapp' => env('APP_URL'),
-                'login' => 'admin',
-                'password' => '007',
-                'manager' => 'Змазова Ксения',
-                'email' => 'zmazova@flagstudio.ru',
-                'phone' => '+7 (343) 287-53-70',
+                'testapp' => config('nova-contacts.test_url'),
+                'login' => config('nova-contacts.basic_auth_login'),
+                'password' => config('nova-contacts.basic_auth_password'),
+                'manager' => config('nova-contacts.manager_name'),
+                'email' => config('nova-contacts.manager_email'),
+                'phone' => config('nova-contacts.phone'),
             ],
         ]);
     }
