@@ -128,7 +128,7 @@ RUN curl --silent --show-error --fail --location \
 ###########################################################################
 
 USER root
-RUN apk add composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
 ARG COMPOSER_REPO_PACKAGIST
 ENV COMPOSER_REPO_PACKAGIST ${COMPOSER_REPO_PACKAGIST}
@@ -136,7 +136,6 @@ ENV COMPOSER_REPO_PACKAGIST ${COMPOSER_REPO_PACKAGIST}
 # Export composer vendor path
 RUN echo "" >> ~/.bashrc && \
     echo 'export PATH="~/.composer/vendor/bin:$PATH"' >> ~/.bashrc
-RUN composer global require hirak/prestissimo
 # Nova CMS credentials
 ARG NOVA_USERNAME
 ARG NOVA_PASSWORD
@@ -147,7 +146,7 @@ RUN composer global config http-basic.nova.laravel.com ${NOVA_USERNAME} ${NOVA_P
 # NPM
 ###########################################################################
 
-RUN apk add python make automake autoconf
+RUN apk add --no-cache python2 make automake autoconf
 RUN apk add  --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/v3.7/main/ nodejs=8.9.3-r1
 
 
