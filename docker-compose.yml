@@ -33,6 +33,11 @@ services:
   ### MySQL ################################################
   mysql:
     image: registry.gitlab.com/flagstudio/laraflag:mysql-5.7-base
+    environment:
+      - MYSQL_DB=${DB_DATABASE}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
     volumes:
       - ${DATA_PATH_HOST}/mysql:/var/lib/mysql
     ports:
