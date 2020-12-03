@@ -15,7 +15,7 @@ services:
 
 ### MySQL ################################################
     mysql:
-      image: registry.gitlab.com/flagstudio/laraflag:mysql-5.7-base
+      image: registry.gitlab.com/flagstudio/laraflag:mysql-8.0-base
       environment:
         - MYSQL_DB=${DB_DATABASE}
         - MYSQL_USER=${DB_USERNAME}
