@@ -1,5 +1,5 @@
 ARG PHP_VERSION
-FROM registry.gitlab.com/flagstudio/laraflag:php-${PHP_VERSION}-base
+FROM registry.gitlab.com/flagstudio/laraflag:php-${PHP_VERSION}-base-debian
 
 
 ###########################################################################
@@ -11,8 +11,8 @@ COPY ./docker/app/laraflag.ini /usr/local/etc/php/conf.d
 COPY ./docker/app/www.conf /usr/local/etc/php-fpm.d/www.conf
 COPY ./docker/app/supervisord_build.conf /etc/supervisord.conf
 COPY ./docker/app/Caddyfile /etc/Caddyfile
-COPY ./docker/app/crontab /etc/crontabs/root
-
+COPY ./docker/app/crontab /var/spool/cron/crontabs/root
+RUN crontab /var/spool/cron/crontabs/root
 
 ###########################################################################
 # Opcache:
@@ -26,8 +26,6 @@ RUN if [ ${PHP_FPM_INSTALL_OPCACHE} = true ]; then \
 
 # Copy opcache configration
 COPY ./docker/app/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
-
-
 
 ###########################################################################
 # Copy code

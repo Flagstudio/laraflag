@@ -1,134 +1,115 @@
 ARG PHP_VERSION
-FROM php:${PHP_VERSION}-fpm-alpine
+FROM php:${PHP_VERSION}-fpm
+
+
+# Set Environment Variables
+ENV DEBIAN_FRONTEND noninteractive
 
 #
 #--------------------------------------------------------------------------
-# Some ebala for PHP
+# Software's Installation
 #--------------------------------------------------------------------------
 #
-
-
-RUN apk --update --no-cache add wget \
-#  apt-utils \
-  curl \
-  git \
-  build-base \
-  libmemcached-dev \
-  libmcrypt-dev \
-  libxml2-dev \
-  zlib-dev \
-  autoconf \
-  cyrus-sasl-dev \
-  libgsasl-dev \
-  supervisor \
-  libzip-dev \
-  icu-dev \
-  postgresql-dev \
-#  zlib1g-dev \
-#  libicu-dev \
-  g++ \
-#  libmagickwand-dev \
-  imagemagick \
-  # wkhtmltopdf
-  xvfb \
-  # Additionnal dependencies for better rendering
-  ttf-freefont \
-  fontconfig \
-  dbus \
-  bash \
-  libpng \
-  libpng-dev \
-  libjpeg-turbo-dev \
-  libwebp-dev zlib-dev \
-  freetype-dev \
-
-  libxpm-dev && \
-
-
-# For wkhtmltopdf
-    apk add qt5-qtbase-dev \
-            wkhtmltopdf \
-            --no-cache \
-            --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ \
-            --allow-untrusted \
-    && \
-
-    # Wrapper for xvfb
-    mv /usr/bin/wkhtmltopdf /usr/bin/wkhtmltopdf-origin && \
-    echo $'#!/usr/bin/env sh\n\
-Xvfb :0 -screen 0 1024x768x24 -ac +extension GLX +render -noreset & \n\
-DISPLAY=:0.0 wkhtmltopdf-origin $@ \n\
-killall Xvfb\
-' > /usr/bin/wkhtmltopdf && \
-    chmod +x /usr/bin/wkhtmltopdf && \
-
-    apk del libpng-dev libjpeg-turbo-dev libwebp-dev zlib-dev libxpm-dev
-
-# For Imagick
-RUN set -ex \
-    && apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS imagemagick-dev libtool \
-    && export CFLAGS="$PHP_CFLAGS" CPPFLAGS="$PHP_CPPFLAGS" LDFLAGS="$PHP_LDFLAGS" \
-    && pecl install imagick-3.4.3 \
-    && docker-php-ext-enable imagick \
-    && apk add --no-cache --virtual .imagick-runtime-deps imagemagick \
-    && apk del .phpize-deps
-
-RUN docker-php-ext-install mysqli pdo pdo_mysql pdo_pgsql tokenizer xml pcntl bcmath intl zip exif gd
-
-# GD library
-
-RUN apk update \
-    && apk upgrade \
-    && apk add --no-cache \
-        freetype \
-        libpng \
-        libjpeg-turbo \
-        freetype-dev \
-        libpng-dev \
-        jpeg-dev \
-        libjpeg \
-        libjpeg-turbo-dev
-
-RUN docker-php-ext-configure gd \
-        --with-freetype \
-        --with-jpeg
-
-RUN NUMPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) \
-    && docker-php-ext-install -j${NUMPROC} gd
-
-# Memcached
-
-RUN pecl channel-update pecl.php.net && \
-    pecl install memcached mcrypt-1.0.1 && \
-    docker-php-ext-enable memcached
-
+# Installing tools and PHP extentions using "apt", "docker-php", "pecl",
 #
-#--------------------------------------------------------------------------
-# Some govno for Caddy web server
-#--------------------------------------------------------------------------
-#
-ARG VERSION="0.10.11"
 
-RUN apk update && apk upgrade \
-  && apk add --no-cache openssh-client git \
-  && apk add --no-cache --virtual .build-dependencies tar curl
+RUN docker-php-ext-install bcmath tokenizer mysqli exif
 
-RUN curl --silent --show-error --fail --location \
-      --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" -o - \
-      "https://github.com/mholt/caddy/releases/download/v${VERSION}/caddy_v${VERSION}_linux_amd64.tar.gz" \
-    | tar --no-same-owner -C /usr/bin -xz \
- && chmod 0755 /usr/bin/caddy \
- && /usr/bin/caddy -version \
- && apk del .build-dependencies
 
+
+# Install "curl", "libmemcached-dev", "libpq-dev", "libjpeg-dev",
+#         "libpng-dev", "libfreetype6-dev", "libssl-dev", "libmcrypt-dev",
+RUN set -eux; \
+    apt-get update; \
+    apt-get upgrade -y; \
+    apt-get install -y --no-install-recommends \
+            curl \
+            libmemcached-dev \
+            libz-dev \
+            libpq-dev \
+            libjpeg-dev \
+            libpng-dev \
+            libfreetype6-dev \
+            libssl-dev \
+            libmcrypt-dev \
+            jpegoptim optipng pngquant gifsicle \
+            supervisor \
+            postgresql-client \
+            xvfb libfontconfig wkhtmltopdf \
+            git \
+            cron \
+            libonig-dev; \
+    rm -rf /var/lib/apt/lists/*
+
+RUN set -eux; \
+    # Install the PHP pdo_mysql extention
+    docker-php-ext-install pdo_mysql; \
+    # Install the PHP pdo_pgsql extention
+    docker-php-ext-install pdo_pgsql; \
+    # Install the PHP gd library
+    docker-php-ext-configure gd \
+            --prefix=/usr \
+            --with-jpeg \
+            --with-freetype; \
+    docker-php-ext-install gd; \
+    php -r 'var_dump(gd_info());'
+
+RUN apt-get update;
+
+###########################################################################
+# ZipArchive:
+###########################################################################
+
+RUN apt-get install libzip-dev -y && \
+    docker-php-ext-configure zip && \
+    docker-php-ext-install zip;
+
+###########################################################################
+# Human Language and Character Encoding Support:
+###########################################################################
+
+
+RUN apt-get install -y zlib1g-dev libicu-dev g++ && \
+    docker-php-ext-configure intl && \
+    docker-php-ext-install intl;
 
 
 ###########################################################################
-# Composer
+# ImageMagick:
 ###########################################################################
 
 USER root
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
+
+RUN apt update && \
+    apt install -y imagemagick libmagickwand-dev --fix-missing && \
+    pecl install imagick && \
+    docker-php-ext-enable imagick ;
+
+###########################################################################
+# Caddy:
+###########################################################################
+
+ARG CADDY_VERSION="0.10.11"
+
+RUN curl --silent --show-error --fail --location \
+      --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" -o - \
+      "https://github.com/mholt/caddy/releases/download/v${CADDY_VERSION}/caddy_v${CADDY_VERSION}_linux_amd64.tar.gz" \
+    | tar --no-same-owner -C /usr/bin -xz \
+     && chmod 0755 /usr/bin/caddy \
+     && /usr/bin/caddy -version
+
+
+
+#
+############################################################################
+## Composer
+############################################################################
+
+USER root
+
+RUN curl -sS https://getcomposer.org/installer -o composer-setup.php
+RUN php -r "if (hash_file('SHA384', 'composer-setup.php') === '$(curl -sS https://composer.github.io/installer.sig)') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+RUN php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
 ARG COMPOSER_REPO_PACKAGIST
 ENV COMPOSER_REPO_PACKAGIST ${COMPOSER_REPO_PACKAGIST}
@@ -142,19 +123,75 @@ ARG NOVA_PASSWORD
 RUN composer global config http-basic.nova.laravel.com ${NOVA_USERNAME} ${NOVA_PASSWORD}
 
 
+
 ###########################################################################
-# NPM
+# Node / NVM:
 ###########################################################################
 
-RUN apk add --no-cache python2 make automake autoconf
-RUN apk add  --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/v3.7/main/ nodejs=8.9.3-r1
+# Check if NVM needs to be installed
+ARG NODE_VERSION=12
+ENV NODE_VERSION ${NODE_VERSION}
+ARG INSTALL_NODE=true
+ARG INSTALL_NPM_GULP=false
+ARG INSTALL_NPM_BOWER=false
+ARG INSTALL_NPM_VUE_CLI=false
+ARG NPM_REGISTRY
+ENV NPM_REGISTRY ${NPM_REGISTRY}
+ENV NVM_DIR /home/laradock/.nvm
+
+RUN if [ ${INSTALL_NODE} = true ]; then \
+    # Install nvm (A Node Version Manager)
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash \
+        && . $NVM_DIR/nvm.sh \
+        && nvm install ${NODE_VERSION} \
+        && nvm use ${NODE_VERSION} \
+        && nvm alias ${NODE_VERSION} \
+        && if [ ${NPM_REGISTRY} ]; then \
+        npm config set registry ${NPM_REGISTRY} \
+        ;fi \
+        && if [ ${INSTALL_NPM_GULP} = true ]; then \
+        npm install -g gulp \
+        ;fi \
+        && if [ ${INSTALL_NPM_BOWER} = true ]; then \
+        npm install -g bower \
+        ;fi \
+        && if [ ${INSTALL_NPM_VUE_CLI} = true ]; then \
+        npm install -g @vue/cli \
+        ;fi \
+        && ln -s `npm bin --global` /home/laradock/.node-bin \
+;fi
+
+# Wouldn't execute when added to the RUN statement in the above block
+# Source NVM when loading bash since ~/.profile isn't loaded on non-login shell
+RUN if [ ${INSTALL_NODE} = true ]; then \
+    echo "" >> ~/.bashrc && \
+    echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.bashrc && \
+    echo '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm' >> ~/.bashrc \
+;fi
+
+# Add NVM binaries to root's .bashrc
+USER root
+
+RUN if [ ${INSTALL_NODE} = true ]; then \
+    echo "" >> ~/.bashrc && \
+    echo 'export NVM_DIR="/home/laradock/.nvm"' >> ~/.bashrc && \
+    echo '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm' >> ~/.bashrc \
+;fi
+
+# Add PATH for node
+ENV PATH $PATH:/home/laradock/.node-bin
+
+RUN if [ ${NPM_REGISTRY} ]; then \
+    . ~/.bashrc && npm config set registry ${NPM_REGISTRY} \
+;fi
 
 
-# You need to install:
-# configs for php, caddy, supervisor
-# copy projects files inside image
-# composer install (not as easy as it seems
-# cache routes, configs, create storage link
-# run endpoint
-# expose ports
-# So, you need flagstudio/laraflag:latest on gitlab resitry. Ask Misha for more info.
+#
+## You need to install:
+## configs for php, caddy, supervisor
+## copy projects files inside image
+## composer install (not as easy as it seems
+## cache routes, configs, create storage link
+## run endpoint
+## expose ports
+## So, you need flagstudio/laraflag:latest on gitlab resitry. Ask Misha for more info.
