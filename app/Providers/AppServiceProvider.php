@@ -17,7 +17,6 @@ class AppServiceProvider extends ServiceProvider
         if (app()->environment('production')) {
             error_reporting(E_ALL ^ E_NOTICE);
         }
-        Schema::defaultStringLength(191);
     }
 
     /**
