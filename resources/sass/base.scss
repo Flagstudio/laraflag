@@ -61,3 +61,7 @@ body {
 [v-cloak] {
   visibility: hidden;
 }
+
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none;
+}

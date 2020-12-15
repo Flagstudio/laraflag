@@ -23,6 +23,7 @@
     "browser-sync": "2.26.12",
     "cross-env": "7.0.2",
     "css-loader": "3.4.2",
+    "focus-visible": "^5.2.0",
     "install-changed": "1.1.0",
     "laravel-mix": "5.0.5",
     "node-sass": "4.14.1",
