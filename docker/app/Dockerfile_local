@@ -1,6 +1,15 @@
 ARG PHP_VERSION
 FROM registry.gitlab.com/flagstudio/laraflag:php-${PHP_VERSION}-base-debian
 
+# Add a non-root user to prevent files being created with root permissions on host machine.
+ARG PUID=1000
+ENV PUID ${PUID}
+ARG PGID=1000
+ENV PGID ${PGID}
+
+RUN groupadd -g ${PGID} local && \
+    useradd -u ${PUID} -g local -m local -G local && \
+    usermod -p "*" local
 
 ###########################################################################
 # Configs
