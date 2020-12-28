@@ -36,10 +36,10 @@ build-master:
 #  only:
 #    - master
 #  script:
-#    - scp docker/ssl/Caddyfile_SSL $USER_PROD:$PORT_PROD@$HOSTNAME_PROD:$PATH_PROD/
-#    - scp docker-compose.prod.yml $USER_PROD:$PORT_PROD@$HOSTNAME_PROD:$PATH_PROD/docker-compose.yml
-#    - scp .env.example $USER_PROD:$PORT_PROD@$HOSTNAME_PROD:$PATH_PROD/.env.example
-#    - ssh -T $USER_PROD:$PORT_PROD@$HOSTNAME_PROD "cd $PATH_PROD &&
+#    - scp -P $PORT_PROD docker/ssl/Caddyfile_SSL $USER_PROD@$HOSTNAME_PROD:$PATH_PROD/
+#    - scp -P $PORT_PROD docker-compose.prod.yml $USER_PROD@$HOSTNAME_PROD:$PATH_PROD/docker-compose.yml
+#    - scp -P $PORT_PROD .env.example $USER_PROD@$HOSTNAME_PROD:$PATH_PROD/.env.example
+#    - ssh -T $USER_PROD@$HOSTNAME_PROD -p $PORT_PROD "cd $PATH_PROD &&
 #      sudo docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" registry.gitlab.com &&
 #      sudo docker pull $CI_REGISTRY_IMAGE:latest &&
 #      sudo docker-compose up --remove-orphans -d app &&
