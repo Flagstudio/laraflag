@@ -37,6 +37,7 @@ build-master:
 #    - master
 #  script:
 #    - scp -P $PORT_PROD docker/ssl/Caddyfile_SSL $USER_PROD@$HOSTNAME_PROD:$PATH_PROD/
+#    - scp -P $PORT_PROD docker/netdata $USER_PROD@$HOSTNAME_PROD:$PATH_PROD/
 #    - scp -P $PORT_PROD docker-compose.prod.yml $USER_PROD@$HOSTNAME_PROD:$PATH_PROD/docker-compose.yml
 #    - scp -P $PORT_PROD .env.example $USER_PROD@$HOSTNAME_PROD:$PATH_PROD/.env.example
 #    - ssh -T $USER_PROD@$HOSTNAME_PROD -p $PORT_PROD "cd $PATH_PROD &&

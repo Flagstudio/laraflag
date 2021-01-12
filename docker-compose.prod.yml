@@ -85,8 +85,8 @@ services:
         - /proc:/host/proc:ro
         - /sys:/host/sys:ro
         - /var/run/docker.sock:/var/run/docker.sock:ro
-        - ./docker/netdata/health.d:/etc/netdata/health.d
-        - ./docker/netdata/health_alarm_notify.conf:/etc/netdata/health_alarm_notify.conf
-        - ./docker/netdata/netdata.conf:/etc/netdata/netdata.conf
+        - ./netdata/health.d:/etc/netdata/health.d
+        - ./netdata/health_alarm_notify.conf:/etc/netdata/health_alarm_notify.conf
+        - ./netdata/netdata.conf:/etc/netdata/netdata.conf
       ports:
         - "127.0.0.1:${NETDATA_PORT}:19999"
