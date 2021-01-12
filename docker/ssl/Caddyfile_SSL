@@ -11,3 +11,10 @@ domain.ru {
 www.domain.ru {
     redir https://domain.ru{uri}
 }
+
+#domain.ru/netdata/ {
+#    basicauth / admin 007
+#    proxy / netdata:19999 {
+#        transparent
+#    }
+#}
