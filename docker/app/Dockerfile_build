@@ -59,6 +59,11 @@ RUN php artisan package:discover
 RUN php artisan storage:link
 RUN php artisan route:cache
 
+# Micro Editor https://micro-editor.github.io/
+RUN curl https://getmic.ro | bash; \
+        mv micro /root/micro; \
+        echo 'alias m="~/micro"' >> /root/.bashrc
+
 CMD ["/usr/bin/supervisord", "-n", "-c",  "/etc/supervisord.conf"]
 
 EXPOSE 8080
