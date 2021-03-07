@@ -14,7 +14,7 @@ services:
       dockerfile: docker/app/Dockerfile_local
     image: registry.gitlab.com/flagstudio/${COMPOSE_PROJECT_NAME}:latest # образ, который строим. НЕ ТОТ из которого строимся
     volumes:
-      - ./:/var/www
+      - ./:/var/www:delegated
     ports:
       - "80:8080"
     expose:
@@ -39,7 +39,7 @@ services:
       - MYSQL_PASSWORD=${DB_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
     volumes:
-      - ${DATA_PATH_HOST}/mysql:/var/lib/mysql
+      - ${DATA_PATH_HOST}/mysql:/var/lib/mysql:delegated
     ports:
       - "127.0.0.1:3306:3306"
     restart: always
@@ -54,7 +54,7 @@ services:
       - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
     volumes:
-      - ${DATA_PATH_HOST}/postgres:/var/lib/postgresql/data
+      - ${DATA_PATH_HOST}/postgres:/var/lib/postgresql/data:delegated
     ports:
       - "127.0.0.1:5432:5432"
 
@@ -62,7 +62,7 @@ services:
   elasticsearch:
     image: registry.gitlab.com/flagstudio/laraflag:elasticsearch-7.6.2
     volumes:
-      - ${ELASTICSEARCH_CONFIG_PATH}:/usr/share/elasticsearch/data
+      - ${ELASTICSEARCH_CONFIG_PATH}:/usr/share/elasticsearch/data:delegated
     environment:
       - cluster.name=laradock-cluster
       - node.name=laradock-node
