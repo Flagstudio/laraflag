@@ -4,7 +4,7 @@
 
 
 # Grab full name of php-fpm container
-PHP_FPM_CONTAINER=$(docker ps | grep php-fpm | awk '{print $1}')
+PHP_FPM_CONTAINER=$(docker ps | grep app | awk '{print $1}')
 
 
 # Grab OS type
