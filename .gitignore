@@ -13,7 +13,7 @@ yarn-error.log
 .env
 .phpunit.result.cache
 _ide_helper.php
-packagehash.txt
+.packagehash
 public/css/
 public/js/
 public/images/
