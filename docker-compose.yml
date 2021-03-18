@@ -47,7 +47,7 @@ services:
 
   ### PostgreSQL ###########################################
   postgres:
-    image: postgres:alpine
+    image: postgres:12-alpine
     command: postgres
     environment:
       - POSTGRES_DB=${DB_DATABASE}
