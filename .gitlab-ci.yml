@@ -30,6 +30,19 @@ build-master:
   only:
     - master
 
+#test-master:
+#  image: registry.gitlab.com/flagstudio/laraflag:php-7.4-base-debian-node-12
+#  stage: build
+#  only:
+#    - master
+#    - tags
+#  coverage: '/^\s*Lines:\s*\d+.\d+\%/'
+#  script:
+#    - pecl install xdebug-2.9.8
+#    - docker-php-ext-enable xdebug
+#    - cp ./docker/app/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+#    - composer i
+#    - vendor/bin/phpunit  --testdox --coverage-text --colors=never --configuration  phpunit.xml
 
 #deploy-master:
 #  stage: deploy
