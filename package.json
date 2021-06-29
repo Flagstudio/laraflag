@@ -16,7 +16,7 @@
   "dependencies": {
     "axios": "0.21.1",
     "focus-visible": "^5.2.0",
-    "swiper": "6.5.0",
+    "swiper": "6.5.1",
     "vue": "2.6.12"
   },
   "devDependencies": {
