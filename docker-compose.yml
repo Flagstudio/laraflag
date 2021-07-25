@@ -14,7 +14,7 @@ services:
       dockerfile: docker/app/Dockerfile_local
     image: registry.gitlab.com/flagstudio/${COMPOSE_PROJECT_NAME}:latest # образ, который строим. НЕ ТОТ из которого строимся
     volumes:
-      - ./:/var/www:delegated
+      - ./:/var/www:cached
     ports:
       - "80:8080"
       - "127.0.0.1:3000:3000"
