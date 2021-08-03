@@ -12,6 +12,3 @@
 */
 
 Route::view('/', 'main.index')->name('main');
-
-Route::get('robots.txt', 'RobotsController')->name('robots');
-Route::get('sitemap.xml', 'SitemapController')->name('sitemap');

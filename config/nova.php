@@ -1,5 +1,6 @@
 <?php
 
+use App\Ship\Apiato\Foundation\Middleware\RenameUploadedFiles;
 use Laravel\Nova\Http\Middleware\Authenticate;
 use Laravel\Nova\Http\Middleware\Authorize;
 use Laravel\Nova\Http\Middleware\BootTools;
@@ -88,7 +89,7 @@ return [
         DispatchServingNovaEvent::class,
         BootTools::class,
         Authorize::class,
-        \App\Http\Middleware\RenameUploadedFiles::class,
+        RenameUploadedFiles::class,
         'optimizeImages' => \Spatie\LaravelImageOptimizer\Middlewares\OptimizeImages::class,
     ],
 

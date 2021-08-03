@@ -19,22 +19,23 @@
         "fideloper/proxy": "^4.4",
         "flagstudio/nova-actions-left": "^0.2.0",
         "flagstudio/nova-admin-bar": "^0.2.0",
+        "flagstudio/nova-contacts": "*",
+        "flagstudio/nova-instructions": "*",
         "fourstacks/nova-repeatable-fields": "^1.3",
         "jenssegers/date": "^4.0",
-        "laravel/framework": "^8.0",
+        "laravel/framework": "^8.5",
         "laravel/helpers": "^1.2",
         "laravel/nova": "^3.0",
         "laravel/telescope": "^4.0",
         "laravel/tinker": "^2.0",
         "spatie/eloquent-sortable": "^3.8",
+        "spatie/enum": "^3.9",
         "spatie/image-optimizer": "^1.2",
         "spatie/laravel-image-optimizer": "^1.6",
         "spatie/laravel-medialibrary": "^8.3",
         "spatie/laravel-missing-page-redirector": "^2.5",
         "spatie/laravel-tail": "^4.2",
-        "whitecube/nova-flexible-content": "^0.2",
-        "flagstudio/nova-contacts": "*",
-        "flagstudio/nova-instructions": "*"
+        "whitecube/nova-flexible-content": "^0.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
@@ -54,7 +55,7 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "app/Http/helpers.php"
+            "app/Ship/Apiato/Foundation/helpers.php"
         ]
     },
     "autoload-dev": {

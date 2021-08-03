@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Containers\{{container-name}}\Domain\Enums\{{entity-name}};
+
+use App\Ship\Parents\Enum\Enum;
+
+/**
+ * @method static self //TODO
+ */
+class {{class-name}} extends Enum
+{
+    public static function labels(): array
+    {
+        return [
+            //TODO
+        ];
+    }
+}
