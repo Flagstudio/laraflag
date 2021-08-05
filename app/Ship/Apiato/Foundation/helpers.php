@@ -26,8 +26,8 @@ if (! function_exists('task')) {
     }
 }
 
-if (! function_exists('run_action')) {
-    function run_action(...$parameters)
+if (! function_exists('runAction')) {
+    function runAction(...$parameters)
     {
         return resolve(\App\Ship\Apiato\Helpers\CallAction::class)
             ->action(...$parameters);

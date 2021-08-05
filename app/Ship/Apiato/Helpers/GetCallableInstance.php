@@ -15,6 +15,6 @@ trait GetCallableInstance
             $args = $this->extractArguments($parameters[1]);
         }
 
-        return [new $parameters[0], $args];
+        return [resolve($parameters[0]), $args];
     }
 }

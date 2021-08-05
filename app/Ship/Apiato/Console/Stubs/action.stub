@@ -3,8 +3,7 @@
 namespace App\Containers\{{container-name}}\Actions;
 
 use App\Ship\Parents\Actions\Action;
-use App\Ship\Parents\Responders\ErrorResponder;
-use App\Ship\Parents\Responders\SuccessResponder;
+use App\Ship\Responders\ErrorResponder;
 
 class {{class-name}} extends Action
 {
@@ -15,9 +14,9 @@ class {{class-name}} extends Action
 
             //TODO
 
-            return resolve(SuccessResponder::class)->json($data);
+            return $this->responder(SuccessResponder::class, $data);
         } catch(\Exception $e) {
-            return resolve(ErrorResponder::class)->json($e->getMessage());
+            return $this->responder(ErrorResponder::class, $e->getMessage());
         }
     }
 }

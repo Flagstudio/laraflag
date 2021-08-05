@@ -5,11 +5,6 @@ namespace App\Ship\Apiato\Abstracts\Notifications;
 use Illuminate\Notifications\Notification as LaravelNotification;
 use Illuminate\Support\Facades\Config;
 
-/**
- * Class Notification
- *
- * @author  Mahmoud Zalt  <mahmoud@zalt.me>
- */
 class Notification extends LaravelNotification
 {
 

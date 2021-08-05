@@ -86,7 +86,8 @@
         ],
         "cghooks": "vendor/bin/cghooks",
         "post-install-cmd": "cghooks add --ignore-lock",
-        "post-update-cmd": "cghooks update"
+        "post-update-cmd": "cghooks update",
+        "autotests": "vendor/bin/phpunit --testdox --do-not-cache-result"
     },
     "config": {
         "preferred-install": "dist",

@@ -1,0 +1,14 @@
+<?php
+
+namespace App\Containers\{{container-name}}\Transfers\Responders;
+
+use App\Ship\Parents\Responders\SuccessResponder;
+use Symfony\Component\HttpFoundation\Response;
+
+class {{class-name}} extends SuccessResponder
+{
+    public function view()
+    {
+        // TODO: Implement view() method.
+    }
+}

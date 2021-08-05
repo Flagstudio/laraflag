@@ -4,11 +4,6 @@ namespace App\Ship\Apiato\Foundation\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-/**
- * Class Apiato
- *
- * @author  Mahmoud Zalt  <mahmoud@zalt.me>
- */
 class Apiato extends Facade
 {
 

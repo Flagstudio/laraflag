@@ -4,11 +4,6 @@ namespace App\Ship\Apiato\Abstracts\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as LaravelEventServiceProvider;
 
-/**
- * Class EventsProvider
- *
- * @author  Mahmoud Zalt  <mahmoud@zalt.me>
- */
 class EventsProvider extends LaravelEventServiceProvider
 {
 

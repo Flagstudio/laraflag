@@ -35,7 +35,7 @@ class RepositoryGenerator extends GeneratorCommand implements ComponentsGenerato
      *
      * @var  string
      */
-    protected $pathStructure = '{container-name}/Data/Repositories/*';
+    protected $pathStructure = '{container-name}/Domain/Repositories/*';
 
     /**
      * The structure of the file name.

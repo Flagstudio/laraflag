@@ -13,11 +13,6 @@ use Illuminate\Filesystem\Filesystem as IlluminateFilesystem;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
 
-/**
- * Class GeneratorCommand
- *
- * @author  Mahmoud Zalt  <mahmoud@zalt.me>
- */
 abstract class GeneratorCommand extends Command
 {
     use ParserTrait, PrinterTrait, FileSystemTrait, FormatterTrait;

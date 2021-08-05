@@ -4,11 +4,6 @@ namespace App\Ship\Apiato\Abstracts\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as LaravelRouteServiceProvider;
 
-/**
- * Class RoutesProvider
- *
- * @author  Mahmoud Zalt  <mahmoud@zalt.me>
- */
 class RoutesProvider extends LaravelRouteServiceProvider
 {
     /**

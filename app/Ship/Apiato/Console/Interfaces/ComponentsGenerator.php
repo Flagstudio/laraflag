@@ -2,11 +2,6 @@
 
 namespace App\Ship\Apiato\Console\Interfaces;
 
-/**
- * Class ComponentsGenerator
- *
- * @author  Mahmoud Zalt  <mahmoud@zalt.me>
- */
 interface ComponentsGenerator
 {
 

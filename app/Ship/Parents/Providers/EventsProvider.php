@@ -4,13 +4,6 @@ namespace App\Ship\Parents\Providers;
 
 use App\Ship\Apiato\Abstracts\Providers\EventsProvider as AbstractEventsProvider;
 
-/**
- * Class EventsProvider
- *
- * A.K.A app/Providers/EventsServiceProvider.php
- *
- * @author  Mahmoud Zalt  <mahmoud@zalt.me>
- */
 class EventsProvider extends AbstractEventsProvider
 {
 

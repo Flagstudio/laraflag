@@ -18,6 +18,8 @@ return new class extends Migration {
             $table->string('uuid')->unique();
             $table->string('name');
             $table->string('phone')->unique();
+            $table->string('verify_code')->nullable();
+            $table->timestamp('phone_verified_at')->nullable();
             $table->string('email')->nullable()->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();

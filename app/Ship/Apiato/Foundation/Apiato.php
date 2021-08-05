@@ -9,13 +9,6 @@ use App\Ship\Apiato\Exceptions\WrongConfigurationsException;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
-/**
- * Class Apiato
- *
- * Helper Class to serve Apiato (Ship/Containers).
- *
- * @author  Mahmoud Zalt  <mahmoud@zalt.me>
- */
 class Apiato
 {
 

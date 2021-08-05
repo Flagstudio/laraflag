@@ -3,14 +3,9 @@
 namespace App\Ship\Apiato\Abstracts\Entities;
 
 use App\Ship\Apiato\Abstracts\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as LaravelAuthenticatableUser;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-/**
- * Class UserModel.
- *
- * @author  Mahmoud Zalt <mahmoud@zalt.me>
- */
-abstract class UserEntity extends LaravelAuthenticatableUser
+abstract class UserEntity extends Authenticatable
 {
     use HasFactory;
 }

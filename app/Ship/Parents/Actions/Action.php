@@ -3,6 +3,8 @@
 namespace App\Ship\Parents\Actions;
 
 use App\Ship\Apiato\Abstracts\Actions\Action as AbstractAction;
+use App\Ship\Traits\CanCallResponder;
+use App\Ship\Traits\CanCallTask;
 
 /**
  * Class Action.
@@ -11,4 +13,6 @@ use App\Ship\Apiato\Abstracts\Actions\Action as AbstractAction;
  */
 abstract class Action extends AbstractAction
 {
+    use CanCallTask,
+        CanCallResponder;
 }

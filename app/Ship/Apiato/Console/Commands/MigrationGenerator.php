@@ -38,7 +38,7 @@ class MigrationGenerator extends GeneratorCommand implements ComponentsGenerator
      *
      * @var  string
      */
-    protected $pathStructure = '{container-name}/Data/Migrations/*';
+    protected $pathStructure = '{container-name}/Domain/Migrations/*';
 
     /**
      * The structure of the file name.

@@ -9,13 +9,6 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-/**
- * Class Job
- *
- * A.K.A (app/Jobs/Job.php)
- *
- * @author  Mahmoud Zalt  <mahmoud@zalt.me>
- */
 abstract class Job extends AbstractJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;

@@ -1,12 +1,7 @@
 <?php
 
-namespace App\Ship\Apiato\Generator;
+namespace App\Ship\Apiato\Console;
 
-/**
- * Class GeneratorException
- *
- * @author  Mahmoud Zalt  <mahmoud@zalt.me>
- */
 class GeneratorException extends \Exception
 {
 

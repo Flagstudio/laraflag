@@ -34,7 +34,8 @@ class RoutesLoader extends Loader
         $controllerNamespace = 'App\\Containers\\' . basename($containerPath) . '\\Controllers';
 
         if (File::isDirectory($apiRoutesPath) && File::exists($apiRoutesFile)) {
-            Route::middleware('api')
+            Route::prefix('api')
+                ->middleware('api')
                 ->namespace($controllerNamespace)
                 ->group($apiRoutesFile);
         }

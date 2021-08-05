@@ -3,6 +3,7 @@
 namespace App\Ship\Parents\Actions;
 
 use App\Ship\Apiato\Abstracts\Actions\SubAction as AbstractSubAction;
+use App\Ship\Traits\CanCallTask;
 
 /**
  * Class SubAction.
@@ -11,4 +12,5 @@ use App\Ship\Apiato\Abstracts\Actions\SubAction as AbstractSubAction;
  */
 abstract class SubAction extends AbstractSubAction
 {
+    use CanCallTask;
 }

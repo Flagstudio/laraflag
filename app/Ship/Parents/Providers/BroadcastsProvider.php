@@ -6,13 +6,6 @@ use App\Ship\Apiato\Abstracts\Providers\BroadcastsProvider as AbstractBroadcasts
 use Illuminate\Support\Facades\Broadcast;
 use function app_path;
 
-/**
- * Class BroadcastsProvider
- *
- * A.K.A app/Providers/BroadcastServiceProvider.php
- *
- * @author  Mahmoud Zalt  <mahmoud@zalt.me>
- */
 class BroadcastsProvider extends AbstractBroadcastsProvider
 {
 
