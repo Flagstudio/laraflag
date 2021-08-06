@@ -8,63 +8,23 @@ use Symfony\Component\Console\Input\InputOption;
 
 class EventHandlerGenerator extends GeneratorCommand implements ComponentsGenerator
 {
-
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
     protected $name = 'flag:eventhandler';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Create a new EventHandler class';
 
-    /**
-     * The type of class being generated.
-     *
-     * @var string
-     */
-    protected $fileType = 'EventHandler';
+    protected string $fileType = 'EventHandler';
 
-    /**
-     * The structure of the file path.
-     *
-     * @var  string
-     */
-    protected $pathStructure = '{container-name}/Events/Handlers/*';
+    protected string $pathStructure = '{container-name}/Events/Handlers/*';
 
-    /**
-     * The structure of the file name.
-     *
-     * @var  string
-     */
-    protected $nameStructure = '{file-name}';
+    protected string $nameStructure = '{file-name}';
 
-    /**
-     * The name of the stub file.
-     *
-     * @var  string
-     */
-    protected $stubName = 'events/eventhandler.stub';
+    protected string $stubName = 'events/eventhandler.stub';
 
-    /**
-     * User required/optional inputs expected to be passed while calling the command.
-     * This is a replacement of the `getArguments` function "which reads whenever it's called".
-     *
-     * @var  array
-     */
-    public $inputs = [
+    public array $inputs = [
         ['event', null, InputOption::VALUE_OPTIONAL, 'The Event to generate this Handler for'],
     ];
 
-    /**
-     * @return array
-     */
-    public function getUserInputs()
+    public function getUserInputs(): array
     {
         $event = $this->checkParameterOrAsk('event', 'Enter the name of the Event to generate this Handler for');
 

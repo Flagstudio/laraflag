@@ -9,63 +9,23 @@ use Symfony\Component\Console\Input\InputOption;
 
 class TestGenerator extends GeneratorCommand implements ComponentsGenerator
 {
-
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
     protected $name = 'flag:test';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Create a TestCase for a Container';
 
-    /**
-     * The type of class being generated.
-     *
-     * @var string
-     */
-    protected $fileType = 'TestCase';
+    protected string $fileType = 'TestCase';
 
-    /**
-     * The structure of the file path.
-     *
-     * @var  string
-     */
-    protected $pathStructure = '{container-name}/Tests/{type}/*';
+    protected string $pathStructure = '{container-name}/Tests/{type}/*';
 
-    /**
-     * The structure of the file name.
-     *
-     * @var  string
-     */
-    protected $nameStructure = '{file-name}';
+    protected string $nameStructure = '{file-name}';
 
-    /**
-     * The name of the stub file.
-     *
-     * @var  string
-     */
-    protected $stubName = 'test.stub';
+    protected string $stubName = 'test.stub';
 
-    /**
-     * User required/optional inputs expected to be passed while calling the command.
-     * This is a replacement of the `getArguments` function "which reads whenever it's called".
-     *
-     * @var  array
-     */
-    public $inputs = [
+    public array $inputs = [
         ['type', null, InputOption::VALUE_OPTIONAL, 'The type to generate the TestCase for.'],
     ];
 
-    /**
-     * @return array
-     */
-    public function getUserInputs()
+    public function getUserInputs(): array
     {
         $type = $this->checkParameterOrChoice(
             'type',
@@ -91,12 +51,7 @@ class TestGenerator extends GeneratorCommand implements ComponentsGenerator
         ];
     }
 
-    /**
-     * Get the default file name for this component to be generated
-     *
-     * @return string
-     */
-    public function getDefaultFileName()
+    public function getDefaultFileName(): string
     {
         return 'ExampleTest';
     }

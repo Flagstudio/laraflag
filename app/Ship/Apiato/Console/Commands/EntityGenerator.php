@@ -9,56 +9,28 @@ use Illuminate\Support\Str;
 
 class EntityGenerator extends GeneratorCommand implements ComponentsGenerator
 {
-
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
     protected $name = 'flag:entity';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Create a new Entity class';
 
-    /**
-     * The type of class being generated.
-     *
-     * @var string
-     */
-    protected $fileType = 'Entity';
+    protected string $fileType = 'Entity';
 
-    /**
-     * The structure of the file path.
-     *
-     * @var  string
-     */
-    protected $pathStructure = '{container-name}/Domain/Entities/*';
+    protected string $pathStructure = '{container-name}/Domain/Entities/*';
 
-    /**
-     * The structure of the file name.
-     *
-     * @var  string
-     */
-    protected $nameStructure = '{file-name}';
+    protected string $nameStructure = '{file-name}';
 
-    /**
-     * The name of the stub file.
-     *
-     * @var  string
-     */
-    protected $stubName = 'entity.stub';
+    protected string $stubName = 'entity.stub';
 
-    public $inputs = [];
+    public array $inputs = [];
 
-    /**
-     * @return array
-     */
-    public function getUserInputs()
+    public function getUserInputs(): array
     {
+        $this->warn('Generating Repository class');
+        $this->call('flag:repository', [
+            '--container' => $this->containerName,
+            '--file' => Str::finish($this->fileName, 'Repository'),
+        ]);
+
         return [
             'path-parameters' => [
                 'container-name' => $this->containerName,

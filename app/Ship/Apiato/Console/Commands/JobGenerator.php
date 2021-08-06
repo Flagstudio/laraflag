@@ -8,62 +8,21 @@ use Illuminate\Support\Str;
 
 class JobGenerator extends GeneratorCommand implements ComponentsGenerator
 {
-
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
     protected $name = 'flag:job';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Create a new Job class';
 
-    /**
-     * The type of class being generated.
-     *
-     * @var string
-     */
-    protected $fileType = 'Job';
+    protected string $fileType = 'Job';
 
-    /**
-     * The structure of the file path.
-     *
-     * @var  string
-     */
-    protected $pathStructure = '{container-name}/Jobs/*';
+    protected string $pathStructure = '{container-name}/Jobs/*';
 
-    /**
-     * The structure of the file name.
-     *
-     * @var  string
-     */
-    protected $nameStructure = '{file-name}';
+    protected string $nameStructure = '{file-name}';
 
-    /**
-     * The name of the stub file.
-     *
-     * @var  string
-     */
-    protected $stubName = 'job.stub';
+    protected string $stubName = 'job.stub';
 
-    /**
-     * User required/optional inputs expected to be passed while calling the command.
-     * This is a replacement of the `getArguments` function "which reads whenever it's called".
-     *
-     * @var  array
-     */
-    public $inputs = [
-    ];
+    public array $inputs = [];
 
-    /**
-     * @return array
-     */
-    public function getUserInputs()
+    public function getUserInputs(): array
     {
         return [
             'path-parameters' => [
@@ -80,12 +39,7 @@ class JobGenerator extends GeneratorCommand implements ComponentsGenerator
         ];
     }
 
-    /**
-     * Get the default file name for this component to be generated
-     *
-     * @return string
-     */
-    public function getDefaultFileName()
+    public function getDefaultFileName(): string
     {
         return 'DefaultJob';
     }

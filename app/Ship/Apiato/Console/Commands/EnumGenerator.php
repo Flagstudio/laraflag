@@ -8,55 +8,21 @@ use Illuminate\Support\Str;
 
 class EnumGenerator extends GeneratorCommand implements ComponentsGenerator
 {
-
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
     protected $name = 'flag:enum';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Create a new Enum class';
 
-    /**
-     * The type of class being generated.
-     *
-     * @var string
-     */
-    protected $fileType = 'Enum';
+    protected string $fileType = 'Enum';
 
-    /**
-     * The structure of the file path.
-     *
-     * @var  string
-     */
-    protected $pathStructure = '{container-name}/Domain/Enums/{entity}/*';
+    protected string $pathStructure = '{container-name}/Domain/Enums/{entity}/*';
 
-    /**
-     * The structure of the file name.
-     *
-     * @var  string
-     */
-    protected $nameStructure = '{file-name}';
+    protected string $nameStructure = '{file-name}';
 
-    /**
-     * The name of the stub file.
-     *
-     * @var  string
-     */
-    protected $stubName = 'enum.stub';
+    protected string $stubName = 'enum.stub';
 
-    public $inputs = [];
+    public array $inputs = [];
 
-    /**
-     * @return array
-     */
-    public function getUserInputs()
+    public function getUserInputs(): array
     {
         $entity = Str::remove($this->fileType, $this->fileName);
 

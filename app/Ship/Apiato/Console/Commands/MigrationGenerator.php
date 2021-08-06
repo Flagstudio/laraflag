@@ -11,64 +11,24 @@ use Symfony\Component\Console\Input\InputOption;
 
 class MigrationGenerator extends GeneratorCommand implements ComponentsGenerator
 {
-
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
     protected $name = 'flag:migration';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Create an "empty" migration file for a Container';
 
-    /**
-     * The type of class being generated.
-     *
-     * @var string
-     */
-    protected $fileType = 'Migration';
+    protected string $fileType = 'Migration';
 
-    /**
-     * The structure of the file path.
-     *
-     * @var  string
-     */
-    protected $pathStructure = '{container-name}/Domain/Migrations/*';
+    protected string $pathStructure = '{container-name}/Domain/Migrations/*';
 
-    /**
-     * The structure of the file name.
-     *
-     * @var  string
-     */
-    protected $nameStructure = '{date}_{file-name}';
+    protected string $nameStructure = '{date}_{file-name}';
 
-    /**
-     * The name of the stub file.
-     *
-     * @var  string
-     */
-    protected $stubName = 'migrations/generic.stub';
+    protected string $stubName = 'migrations/generic.stub';
 
-    /**
-     * User required/optional inputs expected to be passed while calling the command.
-     * This is a replacement of the `getArguments` function "which reads whenever it's called".
-     *
-     * @var  array
-     */
-    public $inputs = [
+    public array $inputs = [
         ['tablename', null, InputOption::VALUE_NONE, 'The name for the database table'],
         ['stub', null, InputOption::VALUE_NONE, 'The stub file to load for this generator.'],
     ];
 
-    /**
-     * @return array|null
-     */
-    public function getUserInputs()
+    public function getUserInputs(): ?array
     {
         $tablename = Str::lower($this->checkParameterOrAsk('tablename', 'Enter the name of the database table'));
 
@@ -122,24 +82,12 @@ class MigrationGenerator extends GeneratorCommand implements ComponentsGenerator
         ];
     }
 
-    /**
-     * Get the default file name for this component to be generated
-     *
-     * @return string
-     */
-    public function getDefaultFileName()
+    public function getDefaultFileName(): string
     {
         return 'create_' . Str::lower($this->containerName) . '_tables';
     }
 
-    /**
-     * Removes "special characters" from a string
-     *
-     * @param $str
-     *
-     * @return string
-     */
-    protected function removeSpecialChars($str)
+    protected function removeSpecialChars($str): string
     {
         return $str;
     }

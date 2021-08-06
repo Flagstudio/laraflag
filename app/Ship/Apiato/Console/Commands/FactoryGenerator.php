@@ -9,62 +9,23 @@ use Symfony\Component\Console\Input\InputOption;
 
 class FactoryGenerator extends GeneratorCommand implements ComponentsGenerator
 {
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
     protected $name = 'flag:factory';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Create a new Factory for Model';
 
-    /**
-     * The type of class being generated.
-     *
-     * @var string
-     */
-    protected $fileType = 'Factory';
+    protected string $fileType = 'Factory';
 
-    /**
-     * The structure of the file path.
-     *
-     * @var  string
-     */
-    protected $pathStructure = '{container-name}/Domain/Factories/*';
+    protected string $pathStructure = '{container-name}/Domain/Factories/*';
 
-    /**
-     * The structure of the file name.
-     *
-     * @var  string
-     */
-    protected $nameStructure = '{file-name}';
+    protected string $nameStructure = '{file-name}';
 
-    /**
-     * The name of the stub file.
-     *
-     * @var  string
-     */
-    protected $stubName = 'factory.stub';
+    protected string $stubName = 'factory.stub';
 
-    /**
-     * User required/optional inputs expected to be passed while calling the command.
-     * This is a replacement of the `getArguments` function "which reads whenever it's called".
-     *
-     * @var  array
-     */
-    public $inputs = [
+    public array $inputs = [
         ['model', null, InputOption::VALUE_OPTIONAL, 'The name of Entities'],
     ];
 
-    /**
-     * @return array
-     */
-    public function getUserInputs()
+    public function getUserInputs(): array
     {
         $model = $this->checkParameterOrAsk('model', 'Enter the name of Model');
 

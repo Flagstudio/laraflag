@@ -8,62 +8,21 @@ use Illuminate\Support\Str;
 
 class ConfigurationGenerator extends GeneratorCommand implements ComponentsGenerator
 {
-
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
     protected $name = 'flag:config';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Create a Configuration file for a Container';
 
-    /**
-     * The type of class being generated.
-     *
-     * @var string
-     */
-    protected $fileType = 'Configuration';
+    protected string $fileType = 'Configuration';
 
-    /**
-     * The structure of the file path.
-     *
-     * @var  string
-     */
-    protected $pathStructure = '{container-name}/Configs/*';
+    protected string $pathStructure = '{container-name}/Configs/*';
 
-    /**
-     * The structure of the file name.
-     *
-     * @var  string
-     */
-    protected $nameStructure = '{file-name}';
+    protected string $nameStructure = '{file-name}';
 
-    /**
-     * The name of the stub file.
-     *
-     * @var  string
-     */
-    protected $stubName = 'config.stub';
+    protected string $stubName = 'config.stub';
 
-    /**
-     * User required/optional inputs expected to be passed while calling the command.
-     * This is a replacement of the `getArguments` function "which reads whenever it's called".
-     *
-     * @var  array
-     */
-    public $inputs = [
-    ];
+    public array $inputs = [];
 
-    /**
-     * @return array
-     */
-    public function getUserInputs()
+    public function getUserInputs(): array
     {
         return [
             'path-parameters' => [
@@ -80,12 +39,7 @@ class ConfigurationGenerator extends GeneratorCommand implements ComponentsGener
         ];
     }
 
-    /**
-     * Get the default file name for this component to be generated
-     *
-     * @return string
-     */
-    public function getDefaultFileName()
+    public function getDefaultFileName(): string
     {
         return Str::lower($this->containerName);
     }

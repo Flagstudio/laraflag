@@ -9,66 +9,25 @@ use Symfony\Component\Console\Input\InputOption;
 
 class ActionGenerator extends GeneratorCommand implements ComponentsGenerator
 {
-
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
     protected $name = 'flag:action';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Create a Action file for a Container';
 
-    /**
-     * The type of class being generated.
-     *
-     * @var string
-     */
-    protected $fileType = 'Action';
+    protected string $fileType = 'Action';
 
-    /**
-     * The structure of the file path.
-     *
-     * @var  string
-     */
-    protected $pathStructure = '{container-name}/Actions/*';
+    protected string $pathStructure = '{container-name}/Actions/*';
 
-    /**
-     * The structure of the file name.
-     *
-     * @var  string
-     */
-    protected $nameStructure = '{file-name}';
+    protected string $nameStructure = '{file-name}';
 
-    /**
-     * The name of the stub file.
-     *
-     * @var  string
-     */
-    protected $stubName = 'actions/generic.stub';
+    protected string $stubName = 'actions/generic.stub';
 
-    /**
-     * User required/optional inputs expected to be passed while calling the command.
-     * This is a replacement of the `getArguments` function "which reads from the console whenever it's called".
-     *
-     * @var  array
-     */
-    public $inputs = [
+    public array $inputs = [
         ['model', null, InputOption::VALUE_OPTIONAL, 'The model this action is for.'],
         ['stub', null, InputOption::VALUE_OPTIONAL, 'The stub file to load for this generator.'],
     ];
 
-    /**
-     * @return array
-     */
-    public function getUserInputs()
+    public function getUserInputs(): array
     {
-        // load a new stub-file based on the users choice
         $this->stubName = 'action.stub';
 
         return [
@@ -86,12 +45,7 @@ class ActionGenerator extends GeneratorCommand implements ComponentsGenerator
         ];
     }
 
-    /**
-     * Get the default file name for this component to be generated
-     *
-     * @return string
-     */
-    public function getDefaultFileName()
+    public function getDefaultFileName(): string
     {
         return 'DefaultAction';
     }

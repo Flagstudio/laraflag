@@ -43,56 +43,27 @@ abstract class GeneratorCommand extends Command
      */
     const CONTAINER_DIRECTORY_NAME = 'Containers';
 
-    /**
-     * @var string
-     */
-    protected $filePath;
+    protected string $filePath;
 
-    /**
-     * @var string the name of the container to generate the stubs
-     */
-    protected $containerName;
+    protected string $containerName;
 
-    /**
-     * @var string The name of the file to be created (entered by the user)
-     */
-    protected $fileName;
+    protected string $fileName;
 
-    /**
-     * @var string
-     */
-    protected $userData;
+    protected array $userData;
 
-    /**
-     * @var string
-     */
-    protected $parsedFileName;
+    protected string $parsedFileName;
 
-    /**
-     * @var string
-     */
-    protected $stubContent;
+    protected string $stubContent;
 
-    /**
-     * @var string
-     */
-    protected $renderedStubContent;
+    protected string $renderedStubContent;
 
-    /**
-     * @var  \Illuminate\Filesystem\Filesystem
-     */
-    protected $fileSystem;
+    protected \Illuminate\Filesystem\Filesystem $fileSystem;
 
-    protected $defaultInputs = [
-        ['container', null, InputOption::VALUE_OPTIONAL, 'The name of the container'],
-        ['file', null, InputOption::VALUE_OPTIONAL, 'The name of the file'],
+    protected array $defaultInputs = [
+        ['container', null, InputOption::VALUE_REQUIRED, 'The name of the container'],
+        ['file', null, InputOption::VALUE_REQUIRED, 'The name of the file'],
     ];
 
-    /**
-     * GeneratorCommand constructor.
-     *
-     * @param \Illuminate\Filesystem\Filesystem $fileSystem
-     */
     public function __construct(IlluminateFilesystem $fileSystem)
     {
         parent::__construct();
@@ -100,11 +71,6 @@ abstract class GeneratorCommand extends Command
         $this->fileSystem = $fileSystem;
     }
 
-    /**
-     * @void
-     *
-     * @throws \App\Ship\Apiato\Console\Exceptions\GeneratorErrorException
-     */
     public function handle()
     {
         $this->validateGenerator($this);
@@ -147,11 +113,6 @@ abstract class GeneratorCommand extends Command
         return 0;
     }
 
-    /**
-     * @param $generator
-     *
-     * @throws \App\Ship\Apiato\Console\Exceptions\GeneratorErrorException
-     */
     protected function validateGenerator($generator)
     {
         if (!$generator instanceof ComponentsGenerator) {
@@ -161,12 +122,7 @@ abstract class GeneratorCommand extends Command
         }
     }
 
-    /**
-     * @param $path
-     *
-     * @return  string
-     */
-    protected function getFilePath($path)
+    protected function getFilePath($path): string
     {
         // complete the missing parts of the path
         $path = base_path() . '/' .
@@ -179,10 +135,7 @@ abstract class GeneratorCommand extends Command
         return $path;
     }
 
-    /**
-     * @return  mixed
-     */
-    protected function getStubContent()
+    protected function getStubContent(): string
     {
         // check if there is a custom file that overrides the default stubs
         $path = app_path() . '/Ship/' . self::CUSTOM_STUB_PATH;
@@ -200,12 +153,7 @@ abstract class GeneratorCommand extends Command
         return $stub;
     }
 
-    /**
-     * Get all the console command arguments, from the components. The default arguments are prepended
-     *
-     * @return array
-     */
-    protected function getOptions()
+    protected function getOptions(): array
     {
         $arguments = array_merge($this->defaultInputs, $this->inputs);
         return $arguments;
@@ -309,34 +257,17 @@ abstract class GeneratorCommand extends Command
         return $data;
     }
 
-    /**
-     * Get the default file name for this component to be generated
-     *
-     * @return string
-     */
-    protected function getDefaultFileName()
+    protected function getDefaultFileName(): string
     {
         return 'Default' . Str::ucfirst($this->fileType);
     }
 
-    /**
-     * Get the default file extension for the file to be created.
-     *
-     * @return string
-     */
-    protected function getDefaultFileExtension()
+    protected function getDefaultFileExtension(): string
     {
         return 'php';
     }
 
-    /**
-     * Removes "special characters" from a string
-     *
-     * @param $str
-     *
-     * @return string
-     */
-    protected function removeSpecialChars($str)
+    protected function removeSpecialChars($str): string
     {
         // remove everything that is NOT a character or digit
         $str = preg_replace('/[^A-Za-z0-9]/', '', $str);

@@ -8,38 +8,17 @@ use Illuminate\Support\Str;
 
 class ContainerGenerator extends GeneratorCommand implements ComponentsGenerator
 {
-
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
     protected $name = 'flag:container';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Create a Container for apiato from scratch';
 
-    /**
-     * The type of class being generated.
-     *
-     * @var string
-     */
-    protected $fileType = 'Container';
+    protected string $fileType = 'Container';
 
-    /**
-     * The structure of the file path.
-     *
-     * @var  string
-     */
-    protected $pathStructure = '{container-name}/*';
+    protected string $pathStructure = '{container-name}/*';
 
-    protected $inputs = [];
+    protected array $inputs = [];
 
-    public function handle()
+    public function handle(): int
     {
         $this->validateGenerator($this);
 
