@@ -24,6 +24,7 @@
         "fourstacks/nova-repeatable-fields": "^1.3",
         "jenssegers/date": "^4.0",
         "kabbouchi/nova-impersonate": "^1.7",
+        "knuckleswtf/scribe": "^3.8",
         "laravel/framework": "^8.5",
         "laravel/helpers": "^1.2",
         "laravel/nova": "^3.0",
