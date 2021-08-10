@@ -4,36 +4,35 @@ namespace App\Containers\Authentication\Actions;
 
 use App\Containers\Authentication\Transfers\Responders\UserExistsResponder;
 use App\Containers\Authentication\Transfers\Responders\UserRegisterResponder;
+use App\Containers\Authentication\Transfers\Transporters\UserRegisterTransporter;
 use App\Containers\User\Tasks\FindUserByPhoneTask;
 use App\Containers\User\Tasks\GenerateActivationCodeTask;
 use App\Containers\User\Tasks\StoreUserTask;
 use App\Ship\Parents\Actions\Action;
 use App\Ship\Responders\ErrorResponder;
-use Illuminate\Support\Facades\Auth;
 
 class RegisterAction extends Action
 {
-    public function run(string $phone)
+    public function run(UserRegisterTransporter $transfer)
     {
         try {
-            $user = $this->task(FindUserByPhoneTask::class, $phone);
-
-            if ($user) {
-                Auth::login($user);
-                return $this->responder(UserExistsResponder::class);
+            $userIsNew = false;
+            if (!$user = $this->task(FindUserByPhoneTask::class, $transfer->phone)) {
+                $userIsNew = true;
+                $user = $this->task(StoreUserTask::class, $transfer);
             }
 
-            $user = $this->task(StoreUserTask::class, (object) ['phone' => $phone]);
-
-            Auth::login($user);
-
-            $this->task(GenerateActivationCodeTask::class);
+            $this->task(GenerateActivationCodeTask::class, $user);
 
             if (!config('authentication.register_test_mode')) {
-                //TODO send mail with activation code
+                //TODO send sms with activation code
             }
 
-            return $this->responder(UserRegisterResponder::class);
+            if ($userIsNew) {
+                return $this->responder(UserRegisterResponder::class);
+            }
+
+            return $this->responder(UserExistsResponder::class);
         } catch (\Exception $e) {
             return $this->responder(ErrorResponder::class, $e->getMessage());
         }

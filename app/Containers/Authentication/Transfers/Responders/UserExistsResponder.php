@@ -12,7 +12,7 @@ class UserExistsResponder extends SuccessResponder
         return [
             'status' => Response::HTTP_OK,
             'data' => [
-                'is_new' => false,
+                'is_new' => false
             ],
         ];
     }

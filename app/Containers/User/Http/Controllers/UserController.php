@@ -10,7 +10,9 @@ class UserController extends Controller
 {
     public function update(UserUpdateRequest $request)
     {
-        $data = $request->validated();
-        return $this->action(UserUpdateAction::class, [$data]);
+        return $this->action(
+            UserUpdateAction::class,
+            $request->transportered(),
+        );
     }
 }

@@ -2,16 +2,18 @@
 
 namespace App\Containers\User\Tasks;
 
+use App\Containers\User\Domain\Entities\User;
 use App\Containers\User\Exceptions\ErrorVerificationException;
 use App\Ship\Parents\Tasks\Task;
-use Illuminate\Support\Facades\Auth;
 
 class CheckVerifyCodeTask extends Task
 {
-    public function run(string $code)
+    public function run(string $phone, string $code): ?User
     {
         try {
-            return Auth::user()->verify_code === $code;
+            return User::wherePhone($phone)
+                ->where('verify_code', $code)
+                ->first();
         } catch (\Exception $e) {
             throw new ErrorVerificationException;
         }

@@ -19,11 +19,9 @@ class RegisterTest extends TestCase
 
         $this->ajaxPost(route('auth.register'), $request)
             ->assertCreated();
-
-        $this->assertAuthenticated();
     }
 
-    public function test_user_already_exists()
+    public function test_user_can_login()
     {
         $existingUser = User::first();
         $request = [
@@ -34,7 +32,5 @@ class RegisterTest extends TestCase
 
         $this->ajaxPost(route('auth.register'), $request)
             ->assertOk();
-
-        $this->assertAuthenticated();
     }
 }

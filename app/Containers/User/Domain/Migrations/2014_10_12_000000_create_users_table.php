@@ -19,15 +19,14 @@ return new class extends Migration {
             $table->string('name');
             $table->string('phone')->unique();
             $table->string('verify_code')->nullable();
-            $table->timestamp('phone_verified_at')->nullable();
             $table->string('email')->nullable()->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->date('birth')->nullable();
             $table->integer('sex')->default(SexEnum::man()->label);
-            $table->integer('allow_ads')->default(false);
-            $table->integer('allow_privacy')->default(false);
-            $table->integer('allow_geocoding')->default(false);
+            $table->boolean('allow_ads')->default(false);
+            $table->boolean('allow_privacy')->default(false);
+            $table->boolean('allow_geocoding')->default(false);
             $table->timestamps();
         });
     }

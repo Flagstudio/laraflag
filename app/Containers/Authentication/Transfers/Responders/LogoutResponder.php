@@ -5,14 +5,14 @@ namespace App\Containers\Authentication\Transfers\Responders;
 use App\Ship\Parents\Responders\SuccessResponder;
 use Symfony\Component\HttpFoundation\Response;
 
-class UserRegisterResponder extends SuccessResponder
+class LogoutResponder extends SuccessResponder
 {
     public function json(?array $data = []): array
     {
         return [
-            'status' => Response::HTTP_CREATED,
+            'status' => Response::HTTP_OK,
             'data' => [
-                'is_new' => true
+                'message' => 'User successfully signed out'
             ],
         ];
     }

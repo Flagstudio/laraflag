@@ -10,7 +10,9 @@ class RegisterController extends Controller
 {
     public function store(UserRegisterRequest $request)
     {
-        $data = $request->validated();
-        return $this->action(RegisterAction::class, $data['phone']);
+        return $this->action(
+            RegisterAction::class,
+            $request->transportered(),
+        );
     }
 }
