@@ -10,64 +10,24 @@ use Symfony\Component\Console\Input\InputOption;
 
 class TransformerGenerator extends GeneratorCommand implements ComponentsGenerator
 {
-
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
     protected $name = 'flag:transformer';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Create a new Transformer class for a given Model';
 
-    /**
-     * The type of class being generated.
-     *
-     * @var string
-     */
-    protected $fileType = 'Transformer';
+    protected string $fileType = 'Transformer';
 
-    /**
-     * The structure of the file path.
-     *
-     * @var  string
-     */
-    protected $pathStructure = '{container-name}/Transfers/Transformers/*';
+    protected string $pathStructure = '{container-name}/Transfers/Transformers/*';
 
-    /**
-     * The structure of the file name.
-     *
-     * @var  string
-     */
-    protected $nameStructure = '{file-name}';
+    protected string $nameStructure = '{file-name}';
 
-    /**
-     * The name of the stub file.
-     *
-     * @var  string
-     */
-    protected $stubName = 'transformer.stub';
+    protected string $stubName = 'transformer.stub';
 
-    /**
-     * User required/optional inputs expected to be passed while calling the command.
-     * This is a replacement of the `getArguments` function "which reads whenever it's called".
-     *
-     * @var  array
-     */
-    public $inputs = [
+    public array $inputs = [
         ['model', null, InputOption::VALUE_OPTIONAL, 'The model to generate this Transformer for'],
         ['full', null, InputOption::VALUE_OPTIONAL, 'Generate a Transformer with all fields of the model'],
     ];
 
-    /**
-     * @return array
-     */
-    public function getUserInputs()
+    public function getUserInputs(): array
     {
         $model = $this->checkParameterOrAsk('model', 'Enter the name of the Model to generate this Transformer for');
         $full = $this->checkParameterOrConfirm('full', 'Generate a Transformer with all fields', false);
@@ -91,7 +51,7 @@ class TransformerGenerator extends GeneratorCommand implements ComponentsGenerat
         ];
     }
 
-    private function getListOfAllAttributes($full, $model)
+    private function getListOfAllAttributes($full, $model): string
     {
         $indent = str_repeat(' ', 12);
         $fields = [

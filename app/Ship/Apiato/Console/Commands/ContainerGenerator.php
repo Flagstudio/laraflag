@@ -38,10 +38,7 @@ class ContainerGenerator extends GeneratorCommand implements ComponentsGenerator
         return 0;
     }
 
-    /**
-     * @return array
-     */
-    public function getUserInputs()
+    public function getUserInputs(): array
     {
         // containername as inputted and lower
         $containerName = $this->containerName;
@@ -68,17 +65,12 @@ class ContainerGenerator extends GeneratorCommand implements ComponentsGenerator
         ];
     }
 
-    /**
-     * Get the default file name for this component to be generated
-     *
-     * @return string
-     */
-    public function getDefaultFileName()
+    public function getDefaultFileName(): string
     {
         return 'composer';
     }
 
-    public function getDefaultFileExtension()
+    public function getDefaultFileExtension(): string
     {
         return 'json';
     }

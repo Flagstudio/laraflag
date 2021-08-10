@@ -4,6 +4,7 @@ namespace App\Ship\Parents\Controllers;
 
 use App\Ship\Apiato\Abstracts\Controllers\WebController as AbstractWebController;
 use App\Ship\Traits\CanCallAction;
+use App\Ship\Traits\CanCallResponder;
 
 /**
  * Class WebController.
@@ -12,5 +13,6 @@ use App\Ship\Traits\CanCallAction;
  */
 abstract class WebController extends AbstractWebController
 {
-    use CanCallAction;
+    use CanCallAction,
+        CanCallResponder;
 }

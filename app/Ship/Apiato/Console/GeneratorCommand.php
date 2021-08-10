@@ -66,17 +66,32 @@ abstract class GeneratorCommand extends Command
 
     public function __construct(IlluminateFilesystem $fileSystem)
     {
+        $this->fileSystem = $fileSystem;
+
+        $this->signature = $this->name . ' {container?} {file?}';
+
         parent::__construct();
 
-        $this->fileSystem = $fileSystem;
+        $this->specifyParameters();
     }
 
     public function handle()
     {
         $this->validateGenerator($this);
 
-        $this->containerName = ucfirst($this->checkParameterOrAsk('container', 'Enter the name of the Container'));
-        $this->fileName = $this->fileType == 'Container' ? '' : $this->checkParameterOrAsk('file', 'Enter the name of the ' . $this->fileType . ' file', $this->getDefaultFileName());
+        $this->containerName = $this->argument('container')
+            ?? $this->checkParameterOrAsk('container', 'Enter the name of the Container');
+        $this->containerName = ucfirst($this->containerName);
+
+        $this->fileName = $this->argument('file')
+            ?? $this->checkParameterOrAsk(
+                'file',
+                'Enter the name of the ' . $this->fileType . ' file',
+                $this->getDefaultFileName()
+            );
+        if ($this->fileType !== 'Entity') {
+            $this->fileName = Str::finish($this->fileName, $this->fileType);
+        }
 
         // now fix the container and file name
         $this->containerName = $this->removeSpecialChars($this->containerName);

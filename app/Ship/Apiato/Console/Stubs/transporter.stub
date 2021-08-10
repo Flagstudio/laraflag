@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Containers\{{container-name}}\Transfers\Transporters;
+
+use App\Ship\Parents\Transporters\Transporter;
+
+class {{class-name}} extends Transporter
+{
+    //public string $field; //TODO
+
+
+    public static function castKeys(): array
+    {
+        // TODO: Implement castKeys() method.
+    }
+}

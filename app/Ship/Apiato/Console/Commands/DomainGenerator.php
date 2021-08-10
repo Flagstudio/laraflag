@@ -26,24 +26,15 @@ class DomainGenerator extends GeneratorCommand implements ComponentsGenerator
         ['controller', 'c', InputOption::VALUE_NONE, 'Create a new controller for the domain'],
         ['factory', 'f', InputOption::VALUE_NONE, 'Create a new factory for the domain'],
         ['migration', 'm', InputOption::VALUE_NONE, 'Create a new migration file for the domain'],
-//        ['seed', 's', InputOption::VALUE_NONE, 'Create a new seeder file for the domain'],
-//        ['resource', 'r', InputOption::VALUE_NONE, 'Create a new resource file for the domain'],
-//        ['repository', 'q', InputOption::VALUE_NONE, 'Create a new repository file for the domain'],
-//        ['policy', 'p', InputOption::VALUE_NONE, 'Create a new policy file for the domain'],
     ];
 
     public function handle(): int
     {
         $this->validateGenerator($this);
 
-        $this->containerName = ucfirst($this->checkParameterOrAsk('container', 'Enter the name of the Container'));
+        $this->containerName = $this->argument('container')
+            ?? ucfirst($this->checkParameterOrAsk('container', 'Enter the name of the Container'));
         $this->fileName = $this->containerName = $this->removeSpecialChars($this->containerName);
-
-        $options = $this->getSelectedOptions();
-
-        foreach ($options as $name => $option) {
-            $this->{$name . 'Maker'}();
-        }
 
         $this->warn('Generating configuration file');
         $this->call('flag:config', [
@@ -105,7 +96,7 @@ class DomainGenerator extends GeneratorCommand implements ComponentsGenerator
             '--container' => $this->containerName,
             '--file' => "Create{$this->fileName}Table",
             '--tablename' => Str::plural(Str::lower($this->fileName)),
-            '--stub' => 1,
+            '--stub' => 'create',
         ]);
     }
 

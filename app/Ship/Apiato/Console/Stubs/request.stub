@@ -6,15 +6,15 @@ use App\Ship\Parents\Requests\Request;
 
 class {{class-name}} extends Request
 {
+    public function transporter(): string
+    {
+        return ''; //TODO
+    }
+
     public function rules(): array
     {
         return [
             //TODO
         ];
-    }
-
-    public function authorize(): bool
-    {
-        return true;
     }
 }

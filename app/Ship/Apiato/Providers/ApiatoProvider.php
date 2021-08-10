@@ -5,6 +5,7 @@ namespace App\Ship\Apiato\Providers;
 use App\Ship\Apiato\Abstracts\Providers\MainProvider as AbstractMainProvider;
 use App\Ship\Providers\TelescopeServiceProvider;
 use Carbon\Carbon;
+use Tymon\JWTAuth\Providers\LaravelServiceProvider;
 
 class ApiatoProvider extends AbstractMainProvider
 {
@@ -16,6 +17,7 @@ class ApiatoProvider extends AbstractMainProvider
     public $serviceProviders = [
         RouteServiceProvider::class,
         ContainersServiceProvider::class,
+        LaravelServiceProvider::class,
     ];
 
 

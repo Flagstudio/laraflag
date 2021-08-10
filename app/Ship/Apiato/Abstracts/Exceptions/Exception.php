@@ -10,11 +10,6 @@ use Log;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException as SymfonyHttpException;
 
-/**
- * Class Exception.
- *
- * @author  Mahmoud Zalt <mahmoud@zalt.me>
- */
 abstract class Exception extends SymfonyHttpException
 {
 

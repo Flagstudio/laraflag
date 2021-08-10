@@ -5,7 +5,6 @@ namespace App\Ship\Apiato\Console\Commands;
 use App\Ship\Apiato\Console\GeneratorCommand;
 use App\Ship\Apiato\Console\Interfaces\ComponentsGenerator;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -41,29 +40,6 @@ class MigrationGenerator extends GeneratorCommand implements ComponentsGenerator
             )
         );
         $this->stubName = 'migrations/' . $stub . '.stub';
-
-        // now we need to check, if there already exists a "default migration file" for this container!
-        // we therefore search for a file that is named "xxxx_xx_xx_xxxxxx_NAME"
-        $exists = false;
-
-        $folder = $this->parsePathStructure($this->pathStructure, ['container-name' => $this->containerName]);
-        $folder = $this->getFilePath($folder);
-        $folder = rtrim($folder, $this->parsedFileName . '.' . $this->getDefaultFileExtension());
-
-        $migrationName = $this->fileName . '.' . $this->getDefaultFileExtension();
-
-        // get the content of this folder
-        $files = File::allFiles($folder);
-        foreach ($files as $file) {
-            if (Str::endsWith($file->getFilename(), $migrationName)) {
-                $exists = true;
-            }
-        }
-
-        if ($exists) {
-            // there exists a basic migration file for this container
-            return null;
-        }
 
         return [
             'path-parameters' => [

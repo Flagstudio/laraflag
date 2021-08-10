@@ -4,8 +4,10 @@ namespace App\Ship\Apiato\Console\Commands;
 
 use App\Ship\Apiato\Console\GeneratorCommand;
 use App\Ship\Apiato\Console\Interfaces\ComponentsGenerator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Pluralizer;
 use Illuminate\Support\Str;
+use Symfony\Component\Console\Input\InputOption;
 
 class EntityGenerator extends GeneratorCommand implements ComponentsGenerator
 {
@@ -21,7 +23,11 @@ class EntityGenerator extends GeneratorCommand implements ComponentsGenerator
 
     protected string $stubName = 'entity.stub';
 
-    public array $inputs = [];
+    public array $inputs = [
+        ['controller', 'c', InputOption::VALUE_NONE, 'Create a new controller for the domain'],
+        ['factory', 'f', InputOption::VALUE_NONE, 'Create a new factory for the domain'],
+        ['migration', 'm', InputOption::VALUE_NONE, 'Create a new migration file for the domain'],
+    ];
 
     public function getUserInputs(): array
     {
@@ -29,6 +35,14 @@ class EntityGenerator extends GeneratorCommand implements ComponentsGenerator
         $this->call('flag:repository', [
             '--container' => $this->containerName,
             '--file' => Str::finish($this->fileName, 'Repository'),
+        ]);
+
+        $this->warn('Generating Migration file');
+        $this->call('flag:migration', [
+            '--container' => $this->containerName,
+            '--file' => 'create_' . Str::lower($this->fileName) . '_table',
+            '--tablename' => Str::plural($this->fileName),
+            '--stub' => 'create',
         ]);
 
         return [
@@ -45,5 +59,41 @@ class EntityGenerator extends GeneratorCommand implements ComponentsGenerator
                 'file-name' => $this->fileName,
             ],
         ];
+    }
+
+    public function getSelectedOptions(): Collection
+    {
+        return collect($this->options())
+            ->filter(fn ($item): bool => $item === true);
+    }
+
+    public function controllerMaker(): void
+    {
+        $this->warn('Generating Controller');
+        $this->call('flag:controller', [
+            '--container' => $this->containerName,
+            '--file' => $this->fileName . 'Controller',
+        ]);
+    }
+
+    public function factoryMaker(): void
+    {
+        $this->warn('Generating Factory');
+        $this->call('flag:factory', [
+            '--container' => $this->containerName,
+            '--file' => $this->fileName . 'Factory',
+            '--model' => $this->fileName,
+        ]);
+    }
+
+    public function migrationMaker(): void
+    {
+        $this->warn('Generating Migration');
+        $this->call('flag:factory', [
+            '--container' => $this->containerName,
+            '--file' => "Create{$this->fileName}Table",
+            '--tablename' => Str::plural(Str::lower($this->fileName)),
+            '--stub' => 'create',
+        ]);
     }
 }

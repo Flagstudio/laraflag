@@ -20,6 +20,7 @@ class HttpKernel extends Kernel
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Ship\Apiato\Foundation\Middleware\TrustProxies::class,
         \Spatie\MissingPageRedirector\RedirectsMissingPages::class,
+        \Illuminate\Session\Middleware\StartSession::class,
     ];
 
     /**
