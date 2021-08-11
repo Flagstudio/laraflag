@@ -13,7 +13,7 @@ class TestGenerator extends GeneratorCommand implements ComponentsGenerator
 
     protected $description = 'Create a TestCase for a Container';
 
-    protected string $fileType = 'TestCase';
+    protected string $fileType = 'Test';
 
     protected string $pathStructure = '{container-name}/Tests/{type}/*';
 

@@ -12,6 +12,9 @@
         <testsuite name="Containers Tests">
             <directory suffix="Test.php">./app/Containers/*/Tests</directory>
         </testsuite>
+        <testsuite name="Ship Tests">
+            <directory suffix="Test.php">./app/Ship/Tests</directory>
+        </testsuite>
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">

@@ -2,8 +2,10 @@
 
 namespace App\Ship\Apiato\Abstracts\Entities;
 
-use Illuminate\Database\Eloquent\Model as LaravelEloquentModel;
+use App\Ship\Apiato\Abstracts\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-abstract class Entity extends LaravelEloquentModel
+abstract class Entity extends Model
 {
+    use HasFactory;
 }
