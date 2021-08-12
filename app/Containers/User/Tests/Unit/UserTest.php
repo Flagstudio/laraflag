@@ -18,7 +18,7 @@ class UserTest extends TestCase
             'name' => self::USER_NAME,
         ];
 
-        $this->ajaxPost(route('user.update'), $request)
+        $this->postJson(route('user.update'), $request)
             ->assertOk();
 
         $this->assertEquals(self::USER_NAME, Auth::user()->name);

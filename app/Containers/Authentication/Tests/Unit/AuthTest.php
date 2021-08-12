@@ -18,7 +18,7 @@ class AuthTest extends TestCase
 
         $this->assertDatabaseHas('users', $request);
 
-        $this->ajaxPost(route('auth.login'), $request)
+        $this->postJson(route('auth.login'), $request)
             ->assertOk()
             ->assertJsonStructure([
                 'status',
@@ -35,7 +35,7 @@ class AuthTest extends TestCase
     {
         $request = $this->createUserAndBuildRequest(self::WRONG_CODE);
 
-        $this->ajaxPost(route('auth.login'), $request)
+        $this->postJson(route('auth.login'), $request)
             ->assertUnauthorized()
             ->assertJsonStructure([
                 'status',
@@ -62,7 +62,7 @@ class AuthTest extends TestCase
     {
         Auth::login(User::first());
 
-        $this->ajaxPost(route('auth.logout'))
+        $this->postJson(route('auth.logout'))
             ->assertOk()
             ->assertJsonStructure([
                 'status',
@@ -76,7 +76,7 @@ class AuthTest extends TestCase
     {
         Auth::login(User::first());
 
-        $this->ajaxPost(route('auth.refresh'))
+        $this->postJson(route('auth.refresh'))
             ->assertOk()
             ->assertJsonStructure([
                 'status',

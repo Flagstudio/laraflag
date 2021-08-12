@@ -16,8 +16,11 @@ abstract class AbstractResponder
 
     public function handle($data = null): ?JsonResponse
     {
-        $json = $this->json($data);
-        return response()->json($json, $json['status']);
+        if ($this->request->wantsJson()) {
+            $json = $this->json($data);
+            return response()->json($json, $json['status']);
+        }
+        return $this->view();
     }
 
     abstract public function json();

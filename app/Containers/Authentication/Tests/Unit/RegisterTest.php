@@ -17,7 +17,7 @@ class RegisterTest extends TestCase
 
         $this->assertDatabaseMissing('users', $request);
 
-        $this->ajaxPost(route('auth.register'), $request)
+        $this->postJson(route('auth.register'), $request)
             ->assertCreated();
     }
 
@@ -30,7 +30,7 @@ class RegisterTest extends TestCase
 
         $this->assertDatabaseHas('users', $request);
 
-        $this->ajaxPost(route('auth.register'), $request)
+        $this->postJson(route('auth.register'), $request)
             ->assertOk();
     }
 }
