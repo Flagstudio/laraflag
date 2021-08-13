@@ -3,13 +3,11 @@
 namespace App\Ship\Apiato\Abstracts\Tests\PhpUnit;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Tests\CreatesApplication;
 use Tests\TestCase as LaravelTestCase;
 
 abstract class TestCase extends LaravelTestCase
 {
-    use CreatesApplication,
-        DatabaseTransactions;
+    use DatabaseTransactions;
 
     public function __construct(?string $name = null, array $data = [], string $dataName = '')
     {
@@ -20,8 +18,6 @@ abstract class TestCase extends LaravelTestCase
     public function setUp(): void
     {
         parent::setUp();
-
-        $this->seed();
     }
 
     public function tearDown() : void

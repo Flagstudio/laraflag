@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Containers\Nova\Providers;
+namespace App\Ship\Nova\Providers;
 
 use App\Containers\Authorization\Allowers\AdminPanelAllow;
-use App\Containers\Nova\Controllers\ResourceUpdateController;
+use App\Ship\Nova\Controllers\ResourceUpdateController;
 use Flagstudio\NovaContacts\NovaContacts;
 use Flagstudio\NovaInstructions\NovaInstructions;
 use Laravel\Nova\Nova;

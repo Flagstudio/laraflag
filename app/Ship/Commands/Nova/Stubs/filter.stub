@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Containers\{{container-name}}\Nova\Filters;
+
+use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
+use Laravel\Nova\Filters\Filter;
+
+class {{class-name}} extends Filter
+{
+    public $name = 'filter name';
+
+    public $component = 'boolean';
+
+    public function apply(Request $request, $query, $value): Builder
+    {
+        return $query;
+    }
+
+    public function options(Request $request): array
+    {
+        return [];
+    }
+}

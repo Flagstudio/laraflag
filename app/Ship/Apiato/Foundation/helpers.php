@@ -12,7 +12,7 @@ if (! function_exists('container_path')) {
 }
 
 if (! function_exists('ship_path')) {
-    function ship_path(string $path): string
+    function ship_path(string $path = ''): string
     {
         return app_path('Ship/' . $path);
     }

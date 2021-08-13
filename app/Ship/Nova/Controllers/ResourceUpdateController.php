@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Containers\Nova\Controllers;
+namespace App\Ship\Nova\Controllers;
 
 use Laravel\Nova\Http\Requests\UpdateResourceRequest;
 use Laravel\Nova\Http\Controllers\ResourceUpdateController as NovaResourceUpdateController;

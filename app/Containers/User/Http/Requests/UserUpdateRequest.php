@@ -15,7 +15,11 @@ class UserUpdateRequest extends Request
     public function rules(): array
     {
         return [
-            'name' => 'required|string|min:3'
+            'name' => 'required|string|min:3',
+            'phone' => 'nullable|string|min:10',
+            'email' => 'nullable|email',
+            'birthday' => 'nullable|date',
+            'offers' => 'nullable|boolean',
         ];
     }
 }

@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Containers\{{container-name}}\Nova\Resources;
+
+use App\Ship\Nova\Resource;
+use Laravel\Nova\Fields\ID;
+use Illuminate\Http\Request;
+
+class {{class-name}} extends Resource
+{
+    public static $model = \App\Containers\{{container-name}}\Domain\Entities\{{class-name}}::class;
+
+    public static $title = 'name';
+
+    public static  $search = [
+        'id', 'name', 'email',
+    ];
+
+    public static $group = [
+        '{{group}}',
+    ];
+
+    public static function label(): string
+    {
+        //TODO
+    }
+
+    public static function singularLabel(): string
+    {
+        //TODO
+    }
+
+    public function fields(Request $request): array
+    {
+        return [
+            ID::make()->sortable(),
+        ];
+    }
+}

@@ -39,7 +39,9 @@ class ConsoleKernel extends Kernel
      */
     protected function commands()
     {
-        $this->load(ship_path('Apiato/Console'));
+//        $this->load(ship_path('Apiato/Console'));
+
+        $this->load(ship_path());
 
         $this->load(container_path(''));
 

@@ -12,7 +12,7 @@ class AuthTest extends TestCase
     const CODE = '1234';
     const WRONG_CODE = '4321';
 
-    public function test_user_can_login()
+    public function test_user_can_login(): void
     {
         $request = $this->createUserAndBuildRequest(self::CODE);
 
@@ -31,7 +31,7 @@ class AuthTest extends TestCase
         $this->assertAuthenticated();
     }
 
-    public function test_user_send_wrong_code_for_login()
+    public function test_user_send_wrong_code_for_login(): void
     {
         $request = $this->createUserAndBuildRequest(self::WRONG_CODE);
 
@@ -43,7 +43,7 @@ class AuthTest extends TestCase
             ]);
     }
 
-    public function test_user_can_not_login_with_invalid_request()
+    public function test_user_can_not_login_with_invalid_request(): void
     {
         $cases = [
             [
@@ -58,7 +58,7 @@ class AuthTest extends TestCase
         //TODO asserts for all cases
     }
 
-    public function test_user_can_logout()
+    public function test_user_can_logout(): void
     {
         Auth::login(User::first());
 
@@ -72,7 +72,7 @@ class AuthTest extends TestCase
             ]);
     }
 
-    public function test_user_can_refresh_token()
+    public function test_user_can_refresh_token(): void
     {
         Auth::login(User::first());
 

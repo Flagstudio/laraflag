@@ -9,7 +9,7 @@ class RegisterTest extends TestCase
 {
     const PHONE = '+79995647977';
 
-    public function test_user_can_register()
+    public function test_user_can_register(): void
     {
         $request = [
             'phone' => self::PHONE,
@@ -21,7 +21,7 @@ class RegisterTest extends TestCase
             ->assertCreated();
     }
 
-    public function test_user_can_login()
+    public function test_user_can_login(): void
     {
         $existingUser = User::first();
         $request = [

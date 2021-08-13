@@ -150,10 +150,15 @@ abstract class GeneratorCommand extends Command
         return $path;
     }
 
+    protected function getStubPath(): string
+    {
+        return self::CUSTOM_STUB_PATH;
+    }
+
     protected function getStubContent(): string
     {
         // check if there is a custom file that overrides the default stubs
-        $path = app_path() . '/Ship/' . self::CUSTOM_STUB_PATH;
+        $path = app_path() . '/Ship/' . $this->getStubPath();
         $file = str_replace('*', $this->stubName, $path);
 
         // check if the custom file exists
