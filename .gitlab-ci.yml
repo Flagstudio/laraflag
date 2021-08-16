@@ -77,6 +77,7 @@ deploy-develop:
       git reset --hard gitlab/develop &&
       npm run dev &&
       composer install -q &&
+      php artisan migrate --force &&
       php artisan view:clear &&
       chmod -R 777 storage/ bootstrap/ &&
       chown -R dev:dev . &&
