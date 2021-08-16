@@ -15,7 +15,7 @@ class UserRegisterRequest extends Request
     public function rules(): array
     {
         return [
-            'phone' => 'required|min:10'
+            'phone' => 'required|numeric|regex:/\+79[0-9]{9}/'
         ];
     }
 }

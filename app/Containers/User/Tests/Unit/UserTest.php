@@ -35,6 +35,47 @@ class UserTest extends TestCase
         $this->assertEquals(self::USER_NAME, Auth::user()->name);
         $this->assertEquals(self::USER_PHONE, Auth::user()->phone);
         $this->assertEquals(self::USER_EMAIL, Auth::user()->email);
+
+        //testing validation rules
+        $cases = [
+            [
+                'request' => ['name' => ''],
+                'errors' => ['name'],
+                'success' => [],
+            ],
+            [
+                'request' => ['name' => '', 'phone' => '', 'email' => '', 'birthday' => '', 'offers' => ''],
+                'errors' => ['name'],
+                'success' => [],
+            ],
+            [
+                'request' => ['name' => self::USER_NAME, 'phone' => '', 'email' => '', 'birthday' => '', 'offers' => ''],
+                'errors' => [],
+                'success' => ['name'],
+            ],
+            [
+                'request' => ['name' => self::USER_NAME, 'phone' => 'fbga', 'email' => '', 'birthday' => '', 'offers' => ''],
+                'errors' => ['phone'],
+                'success' => ['name'],
+            ],
+            [
+                'request' => ['name' => self::USER_NAME, 'phone' => 'fbga', 'email' => 'grt54-+*-', 'birthday' => '', 'offers' => ''],
+                'errors' => ['phone', 'email'],
+                'success' => ['name'],
+            ],
+            [
+                'request' => ['name' => '2', 'phone' => 'fbga', 'email' => 'grt54-+*-', 'birthday' => '', 'offers' => ''],
+                'errors' => ['name', 'phone', 'email'],
+                'success' => [],
+            ],
+            [
+                'request' => ['name' => self::USER_NAME, 'phone' => self::USER_PHONE, 'email' => self::USER_EMAIL],
+                'errors' => [],
+                'success' => ['name', 'phone', 'email'],
+            ],
+        ];
+
+        $this->testingValidationCases($cases, route('user.update'));
     }
 
     public function test_get_user_info(): void

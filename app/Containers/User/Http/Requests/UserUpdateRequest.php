@@ -16,7 +16,7 @@ class UserUpdateRequest extends Request
     {
         return [
             'name' => 'required|string|min:3',
-            'phone' => 'nullable|string|min:10',
+            'phone' => 'nullable|numeric|regex:/\+79[0-9]{9}/',
             'email' => 'nullable|email',
             'birthday' => 'nullable|date',
             'offers' => 'nullable|boolean',

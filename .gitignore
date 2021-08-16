@@ -23,3 +23,5 @@ public/fonts
 cghooks.lock
 db_backups/
 storage/debugbar/
+.scribe/
+public/docs/

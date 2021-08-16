@@ -15,7 +15,7 @@ class LoginRequest extends Request
     public function rules(): array
     {
         return [
-            'phone' => 'required|exists:users',
+            'phone' => 'required|numeric|regex:/\+79[0-9]{9}/|exists:users',
             'verify_code' => 'required|digits:4'
         ];
     }

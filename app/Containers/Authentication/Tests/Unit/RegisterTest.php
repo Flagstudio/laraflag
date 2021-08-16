@@ -18,7 +18,50 @@ class RegisterTest extends TestCase
         $this->assertDatabaseMissing('users', $request);
 
         $this->postJson(route('auth.register'), $request)
-            ->assertCreated();
+            ->assertCreated()
+            ->assertJsonStructure([
+                'status',
+                'data' => [
+                    'is_new',
+                ],
+            ])
+            ->assertJsonFragment(['is_new' => true]);
+
+        //testing validation rules
+        $cases = [
+            [
+                'request' => ['phone' => ''],
+                'errors' => ['phone'],
+                'success' => [],
+            ],
+            [
+                'request' => ['phone' => '19583'],
+                'errors' => ['phone'],
+                'success' => [],
+            ],
+            [
+                'request' => ['phone' => self::PHONE],
+                'errors' => [],
+                'success' => ['phone'],
+            ],
+            [
+                'request' => ['phone' => 'qwertyuiopsd'],
+                'errors' => ['phone'],
+                'success' => [],
+            ],
+            [
+                'request' => ['phone' => '+7911111111'],
+                'errors' => ['phone'],
+                'success' => [],
+            ],
+            [
+                'request' => ['phone' => '+79aaabbbccdd'],
+                'errors' => ['phone'],
+                'success' => [],
+            ],
+        ];
+
+        $this->testingValidationCases($cases, route('auth.register'));
     }
 
     public function test_user_can_login(): void
@@ -31,6 +74,13 @@ class RegisterTest extends TestCase
         $this->assertDatabaseHas('users', $request);
 
         $this->postJson(route('auth.register'), $request)
-            ->assertOk();
+            ->assertOk()
+            ->assertJsonStructure([
+                'status',
+                'data' => [
+                    'is_new',
+                ],
+            ])
+            ->assertJsonFragment(['is_new' => false]);
     }
 }
