@@ -15,10 +15,11 @@
 
 - **ssl** - caddy веб сервер (вместо nginx)
 - **app** - php-fpm+caddy
-- **mysql** - угадайте
-- **postgres** - угадайте
-- **elasticsearch** — угадайте
-- **elastichq** — UI для эластика
+- **mysql** - MySQL Database
+- **postgres** - PostgreSQL Database
+- **elasticsearch** — Поисковая система
+- **elastichq** — UI и мониторинг для Elasticsearch
+- **meilisearch** — Поисковая система
 
 ### Конфиги
 
@@ -49,3 +50,14 @@ Prod
 - `dc up --build -d app` — пересобрать образ и перезапустить контейнер
 - `dc exec app composer install` — выполнение команд в контейнере
 - `dc exec app bash` — подключиться к контейнеру
+
+## PreCommit hooks
+
+- Если хук возвращает code style errors, пофиксите с помощью команды: `docker-compose exec app vendor/bin/composer csfix`, добавьте изменения в коммит.
+- Чтобы запустить ТОЛЬКО проверку на code style: `docker-compose exec app vendor/bin/composer csfix-validate`, команда вернет список проблемных файлов.
+- Если pre_commit hook содержит ошибки тестов, чиним тесты и запускаем проверку заново.
+
+## Tests
+
+- Войдите в app container `docker-compose exec app /bin/bash`
+- Запустите `composer autotests`

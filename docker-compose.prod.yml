@@ -90,3 +90,9 @@ services:
         - ./netdata/netdata.conf:/etc/netdata/netdata.conf
       ports:
         - "127.0.0.1:${NETDATA_PORT}:19999"
+
+  ### Meilisearch ###########################################
+    meilisearch:
+      image: getmeili/meilisearch:v0.21.0rc6
+      volumes:
+        - ${DATA_PATH_HOST}/ms:/data.ms
