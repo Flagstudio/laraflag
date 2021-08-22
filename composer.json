@@ -40,8 +40,6 @@
         "barryvdh/laravel-debugbar": "^3.2",
         "barryvdh/laravel-ide-helper": "^2.0",
         "beyondcode/laravel-dump-server": "^1.0",
-        "brainmaestro/composer-git-hooks": "^2.8",
-        "friendsofphp/php-cs-fixer": "^2.15",
         "fzaninotto/faker": "^1.9",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^5.0",
@@ -63,13 +61,10 @@
         }
     },
     "extra": {
-        "hooks": {
-            "pre-commit": [
-                "vendor/bin/php-cs-fixer fix . --path-mode=intersection --dry-run -v"
-            ]
-        },
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "laravel/telescope"
+            ]
         }
     },
     "scripts": {
@@ -79,13 +74,20 @@
         "post-create-project-cmd": [
             "@php artisan key:generate"
         ],
+        "post-update-cmd": [
+            "@php artisan nova:publish",
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "@php artisan ide-helper:generate",
+            "@php artisan ide-helper:meta"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover"
+            "@php artisan package:discover --ansi",
+            "mkdir -p .git/hooks && cp tools/git-hooks/pre-commit .git/hooks/pre-commit"
         ],
-        "cghooks": "vendor/bin/cghooks",
-        "post-install-cmd": "cghooks add --ignore-lock",
-        "post-update-cmd": "cghooks update"
+        "csfix": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix . --config=/var/www/.php-cs-fixer.dist.php --path-mode=intersection --using-cache=no --allow-risky=yes",
+        "csfix-validate": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix . --config=/var/www/.php-cs-fixer.dist.php --path-mode=intersection --using-cache=no --allow-risky=yes --dry-run -v",
+        "autotests": "vendor/bin/phpunit --testdox --do-not-cache-result"
     },
     "config": {
         "preferred-install": "dist",

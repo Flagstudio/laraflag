@@ -1,0 +1,32 @@
+#!/bin/sh
+export PATH=/usr/local/bin:$PATH
+export COMPOSE_INTERACTIVE_NO_CLI=1
+
+if [ -t 1 ]; then
+    exec >/dev/tty 2>/dev/tty </dev/tty
+fi
+
+code_errors=0
+test_errors=0
+
+docker-compose exec -T app vendor/bin/composer csfix-validate
+
+if [ "$?" -ne 0 ]; then
+    code_errors=1
+fi
+
+if [ "$code_errors" -eq 1 ]; then
+    echo "Code style errors detected! Run 'docker-compose exec app vendor/bin/composer csfix-validate'"
+    exit 1
+fi
+
+docker-compose exec -T app vendor/bin/composer autotests
+
+if [ "$?" -ne 0 ]; then
+    test_errors=1
+fi
+
+if [ "$test_errors" -eq 1 ]; then
+    echo "Autotests errors detected! Fix tests!"
+    exit 1
+fi
