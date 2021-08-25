@@ -3,6 +3,7 @@
 namespace Tests;
 
 use Closure;
+use Database\Seeders\TestSeeder;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\SQLiteBuilder;
 use Illuminate\Database\SQLiteConnection;
@@ -24,13 +25,10 @@ abstract class TestCase extends BaseTestCase
     public function setUp(): void
     {
         parent::setUp();
+
+        $this->seed(TestSeeder::class);
     }
 
-    /**
-     * @param null $user
-     *
-     * @return \App\User
-     */
     protected function signIn($user = null)
     {
         $user = $user ?: create('App\User');
@@ -39,21 +37,11 @@ abstract class TestCase extends BaseTestCase
         return $user;
     }
 
-    /**
-     * Make ajax POST request
-     *
-     * @param mixed $uri
-     */
     protected function ajaxPost($uri, array $data = [])
     {
         return $this->post($uri, $data, ['HTTP_X-Requested-With' => 'XMLHttpRequest']);
     }
 
-    /**
-     * Make ajax GET request
-     *
-     * @param mixed $uri
-     */
     protected function ajaxGet($uri, array $data = [])
     {
         return $this->call('GET', $uri, $data, [], [], ['HTTP_X-Requested-With' => 'XMLHttpRequest']);

@@ -3,7 +3,6 @@
 namespace App\Containers\User\Tests\Unit;
 
 use App\Ship\Parents\Tests\PhpUnit\TestCase;
-use Illuminate\Support\Facades\Http;
 
 class UserTest extends TestCase
 {
@@ -30,17 +29,6 @@ class UserTest extends TestCase
             'phone' => self::USER_PHONE,
             'email' => self::USER_EMAIL,
         ]);
-
-        //testing integration with 1C
-        Http::assertSent(
-            $this->sendOneSUpdateUser(
-                [
-                    'phone' => self::USER_PHONE,
-                    'name' => self::USER_NAME,
-                    'email' => self::USER_EMAIL,
-                ]
-            )
-        );
     }
 
     public function test_validation_rules_for_update()

@@ -12,7 +12,7 @@ class CheckVerifyCodeTask extends Task
     public function run(string $phone, string $code): ?User
     {
         try {
-            if ((App::isLocal() || app()->environment('dev')) && $code === '0000') {
+            if (!App::isProduction() && $code === '0000') {
                 return User::wherePhone($phone)->first();
             }
 

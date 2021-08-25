@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRedirectsTable extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -13,10 +12,11 @@ class CreateRedirectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('redirects', function (Blueprint $table) {
+        Schema::create('settings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('from');
-            $table->text('to');
+            $table->string('title')->nullable();
+            $table->string('slug')->unique();
+            $table->json('fields')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateRedirectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('redirects');
+        Schema::dropIfExists('settings');
     }
-}
+};

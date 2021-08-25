@@ -4,7 +4,6 @@ namespace App\Containers\Authentication\Tests\Unit;
 
 use App\Containers\User\Domain\Entities\User;
 use App\Ship\Parents\Tests\PhpUnit\TestCase;
-use Illuminate\Support\Facades\Http;
 
 class RegisterTest extends TestCase
 {
@@ -30,9 +29,6 @@ class RegisterTest extends TestCase
             ->assertJsonFragment(['is_new' => true]);
 
         $this->assertDatabaseHas('users', $request);
-
-        //testing integration with 1C
-        Http::assertSent($this->sendOneSGetUser(self::PHONE));
     }
 
     public function test_validation_rules_for_register()
@@ -92,8 +88,5 @@ class RegisterTest extends TestCase
                 ],
             ])
             ->assertJsonFragment(['is_new' => false]);
-
-        //testing integration with 1C
-        Http::assertNotSent($this->sendOneSGetUser(self::PHONE));
     }
 }
