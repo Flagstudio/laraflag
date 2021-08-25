@@ -12,6 +12,7 @@
         "64robots/nova-fields": "^0.17.0",
         "ampeco/nova-date-range-filter": "^0.1.1",
         "babenkoivan/scout-elasticsearch-driver": "^4.2",
+        "baethon/laravel-criteria": "^1.0",
         "doctrine/dbal": "^2.10.2",
         "ebess/advanced-nova-media-library": "^3.0",
         "emilianotisato/nova-tinymce": "v0.5.4",
@@ -36,6 +37,7 @@
         "spatie/laravel-image-optimizer": "^1.6",
         "spatie/laravel-medialibrary": "^8.3",
         "spatie/laravel-missing-page-redirector": "^2.5",
+        "spatie/laravel-sitemap": "^5.9",
         "spatie/laravel-tail": "^4.2",
         "tymon/jwt-auth": "^1.0",
         "whitecube/nova-flexible-content": "^0.2"
