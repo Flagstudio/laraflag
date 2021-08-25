@@ -50,6 +50,18 @@ Prod
 - `dc exec app composer install` — выполнение команд в контейнере
 - `dc exec app bash` — подключиться к контейнеру
 
+# Запуск проекта
+
+- cp .env.example .env
+- В конфиге настраиваем подключение к базе
+- Удалить службы из docker-compose.yml, которые вам не нужны, например mysql
+- dc up -d
+- dc exec app composer i
+- dc exec app npm i
+- dc exec app npm run dev
+- pa migrate --seed
+- pa key:generate
+
 ***
 ***
 
