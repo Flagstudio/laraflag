@@ -10,4 +10,9 @@ class User extends UserEntity
         'birthday',
         'phone_verified_at',
     ];
+
+    public function isAdmin(): bool
+    {
+        return true;
+    }
 }
