@@ -5,38 +5,17 @@ namespace App\Ship\Apiato\Foundation;
 use App\Ship\Apiato\Exceptions\ClassDoesNotExistException;
 use App\Ship\Apiato\Exceptions\MissingContainerException;
 use App\Ship\Apiato\Exceptions\WrongConfigurationsException;
-//use App\Ship\Apiato\Traits\CallableTrait;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 class Apiato
 {
-
-//    use CallableTrait;
-
-    /**
-     * The Apiato version.
-     *
-     * @var string
-     */
-    const VERSION = '9.0.0';
-
-    /**
-     * Get the containers namespace value from the containers config file
-     *
-     * @return  string
-     */
-    public function getContainersNamespace()
+    public function getContainersNamespace(): string
     {
         return Config::get('apiato.containers.namespace');
     }
 
-    /**
-     * Get the containers names
-     *
-     * @return  array
-     */
-    public function getContainersNames()
+    public function getContainersNames(): array
     {
         $containersNames = [];
 
@@ -47,12 +26,7 @@ class Apiato
         return $containersNames;
     }
 
-    /**
-     * Get the port folders names
-     *
-     * @return  array
-     */
-    public function getShipFoldersNames()
+    public function getShipFoldersNames(): array
     {
         $portFoldersNames = [];
 
@@ -63,31 +37,16 @@ class Apiato
         return $portFoldersNames;
     }
 
-    /**
-     * get containers directories paths
-     *
-     * @return  mixed
-     */
-    public function getContainersPaths()
+    public function getContainersPaths(): array
     {
         return File::directories(app_path('Containers'));
     }
 
-    /**
-     * @return  mixed
-     */
-    public function getShipPath()
+    public function getShipPath(): array
     {
         return File::directories(app_path('Ship'));
     }
 
-    /**
-     * build and return an object of a class from its file path
-     *
-     * @param $filePathName
-     *
-     * @return  mixed
-     */
     public function getClassObjectFromFile($filePathName)
     {
         $classString = $this->getClassFullNameFromFile($filePathName);
@@ -97,27 +56,12 @@ class Apiato
         return $object;
     }
 
-    /**
-     * get the full name (name \ namespace) of a class from its file path
-     * result example: (string) "I\Am\The\Namespace\Of\This\Class"
-     *
-     * @param $filePathName
-     *
-     * @return  string
-     */
-    public function getClassFullNameFromFile($filePathName)
+    public function getClassFullNameFromFile(string $filePathName): string
     {
         return $this->getClassNamespaceFromFile($filePathName) . '\\' . $this->getClassNameFromFile($filePathName);
     }
 
-    /**
-     * get the class namespace form file path using token
-     *
-     * @param $filePathName
-     *
-     * @return  null|string
-     */
-    protected function getClassNamespaceFromFile($filePathName)
+    protected function getClassNamespaceFromFile(string $filePathName): ?string
     {
         $src = file_get_contents($filePathName);
 
@@ -148,14 +92,7 @@ class Apiato
         return $namespace;
     }
 
-    /**
-     * get the class name form file path using token
-     *
-     * @param $filePathName
-     *
-     * @return  mixed
-     */
-    protected function getClassNameFromFile($filePathName)
+    protected function getClassNameFromFile(string $filePathName)
     {
         $php_code = file_get_contents($filePathName);
 
@@ -175,27 +112,12 @@ class Apiato
         return $classes[0];
     }
 
-    /**
-     * check if a word starts with another word
-     *
-     * @param $word
-     * @param $startsWith
-     *
-     * @return  bool
-     */
-    public function stringStartsWith($word, $startsWith)
+    public function stringStartsWith(string $word, string $startsWith): string
     {
         return (substr($word, 0, strlen($startsWith)) === $startsWith);
     }
 
-    /**
-     * @param        $word
-     * @param string $splitter
-     * @param bool   $uppercase
-     *
-     * @return  mixed|string
-     */
-    public function uncamelize($word, $splitter = " ", $uppercase = true)
+    public function uncamelize(string $word, string $splitter = " ", bool $uppercase = true): string
     {
         $word = preg_replace(
             '/(?!^)[[:upper:]][[:lower:]]/',
@@ -206,11 +128,6 @@ class Apiato
         return $uppercase ? ucwords($word) : $word;
     }
 
-    /**
-     * @throws WrongConfigurationsException
-     *
-     * @return mixed
-     */
     public function getLoginWebPageName()
     {
         $loginPage = Config::get('apiato.containers.login-page-url');
@@ -222,53 +139,26 @@ class Apiato
         return $loginPage;
     }
 
-
-    /**
-     * Build namespace for a class in Container.
-     *
-     * @param $containerName
-     * @param $className
-     *
-     * @return  string
-     */
-    public function buildClassFullName($containerName, $className)
+    public function buildClassFullName(string $containerName, string $className): string
     {
         return 'App\Containers\\' . $containerName . '\\' . $this->getClassType($className) . 's\\' . $className;
     }
 
-    /**
-     * Get the last part of a camel case string.
-     * Example input = helloDearWorld | returns = World
-     *
-     * @param $className
-     *
-     * @return  mixed
-     */
-    public function getClassType($className)
+    public function getClassType(string $className): string
     {
         $array = preg_split('/(?=[A-Z])/', $className);
 
         return end($array);
     }
 
-    /**
-     * @param $containerName
-     *
-     * @throws MissingContainerException
-     */
-    public function verifyContainerExist($containerName)
+    public function verifyContainerExist(string $containerName)
     {
         if (!is_dir(app_path('Containers/' . $containerName))) {
             throw new MissingContainerException("Container ($containerName) is not installed.");
         }
     }
 
-    /**
-     * @param $className
-     *
-     * @throws ClassDoesNotExistException
-     */
-    public function verifyClassExist($className)
+    public function verifyClassExist(string $className)
     {
         if (!class_exists($className)) {
             throw new ClassDoesNotExistException("Class ($className) is not installed.");

@@ -29,7 +29,7 @@ class ConsoleKernel extends Kernel
             $schedule->command('telescope:prune')->cron('0 23 */2 * *');
         }
 
-        $schedule->command('import:currencies')->dailyAt('04:00');
+        $schedule->command('ones:import-changes')->daily();
     }
 
     /**
@@ -39,8 +39,6 @@ class ConsoleKernel extends Kernel
      */
     protected function commands()
     {
-//        $this->load(ship_path('Apiato/Console'));
-
         $this->load(ship_path());
 
         $this->load(container_path(''));

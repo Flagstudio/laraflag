@@ -14,9 +14,15 @@ class {{class-name}} extends Action
 
             //TODO
 
-            return $this->responder(SuccessResponder::class, $data);
+            return $this->responder(
+                SuccessResponder::class,
+                $data,
+            );
         } catch(\Exception $e) {
-            return $this->responder(ErrorResponder::class, $e->getMessage());
+            return $this->responder(
+                ErrorResponder::class,
+                $e->getMessage(),
+            );
         }
     }
 }

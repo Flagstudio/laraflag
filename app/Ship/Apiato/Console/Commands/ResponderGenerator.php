@@ -14,7 +14,7 @@ class ResponderGenerator extends GeneratorCommand implements ComponentsGenerator
 
     protected string $fileType = 'Responder';
 
-    protected string $pathStructure = '{container-name}/Transfers/Responders/*';
+    protected string $pathStructure = '{container-name}/Http/Responders/*';
 
     protected string $nameStructure = '{file-name}';
 

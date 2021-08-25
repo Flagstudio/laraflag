@@ -6,19 +6,19 @@ use App\Ship\Apiato\Console\GeneratorCommand;
 use App\Ship\Apiato\Console\Interfaces\ComponentsGenerator;
 use Illuminate\Support\Str;
 
-class ConfigurationGenerator extends GeneratorCommand implements ComponentsGenerator
+class CriteriaGenerator extends GeneratorCommand implements ComponentsGenerator
 {
-    protected $name = 'flag:config';
+    protected $name = 'flag:criteria';
 
-    protected $description = 'Create a Configuration file for a Container';
+    protected $description = 'Create a new Criteria class';
 
-    protected string $fileType = '';
+    protected string $fileType = 'Criteria';
 
-    protected string $pathStructure = '{container-name}/Configs/*';
+    protected string $pathStructure = '{container-name}/Domain/Criterias/*';
 
     protected string $nameStructure = '{file-name}';
 
-    protected string $stubName = 'config.stub';
+    protected string $stubName = 'criteria.stub';
 
     public array $inputs = [];
 
@@ -37,10 +37,5 @@ class ConfigurationGenerator extends GeneratorCommand implements ComponentsGener
                 'file-name' => $this->fileName,
             ],
         ];
-    }
-
-    public function getDefaultFileName(): string
-    {
-        return Str::lower($this->containerName);
     }
 }

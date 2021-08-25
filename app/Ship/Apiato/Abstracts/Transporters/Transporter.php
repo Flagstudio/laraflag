@@ -2,9 +2,12 @@
 
 namespace App\Ship\Apiato\Abstracts\Transporters;
 
+use App\Ship\Parents\Entities\Entity;
 use App\Ship\Parents\Requests\Request;
 use Illuminate\Support\Str;
 use Spatie\DataTransferObject\DataTransferObject;
+use Spatie\DataTransferObject\FieldValidator;
+use Spatie\DataTransferObject\ValueCaster;
 
 #[Strict]
 abstract class Transporter extends DataTransferObject
@@ -30,4 +33,19 @@ abstract class Transporter extends DataTransferObject
     }
 
     abstract public static function castKeys(): array;
+
+    protected function castValue(ValueCaster $valueCaster, FieldValidator $fieldValidator, $value)
+    {
+        $type = $fieldValidator->allowedTypes[0];
+
+        if (class_exists($type) && ($object = new $type) instanceof Entity) {
+            return $object->find($value);
+        }
+
+        if (is_array($value)) {
+            return $valueCaster->cast($value, $fieldValidator);
+        }
+
+        return $value;
+    }
 }

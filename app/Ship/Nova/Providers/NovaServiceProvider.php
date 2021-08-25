@@ -2,7 +2,6 @@
 
 namespace App\Ship\Nova\Providers;
 
-use App\Containers\Authorization\Allowers\AdminPanelAllow;
 use App\Ship\Nova\Controllers\ResourceUpdateController;
 use Flagstudio\NovaContacts\NovaContacts;
 use Flagstudio\NovaInstructions\NovaInstructions;
@@ -47,7 +46,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function gate()
     {
         Gate::define('viewNova', function ($user) {
-            return (new AdminPanelAllow(auth()->user()))->isAllow();
+            return true;
         });
     }
 

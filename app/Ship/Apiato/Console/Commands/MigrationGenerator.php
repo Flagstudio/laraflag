@@ -14,7 +14,7 @@ class MigrationGenerator extends GeneratorCommand implements ComponentsGenerator
 
     protected $description = 'Create an "empty" migration file for a Container';
 
-    protected string $fileType = 'Migration';
+    protected string $fileType = '';
 
     protected string $pathStructure = '{container-name}/Domain/Migrations/*';
 

@@ -10,11 +10,9 @@ trait GetCallableInstance
     {
         $this->validateParameters($parameters);
 
-        $args = [];
-        if (isset($parameters[1])) {
-            $args = $this->extractArguments($parameters[1]);
-        }
+        $class = $parameters[0];
+        $args = array_slice($parameters, 1);
 
-        return [resolve($parameters[0]), $args];
+        return [resolve($class), $args];
     }
 }

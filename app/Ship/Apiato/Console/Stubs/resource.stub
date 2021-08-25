@@ -3,11 +3,10 @@
 namespace App\Containers\{{container-name}}\Transfers\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Http\Request;
 
 class {{class-name}} extends JsonResource
 {
-    public function toArray(Request $request): array
+    public function toArray($request = null): array
     {
         return parent::toArray($request);
     }

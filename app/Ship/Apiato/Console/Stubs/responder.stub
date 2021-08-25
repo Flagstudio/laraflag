@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Containers\{{container-name}}\Transfers\Responders;
+namespace App\Containers\{{container-name}}\Http\Responders;
 
 use App\Ship\Parents\Responders\SuccessResponder;
 use Symfony\Component\HttpFoundation\Response;

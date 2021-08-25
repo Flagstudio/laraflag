@@ -2,6 +2,8 @@
 
 namespace App\Ship\Apiato\Abstracts\Criterias;
 
-abstract class Criteria
+use Baethon\LaravelCriteria\CriteriaInterface;
+
+abstract class Criteria implements CriteriaInterface
 {
 }

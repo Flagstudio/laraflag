@@ -3,6 +3,7 @@
 namespace App\Ship\Apiato\Abstracts\Tests\PhpUnit;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Http;
 use Tests\TestCase as LaravelTestCase;
 
 abstract class TestCase extends LaravelTestCase
@@ -18,6 +19,8 @@ abstract class TestCase extends LaravelTestCase
     public function setUp(): void
     {
         parent::setUp();
+
+        Http::fake();
     }
 
     public function tearDown() : void
