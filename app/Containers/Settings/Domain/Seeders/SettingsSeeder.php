@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Containers\Settings\Data\Seeders;
+namespace App\Containers\Settings\Domain\Seeders;
 
 use App\Containers\Settings\Domain\Entities\Settings;
 use Illuminate\Database\Seeder;

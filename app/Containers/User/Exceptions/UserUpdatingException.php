@@ -9,7 +9,7 @@ class UserUpdatingException extends Exception
 {
     public $httpStatusCode = Response::HTTP_BAD_REQUEST;
 
-    public $message = 'Error user updating.';
+    public $message = 'An error occurred when updating user.';
 
     public $code = 0;
 }

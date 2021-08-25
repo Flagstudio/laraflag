@@ -4,21 +4,12 @@ namespace App\Containers\Authentication\Tests\Unit;
 
 use App\Containers\User\Domain\Entities\User;
 use App\Ship\Parents\Tests\PhpUnit\TestCase;
-use Illuminate\Support\Facades\Auth;
 
 class AuthTest extends TestCase
 {
-    const PHONE = '+79995647977';
+    const PHONE = '+79636550055';
     const CODE = '1234';
     const WRONG_CODE = '4321';
-
-    const JSON_TOKEN_STRUCTURE = [
-        'status',
-        'data' => [
-            'accessToken',
-            'expires_in',
-        ],
-    ];
 
     public function test_user_can_login(): void
     {
@@ -26,14 +17,15 @@ class AuthTest extends TestCase
 
         $this->assertDatabaseHas('users', $request);
 
-
         $this->postJson(route('auth.login'), $request)
             ->assertOk()
             ->assertJsonStructure(self::JSON_TOKEN_STRUCTURE);
+    }
 
-        $this->assertAuthenticated();
+    public function test_validation_rules_for_login()
+    {
+        $this->assertGuest();
 
-        //testing validation rules
         $cases = [
             [
                 'request' => ['phone' => '', 'verify_code' => ''],
@@ -82,7 +74,6 @@ class AuthTest extends TestCase
             'verify_code' => self::CODE,
         ]);
 
-        Auth::logout();
         $this->testingValidationCases($cases, route('auth.login'));
     }
 
@@ -92,13 +83,11 @@ class AuthTest extends TestCase
 
         $this->assertDatabaseHas('users', $request);
 
-        $request['varify_code'] = '0000';
+        $request['verify_code'] = '0000';
 
         $this->postJson(route('auth.login'), $request)
             ->assertOk()
             ->assertJsonStructure(self::JSON_TOKEN_STRUCTURE);
-
-        $this->assertAuthenticated();
     }
 
     public function test_user_send_wrong_code_for_login(): void
@@ -115,9 +104,8 @@ class AuthTest extends TestCase
 
     public function test_user_can_logout(): void
     {
-        Auth::login(User::first());
-
-        $this->postJson(route('auth.logout'))
+        $this->asAuthenticated()
+            ->postJson(route('auth.logout'))
             ->assertOk()
             ->assertJsonStructure([
                 'status',
@@ -129,9 +117,8 @@ class AuthTest extends TestCase
 
     public function test_user_can_refresh_token(): void
     {
-        Auth::login(User::first());
-
-        $this->postJson(route('auth.refresh'))
+        $this->asAuthenticated()
+            ->postJson(route('auth.refresh'))
             ->assertOk()
             ->assertJsonStructure(self::JSON_TOKEN_STRUCTURE);
     }

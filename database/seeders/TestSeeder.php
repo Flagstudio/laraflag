@@ -6,7 +6,7 @@ use App\Containers\Settings\Domain\Seeders\SettingsSeeder;
 use App\Containers\User\Domain\Seeders\UserSeeder;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class TestSeeder extends Seeder
 {
     /**
      * Seed the application's database.

@@ -1,8 +1,8 @@
 <?php
 
-namespace Database\Seeders;
+namespace App\Containers\User\Domain\Seeders;
 
-use App\Models\User;
+use App\Containers\User\Domain\Entities\User;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder

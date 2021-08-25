@@ -9,7 +9,7 @@ class UserNotFoundException extends Exception
 {
     public $httpStatusCode = Response::HTTP_BAD_REQUEST;
 
-    public $message = 'Exception Default Message.';
+    public $message = 'User not found.';
 
     public $code = 0;
 }

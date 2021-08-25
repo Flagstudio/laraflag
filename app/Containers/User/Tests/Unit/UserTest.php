@@ -2,22 +2,14 @@
 
 namespace App\Containers\User\Tests\Unit;
 
-use App\Containers\User\Domain\Entities\User;
 use App\Ship\Parents\Tests\PhpUnit\TestCase;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class UserTest extends TestCase
 {
     const USER_NAME = 'testUser';
-    const USER_PHONE = '+79995647977';
+    const USER_PHONE = '+79636550055';
     const USER_EMAIL = 'test@test.test';
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        Auth::login(User::first());
-    }
 
     public function test_user_update(): void
     {
@@ -29,19 +21,40 @@ class UserTest extends TestCase
             'offers' => true,
         ];
 
-        $this->postJson(route('user.update'), $request)
+        $this->asAuthenticated()
+            ->postJson(route('users.update'), $request)
             ->assertOk();
 
-        $this->assertEquals(self::USER_NAME, Auth::user()->name);
-        $this->assertEquals(self::USER_PHONE, Auth::user()->phone);
-        $this->assertEquals(self::USER_EMAIL, Auth::user()->email);
+        $this->assertDatabaseHas('users', [
+            'name' => self::USER_NAME,
+            'phone' => self::USER_PHONE,
+            'email' => self::USER_EMAIL,
+        ]);
 
-        //testing validation rules
+        //testing integration with 1C
+        Http::assertSent(
+            $this->sendOneSUpdateUser(
+                [
+                    'phone' => self::USER_PHONE,
+                    'name' => self::USER_NAME,
+                    'email' => self::USER_EMAIL,
+                ]
+            )
+        );
+    }
+
+    public function test_validation_rules_for_update()
+    {
         $cases = [
             [
                 'request' => ['name' => ''],
                 'errors' => ['name'],
                 'success' => [],
+            ],
+            [
+                'request' => ['name' => self::USER_NAME],
+                'errors' => [],
+                'success' => ['name'],
             ],
             [
                 'request' => ['name' => '', 'phone' => '', 'email' => '', 'birthday' => '', 'offers' => ''],
@@ -75,20 +88,19 @@ class UserTest extends TestCase
             ],
         ];
 
-        $this->testingValidationCases($cases, route('user.update'));
+        $this->testingValidationCases($cases, route('users.update'), $this->userToken);
     }
 
     public function test_get_user_info(): void
     {
-        $this->getJson(route('user.show'))
+        $this->asAuthenticated()
+            ->getJson(route('users.show'))
             ->assertOk()
             ->assertJsonStructure([
                 'data' => [
-                    [
-                        'name',
-                        'phone',
-                        'email',
-                    ],
+                    'name',
+                    'phone',
+                    'email',
                 ],
             ]);
     }

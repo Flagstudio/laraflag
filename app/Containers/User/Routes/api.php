@@ -3,9 +3,9 @@
 use App\Containers\User\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth')
-    ->prefix('user')
-    ->name('user.')
+Route::middleware('jwt.auth')
+    ->prefix('users')
+    ->name('users.')
     ->group(function () {
         Route::get('show', [UserController::class, 'show'])->name('show');
 

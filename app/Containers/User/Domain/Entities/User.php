@@ -7,7 +7,7 @@ use App\Ship\Parents\Entities\UserEntity;
 class User extends UserEntity
 {
     protected $dates = [
-        'birth',
+        'birthday',
         'phone_verified_at',
     ];
 }

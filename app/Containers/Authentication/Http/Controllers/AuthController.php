@@ -2,7 +2,7 @@
 
 namespace App\Containers\Authentication\Http\Controllers;
 
-use App\Containers\Authentication\Actions\loginAction;
+use App\Containers\Authentication\Actions\LoginAction;
 use App\Containers\Authentication\Actions\LogoutAction;
 use App\Containers\Authentication\Actions\RefreshTokenAction;
 use App\Containers\Authentication\Http\Requests\LoginRequest;
@@ -13,7 +13,7 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
         return $this->action(
-            loginAction::class,
+            LoginAction::class,
             $request->transportered(),
         );
     }

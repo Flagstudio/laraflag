@@ -56,7 +56,7 @@ class User extends Resource
                 ->creationRules('unique:users,email')
                 ->updateRules('unique:users,email,{{resourceId}}'),
 
-            Date::make('дата рождения', 'birth'),
+            Date::make('дата рождения', 'birthday'),
 
             Select::make('Пол', 'sex')
                 ->options(SexTitleEnum::labels())

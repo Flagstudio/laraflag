@@ -6,12 +6,14 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class ShowUserResource extends JsonResource
 {
-    public function toArray($request): array
+    public function toArray($request = null): array
     {
         return $this->only([
             'name',
             'phone',
             'email',
+            'birthday',
+            'allow_ads'
         ]);
     }
 }

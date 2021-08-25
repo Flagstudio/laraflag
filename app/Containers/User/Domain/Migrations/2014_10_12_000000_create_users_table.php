@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->string('email')->nullable()->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->date('birth')->nullable();
+            $table->date('birthday')->nullable();
             $table->integer('sex')->default(SexEnum::man()->label);
             $table->boolean('allow_ads')->default(false);
             $table->boolean('allow_privacy')->default(false);
