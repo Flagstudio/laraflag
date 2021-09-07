@@ -61,3 +61,9 @@ Prod
 
 - Войдите в app container `docker-compose exec app /bin/bash`
 - Запустите `composer autotests`
+
+## Database backups
+- [Ссылка на документацию Laravel Backup](https://spatie.be/docs/laravel-backup/v7/introduction)
+- Для запуска из CLI используйте `php artisan backup:run --only-db`
+- По умолчанию бэкап будет выгружен zip-архивом в `storage/app/{APP_NAME}`, вы можете настроить любые другие диски, в т.ч. S3
+- Конфигурационный файл `config/backup.php` для настроек.
