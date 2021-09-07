@@ -88,6 +88,33 @@ RUN curl https://getmic.ro | bash; \
         mv micro /root/micro; \
         echo 'alias m="~/micro"' >> /root/.bashrc
 
+###########################################################################
+# Postgresql client:
+###########################################################################
+
+RUN set -eux; \
+    apt-get update --allow-releaseinfo-change; \
+    apt-get upgrade -y; \
+    apt-get install -y --no-install-recommends \
+        lsb-release \
+        libc6 \
+        libtinfo6 \
+        readline-common \
+        libreadline-dev \
+        libpq-dev \
+        wget \
+        gnupg2;
+
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" | tee  /etc/apt/sources.list.d/pgdg.list
+
+RUN apt-get update --allow-releaseinfo-change -qq && apt-get install -y \
+  postgresql-client-12;
+
+###########################################################################
+# Set workdir & run:
+###########################################################################
+
 WORKDIR /var/www
 
 CMD ["/usr/bin/supervisord", "-n", "-c",  "/etc/supervisord.conf"]
