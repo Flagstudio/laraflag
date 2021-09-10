@@ -109,6 +109,10 @@
         {
             "type": "path",
             "url": "./nova-components/NovaInstructions"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/CustomCard"
         }
     ]
 }

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Nova\Dashboards\ExampleDashboard;
 use Flagstudio\NovaContacts\NovaContacts;
 use Flagstudio\NovaInstructions\NovaInstructions;
 use Laravel\Nova\Nova;
@@ -80,5 +81,16 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function register()
     {
         $this->app->bind('Laravel\Nova\Http\Controllers\ResourceUpdateController', 'App\Http\Controllers\Nova\ResourceUpdateController');
+    }
+
+
+    /**
+     * @return array
+     */
+    public function dashboards():array
+    {
+        return [
+            new ExampleDashboard(),
+        ];
     }
 }
