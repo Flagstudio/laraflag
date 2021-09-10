@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "41e88cb4aa2877ac6369a700cbe22aca",
+    "content-hash": "ed578c21ddca02d4438f5d67636b14ae",
     "packages": [
         {
             "name": "64robots/nova-fields",
@@ -1122,6 +1122,42 @@
                 "trusted proxy"
             ],
             "time": "2020-06-23T01:36:47+00:00"
+        },
+        {
+            "name": "flagstudio/custom-card",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./nova-components/CustomCard",
+                "reference": "3e2dbbcef92c6da79e0766d6b211880c83bd954f"
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Flagstudio\\CustomCard\\CardServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Flagstudio\\CustomCard\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova card.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "flagstudio/nova-actions-left",
@@ -8202,6 +8238,7 @@
                 "faker",
                 "fixtures"
             ],
+            "abandoned": true,
             "time": "2019-12-12T13:22:17+00:00"
         },
         {
@@ -10084,6 +10121,7 @@
                     "type": "github"
                 }
             ],
+            "abandoned": true,
             "time": "2020-09-28T06:45:17+00:00"
         },
         {
@@ -10470,12 +10508,12 @@
             "version": "1.9.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/webmozart/assert.git",
+                "url": "https://github.com/webmozarts/assert.git",
                 "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/bafc69caeb4d49c39fd0779086c03a3738cbb389",
+                "url": "https://api.github.com/repos/webmozarts/assert/zipball/bafc69caeb4d49c39fd0779086c03a3738cbb389",
                 "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389",
                 "shasum": ""
             },
@@ -10517,7 +10555,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "flagstudio/custom-card": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
