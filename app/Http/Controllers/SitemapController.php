@@ -26,6 +26,7 @@ class SitemapController extends Controller
         $urls = $this->sitemapService->getUrls();
 
         \Illuminate\Support\Facades\Request::header('Content-Type : text/xml');
+
         return response()->view('sitemap.index', compact('urls'))
             ->header('Content-type', 'text/xml');
     }

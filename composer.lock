@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ed578c21ddca02d4438f5d67636b14ae",
+    "content-hash": "a6e3c1eb219c1e29817c111988e055dc",
     "packages": [
         {
             "name": "64robots/nova-fields",
@@ -1202,16 +1202,16 @@
         },
         {
             "name": "flagstudio/nova-admin-bar",
-            "version": "v0.2.1",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Flagstudio/nova-admin-bar.git",
-                "reference": "857968db1be0c6d00fb9ea53a2d46526736f2e65"
+                "reference": "41daa849a2a43793b66ac7f57b7e35a2cd86b364"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Flagstudio/nova-admin-bar/zipball/857968db1be0c6d00fb9ea53a2d46526736f2e65",
-                "reference": "857968db1be0c6d00fb9ea53a2d46526736f2e65",
+                "url": "https://api.github.com/repos/Flagstudio/nova-admin-bar/zipball/41daa849a2a43793b66ac7f57b7e35a2cd86b364",
+                "reference": "41daa849a2a43793b66ac7f57b7e35a2cd86b364",
                 "shasum": ""
             },
             "require": {
@@ -1239,7 +1239,11 @@
                 "MIT"
             ],
             "description": "Nova admin bar for laravel.",
-            "time": "2020-10-20T19:02:09+00:00"
+            "support": {
+                "issues": "https://github.com/Flagstudio/nova-admin-bar/issues",
+                "source": "https://github.com/Flagstudio/nova-admin-bar/tree/v0.3.0"
+            },
+            "time": "2021-09-29T06:25:36+00:00"
         },
         {
             "name": "flagstudio/nova-contacts",
@@ -10555,14 +10559,12 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "flagstudio/custom-card": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^7.4"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }

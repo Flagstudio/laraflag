@@ -2,11 +2,11 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Resource as NovaResource;
-use Laravel\Nova\Http\Requests\NovaRequest;
-use R64\NovaFields\JSON;
 use Emilianotisato\NovaTinyMCE\NovaTinyMCE;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Resource as NovaResource;
+use R64\NovaFields\JSON;
 
 abstract class Resource extends NovaResource
 {
@@ -92,7 +92,6 @@ abstract class Resource extends NovaResource
             ->options(config('nova.tinymce_options'));
     }
 
-
     /**
      * @param null|string $url
      * @param string $title
@@ -109,13 +108,15 @@ abstract class Resource extends NovaResource
     }
 
     protected static string $identificator = 'id';
+
     protected function identificator()
     {
         $identificatorName = static::$identificator;
         $identificator = $this->$identificatorName;
-        if (!$identificator && $resourceId = request()->resourceId) {
+        if (! $identificator && $resourceId = request()->resourceId) {
             $identificator = static::$model::find($resourceId)->$identificatorName;
         }
+
         return $identificator;
     }
 

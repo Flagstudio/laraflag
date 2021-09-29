@@ -69,12 +69,15 @@ class Settings extends Resource
         switch ($slug) {
             case \App\Models\Settings::METRICS_SLUG:
                 $fields = $this->metricsFields();
+
                 break;
             case \App\Models\Settings::ROBOTS_SLUG:
                 $fields = $this->robotsFields();
+
                 break;
             default:
                 $fields = [];
+
                 break;
         }
 
@@ -139,7 +142,7 @@ class Settings extends Resource
                 Textarea::make('Внутри тега head', 'scripts_head'),
                 Textarea::make('После открывающего тега body', 'scripts_begin'),
                 Textarea::make('Перед закрывающем тегом body', 'scripts_end'),
-            ])
+            ]),
         ];
     }
 
@@ -152,7 +155,7 @@ class Settings extends Resource
             $this->json([
                 Textarea::make('Robots.txt', 'robots')
                     ->rows(10),
-            ])
+            ]),
         ];
     }
 }

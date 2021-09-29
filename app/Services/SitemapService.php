@@ -31,7 +31,7 @@ class SitemapService
     {
         $this->urls->push([
             'url' => $url,
-            'date' => Carbon::now()
+            'date' => Carbon::now(),
         ]);
     }
 
@@ -44,7 +44,7 @@ class SitemapService
         $modelsUrls = $collection->map(function ($model) use ($urlCallback) {
             return [
                 'url' => $urlCallback($model),
-                'date' => $model->updated_at ?? Carbon::now()
+                'date' => $model->updated_at ?? Carbon::now(),
             ];
         });
 

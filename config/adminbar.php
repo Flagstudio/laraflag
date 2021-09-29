@@ -13,6 +13,16 @@ return [
         'Admin panel' => '/_admin',
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Admin Bar position
+    |--------------------------------------------------------------------------
+    |
+    | Supported: "top", "bottom"
+    |
+    */
+    'position' => 'top',
+
     //Namespace to nova resources
     'resources_namespace' => '\\App\\Nova\\',
 ];

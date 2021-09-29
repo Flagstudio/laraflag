@@ -5,8 +5,8 @@ namespace App\Providers;
 use App\Nova\Dashboards\ExampleDashboard;
 use Flagstudio\NovaContacts\NovaContacts;
 use Flagstudio\NovaInstructions\NovaInstructions;
-use Laravel\Nova\Nova;
 use Illuminate\Support\Facades\Gate;
+use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
@@ -82,7 +82,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         $this->app->bind('Laravel\Nova\Http\Controllers\ResourceUpdateController', 'App\Http\Controllers\Nova\ResourceUpdateController');
     }
-
 
     /**
      * @return array

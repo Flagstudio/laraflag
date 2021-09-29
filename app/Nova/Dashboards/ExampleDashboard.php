@@ -7,7 +7,6 @@ use Laravel\Nova\Dashboard;
 
 class ExampleDashboard extends Dashboard
 {
-
     /**
      * @return string
      */
@@ -15,6 +14,7 @@ class ExampleDashboard extends Dashboard
     {
         return 'Пример Дашборда';
     }
+
     /**
      * Get the cards for the dashboard.
      *
@@ -23,6 +23,7 @@ class ExampleDashboard extends Dashboard
     public function cards()
     {
         $totals_1 = view('nova.example_dashboard')->render();
+
         return [
             new CustomCard($totals_1, '1/2'),
         ];

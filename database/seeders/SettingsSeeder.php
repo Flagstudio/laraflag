@@ -15,7 +15,7 @@ class SettingsSeeder extends Seeder
     public function run()
     {
         $metricsSlug = Settings::METRICS_SLUG;
-        if (!Settings::whereSlug($metricsSlug)->exists()) {
+        if (! Settings::whereSlug($metricsSlug)->exists()) {
             Settings::factory()->create([
                 'title' => 'Метрики',
                 'slug' => $metricsSlug,
@@ -24,7 +24,7 @@ class SettingsSeeder extends Seeder
         }
 
         $robotsSlug = Settings::ROBOTS_SLUG;
-        if (!Settings::whereSlug($robotsSlug)->exists()) {
+        if (! Settings::whereSlug($robotsSlug)->exists()) {
             Settings::factory()->create([
                 'title' => 'Robots.txt',
                 'slug' => $robotsSlug,

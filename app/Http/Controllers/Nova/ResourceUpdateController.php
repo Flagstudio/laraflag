@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Nova;
 
-use Laravel\Nova\Http\Requests\UpdateResourceRequest;
 use Laravel\Nova\Http\Controllers\ResourceUpdateController as NovaResourceUpdateController;
+use Laravel\Nova\Http\Requests\UpdateResourceRequest;
 
 class ResourceUpdateController extends NovaResourceUpdateController
 {

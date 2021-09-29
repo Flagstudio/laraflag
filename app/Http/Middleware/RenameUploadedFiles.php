@@ -44,6 +44,7 @@ class RenameUploadedFiles
     {
         $fileParts = (object)pathinfo('.' . $file->getClientOriginalName());
         $newFileName = Str::slug($fileParts->filename) . '.' . $file->getClientOriginalExtension();
+
         return new UploadedFile($file->getPathname(), $newFileName);
     }
 }
