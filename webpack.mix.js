@@ -1,11 +1,13 @@
+/* eslint-disable import/no-extraneous-dependencies, @typescript-eslint/no-var-requires */
 const mix = require('laravel-mix');
 
 const devMode = !mix.inProduction();
+const webpack = require('webpack');
 require('laravel-mix-bundle-analyzer');
 
 mix
-    .js('resources/js/app.js', 'public/js')
-    .js('resources/js/check-support.js', 'public/js')
+    .ts('resources/js/main.ts', 'public/js')
+    .ts('resources/js/check-support.ts', 'public/js')
     .vue({
         extractStyles: true,
     })
@@ -19,6 +21,15 @@ mix
         proxy: '0.0.0.0:8080',
         open: false,
     });
+
+mix.webpackConfig({
+    plugins: [
+        new webpack.DefinePlugin({
+            __VUE_OPTIONS_API__: true,
+            __VUE_PROD_DEVTOOLS__: false,
+        }),
+    ],
+});
 
 if (devMode) {
     mix.sourceMaps(false, 'source-map');

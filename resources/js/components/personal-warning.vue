@@ -14,14 +14,18 @@
     </section>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+interface State {
+    agree: boolean;
+}
+
+export default defineComponent({
     name: 'PersonalWarning',
-    data() {
-        return {
-            agree: true,
-        };
-    },
+    data: (): State => ({
+        agree: true,
+    }),
     mounted() {
         this.agree = localStorage.getItem('cookie-agreement') === 'true';
     },
@@ -31,5 +35,5 @@ export default {
             localStorage.setItem('cookie-agreement', 'true');
         },
     },
-};
+});
 </script>

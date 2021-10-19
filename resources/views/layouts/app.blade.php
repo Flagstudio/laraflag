@@ -29,9 +29,9 @@
     {!! AdminBar::generate() !!}
 @endif
 
-<div class="main-wrapper">
+<div id="app" class="main-wrapper">
     <div class="layout">
-        <header id="header" class="header">
+        <header class="header">
 
         </header>
 
@@ -39,12 +39,10 @@
 
     </div>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
         <personal-warning>
-            <template v-slot:default>
-                Мы используем данные файлы cookie, данные об IP-адресе и местоположении, разработанные третьими лицами для анализа событий на нашем сайте. Продолжая просмотр страниц сайта, вы принимаете условия его использования. Более подробные сведения можно посмотреть в
-                <a class="personal-warning__link" href="#!" target="_blank" title="Политика конфиденциальности">Политике конфиденциальности</a>.
-            </template>
+            Мы используем данные файлы cookie, данные об IP-адресе и местоположении, разработанные третьими лицами для анализа событий на нашем сайте. Продолжая просмотр страниц сайта, вы принимаете условия его использования. Более подробные сведения можно посмотреть в
+            <a class="personal-warning__link" href="#!" target="_blank" title="Политика конфиденциальности">Политике конфиденциальности</a>.
         </personal-warning>
     </footer>
 </div>
@@ -59,7 +57,7 @@
 <script src="{!! mix('/js/check-support.js') !!}"></script>
 <script src="{!! mix('/js/manifest.js') !!}"></script>
 <script src="{!! mix('/js/vendor.js') !!}"></script>
-<script src="{!! mix('/js/app.js') !!}"></script>
+<script src="{!! mix('/js/main.js') !!}"></script>
 
 @if(! app()->environment('local') && config('app.jira_collector_id') && optional(auth()->user())->isAdmin())
     <script type="text/javascript" src="https://jira.flagstudio.ru/s/95ad89360eec1845f13b7a13ded5c0c4-T/-y6xh9q/73015/19eec8c46095745849ebdd927f182f88/2.0.23/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=ru-RU&collectorId={{ config('app.jira_collector_id') }}"></script>

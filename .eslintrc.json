@@ -4,8 +4,9 @@
         "es2020": true
     },
     "extends": [
-        "plugin:vue/recommended",
-        "airbnb-base"
+        "plugin:vue/vue3-essential",
+        "airbnb-base",
+        "@vue/typescript/recommended"
     ],
     "parserOptions": {
         "ecmaVersion": 11,
@@ -28,6 +29,7 @@
         "indent": ["error", 4],
         "import/extensions": ["error", {
             "js": "always"
-        }]
+        }],
+        "@typescript-eslint/no-explicit-any": "off"
     }
 }
