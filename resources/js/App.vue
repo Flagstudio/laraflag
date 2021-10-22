@@ -6,7 +6,7 @@ import 'focus-visible/dist/focus-visible.min.js';
 
 const csrfNode = document.querySelector('meta[name="csrf-token"]');
 if (csrfNode) {
-    axios.defaults.headers.post['X-CSRF-Token'] = csrfNode.getAttribute('content');
+    axios.defaults.headers.post['X-CSRF-Token'] = csrfNode.getAttribute('content') || '';
 }
 
 export default defineComponent({
