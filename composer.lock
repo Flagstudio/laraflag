@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a6e3c1eb219c1e29817c111988e055dc",
+    "content-hash": "f81c57438cfde8b05c17126054c55249",
     "packages": [
         {
             "name": "64robots/nova-fields",
@@ -1202,21 +1202,21 @@
         },
         {
             "name": "flagstudio/nova-admin-bar",
-            "version": "v0.3.0",
+            "version": "v0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Flagstudio/nova-admin-bar.git",
-                "reference": "41daa849a2a43793b66ac7f57b7e35a2cd86b364"
+                "reference": "8eadc2f1ce4ec24e889e1bdbda4eabc3f9d46c9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Flagstudio/nova-admin-bar/zipball/41daa849a2a43793b66ac7f57b7e35a2cd86b364",
-                "reference": "41daa849a2a43793b66ac7f57b7e35a2cd86b364",
+                "url": "https://api.github.com/repos/Flagstudio/nova-admin-bar/zipball/8eadc2f1ce4ec24e889e1bdbda4eabc3f9d46c9c",
+                "reference": "8eadc2f1ce4ec24e889e1bdbda4eabc3f9d46c9c",
                 "shasum": ""
             },
             "require": {
                 "illuminate/support": "5.5.x|5.6.x|5.7.x|5.8.x|6.x|7.x|8.x",
-                "php": "^7.1.3"
+                "php": "^7.1.3|^8.0"
             },
             "type": "library",
             "extra": {
@@ -1241,9 +1241,9 @@
             "description": "Nova admin bar for laravel.",
             "support": {
                 "issues": "https://github.com/Flagstudio/nova-admin-bar/issues",
-                "source": "https://github.com/Flagstudio/nova-admin-bar/tree/v0.3.0"
+                "source": "https://github.com/Flagstudio/nova-admin-bar/tree/v0.4.0"
             },
-            "time": "2021-09-29T06:25:36+00:00"
+            "time": "2021-11-03T07:38:23+00:00"
         },
         {
             "name": "flagstudio/nova-contacts",

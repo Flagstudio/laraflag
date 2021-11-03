@@ -79,7 +79,9 @@ deploy-develop:
       composer install -q &&
       php artisan migrate --force &&
       php artisan view:clear &&
-      chmod -R 777 storage/ bootstrap/ &&
+      chmod -R 777 storage/ bootstrap/ .env &&
       chown -R dev:dev . &&
+      sed -i 's/GIT_COMMIT=.*/GIT_COMMIT=\""$CI_COMMIT_MESSAGE"\"/' .env &&
+      sed -i 's/GIT_BRANCH=.*/GIT_BRANCH=\""$CI_COMMIT_BRANCH"\"/' .env &&
+      sed -i 's/GIT_DATE=.*/GIT_DATE=\""$CI_COMMIT_TIMESTAMP"\"/' .env &&
       php artisan up"
-
